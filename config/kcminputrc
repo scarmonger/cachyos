@@ -1,0 +1,10 @@
+[Keyboard]
+NumLock=0
+RepeatDelay=300
+
+[Libinput][1133][16419][Logitech Wireless Keyboard PID:4023]
+ScrollFactor=1.5
+
+[Libinput][1133][16472][Logitech Wireless Mouse]
+PointerAcceleration=1.000
+ScrollFactor=3

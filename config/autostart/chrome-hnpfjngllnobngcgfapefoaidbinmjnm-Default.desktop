@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=/usr/bin/chromium --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm
+Icon=/home/mc/.local/share/icons/hicolor/512x512/apps/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.png
+Name=WhatsApp Web
+StartupWMClass=crx_hnpfjngllnobngcgfapefoaidbinmjnm
+Terminal=false
+Type=Application
+Version=1.0

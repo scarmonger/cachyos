@@ -151,7 +151,7 @@ yay -S jqp-bin
 yay -S --noconfirm zoom 
 yay -S microsoft-edge-stable-bin --noconfirm
 
-i remmina
+i remmina freerdp
 
 ## Android screen sharing
 sudo pacman -S scrcpy

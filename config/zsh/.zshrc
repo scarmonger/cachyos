@@ -83,8 +83,8 @@ plugins=(git copybuffer copypath zsh-autosuggestions zsh-syntax-highlighting rsy
 
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
 
-source $ZSH/oh-my-zsh.sh
-
+# source $ZSH/oh-my-zsh.sh
+source /home/mc/.config/zsh/ohmyzsh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
