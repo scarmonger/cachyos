@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Create a new session named "be-start"
+tmux new-session -d -s be-start
+tmux send-keys -t be-start "spjl" Enter
+tmux send-keys -t be-start "server start pjl" Enter
+tmux attach -t be-start

@@ -1,0 +1,2 @@
+#!/bin/bash
+rofimoji --action type copy --selector-args "-theme-str 'window { width: 50%; } listview { lines: 30; columns: 1; }'"

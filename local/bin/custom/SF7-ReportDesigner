@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# Check if Git is installed
+if ! command -v git &> /dev/null
+then
+    echo "Git is not installed. Please install Git first."
+    exit 1
+fi
+
+MAIN_REPOSITORY_REPORT_DESIGNER="git@gitlab.dataon.com:reactjs/fe-sfreport.git"
+
+# Prompt for the account code client
+read -p "Enter your account code client or press Enter if none: " ACCOUNT_CODE_CLIENT
+
+# Validate access to MAIN_REPOSITORY_REPORT_DESIGNER
+if ! git ls-remote "$MAIN_REPOSITORY_REPORT_DESIGNER" &> /dev/null
+then
+    echo "Error: You do not have access to the main repository $MAIN_REPOSITORY_REPORT_DESIGNER."
+    exit 1
+fi
+
+# Clone the repository
+git clone "$MAIN_REPOSITORY_REPORT_DESIGNER"
+REPO_DIR="fe-sfreport"
+
+# Check if cloning was successful
+if [ $? -eq 0 ]; then
+    echo "Cloning successful."
+
+    # Navigate into the cloned repository directory
+    cd "$REPO_DIR" || exit 1
+
+    # Create a new branch 'runner' from 'master'
+    git checkout master
+
+    # Check if ACCOUNT_CODE_CLIENT is provided before handling the submodule
+    if [ -n "$ACCOUNT_CODE_CLIENT" ]; then
+        # Validate access to the submodule repository
+        if ! git ls-remote git@gitlab.dataon.com:reactjs/fe-sfreport-client.git &> /dev/null
+        then
+            echo "Error: You do not have access to the submodule repository git@gitlab.dataon.com:reactjs/fe-sfreport-client.git."
+            exit 1
+        fi
+
+        # Create or replace the .gitmodules file within the project directory
+        cat <<EOT > .gitmodules
+[submodule "fe-sfreport-client"]
+    path = fe-sfreport-client
+    url = git@gitlab.dataon.com:reactjs/fe-sfreport-client.git
+    branch = $ACCOUNT_CODE_CLIENT
+EOT
+
+        echo ".gitmodules file created successfully in $REPO_DIR."
+
+        # Initialize and update the submodule
+        git submodule update --remote --init ./fe-sfreport-client/
+
+        echo "Module already set up."
+
+    else
+        # No ACCOUNT_CODE_CLIENT provided, use custombase branch
+        # Validate access to the submodule repository
+        if ! git ls-remote git@gitlab.dataon.com:reactjs/fe-sfreport-client.git &> /dev/null
+        then
+            echo "Error: You do not have access to the submodule repository git@gitlab.dataon.com:reactjs/fe-sfreport-client.git."
+            exit 1
+        fi
+
+        # Create or replace the .gitmodules file within the project directory
+        cat <<EOT > .gitmodules
+[submodule "fe-sfreport-client"]
+    path = fe-sfreport-client
+    url = git@gitlab.dataon.com:reactjs/fe-sfreport-client.git
+    branch = "custombase"
+EOT
+
+        echo ".gitmodules file created successfully in $REPO_DIR."
+
+        # Initialize and update the submodule
+        git submodule update --remote --init ./fe-sfreport-client/
+
+        echo "Module already set up."
+    fi
+else
+    echo "Cloning failed. Please check the repository URL or your connection."
+    exit 1
+fi
+
+echo "Installation complete."

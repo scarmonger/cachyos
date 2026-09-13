@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# define text editor used
+#DMEDITOR="st -e nvim"
+pdf="zathura"
+
+# create an array
+declare -a options=(
+	"Mastering Regular Expression - /home/mc/Dropbox/Coding/Linux/Mastering-Regular-Expressions.pdf"
+	"Quran by Yusuf Ali - $HOME/Dropbox/Archive/Ahmed_Deedat_Books/English_Translation_of_The_Noble_Quran_by_Yusuf_Ali_(_PDFDrive_).pdf"
+	"progit - /home/mc/Dropbox/Coding/progit.pdf"
+	"bookmark - $XDG_CONFIG_HOME/shell/bm-dirs"
+)
+
+# piping the above array into dmenu
+# we use "printf '%s\n'" to format the array one item to a line
+choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Favorite File:')
+
+if [[ "$choice" ]]; then
+	cfg=$(printf '%s\n' "${choice}" | awk '{print $NF}')
+	$pdf "$cfg"
+	notify-send "$cfg" -u low
+else
+	echo "Program terminated." && exit 1
+fi

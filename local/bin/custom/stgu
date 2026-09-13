@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Create a new session named "start-tgu"
+tmux new-session -d -s start-tgu
+tmux rename-window container
+
+#tmux send-keys -t start-tgu "cd /home/mc/marc/custom/fe-micro-custom/" Enter
+#tmux send-keys -t start-tgu "NODE_OPTIONS="--max-old-space-size=8096" npm start" Enter
+#tmux split-window -h -t start-tgu
+
+#tmux send-keys -t start-tgu "sleep 40; cd /home/mc/marc/custom/fe-micro-container" Enter
+#tmux send-keys -t start-tgu "npm start" Enter
+#tmux split-window -v -t start-tgu
+
+tmux send-keys -t start-tgu "cd /home/mc/marc/custom/backend/tugu/soulbackend/main/src/web/ && box" Enter
+#tmux send-keys -t start-tgu "sleep 50; cd /home/mc/marc/custom/backend/tugu/soulbackend/main/src/web/ && box" Enter
+tmux send-keys -t start-tgu "server start tugu" Enter
+
+#tmux send-keys -t start-tgu "sleep 50; cd /home/mc/marc/custom/backend/pjlhuillier/soulbackend/main/src/web/" Enter
+#tmux send-keys -t start-tgu "box server start pjl" Enter
+
+#tmux selectp -L # selectpane on the upper side
+#tmux split-window -v -t start-tgu
+#tmux send-keys -t start-tgu "sleep 60; cd /home/mc/marc/custom/fe-sfreport/" Enter
+#tmux send-keys -t start-tgu "npm run dev" Enter
+tmux attach -t start-tgu
+
+# Other Commandbox execution syntax
+# box server stop pjl
+# box server restart pjl
+# box server forget pjl

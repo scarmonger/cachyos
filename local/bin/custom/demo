@@ -1,0 +1,4 @@
+#!/bin/bash
+sleep 0.5;
+xdotool key 0xff09 0xff09 type dataon1_demo
+xdotool key enter

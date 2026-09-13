@@ -1,0 +1,19 @@
+#!/bin/sh
+
+choice=$(
+  find /usr/share/applications ~/.local/share/applications \
+    -name '*.desktop' -print0 |
+    while IFS= read -r -d '' file; do
+      name=$(awk -F= '
+            /^Name=/ {print $2; exit}
+        ' "$file")
+      [ -n "$name" ] && printf '%s\t%s\n' "$name" "$file"
+    done |
+    sort -f |
+    dmenu -i -p "Run:" -l 15
+)
+
+[ -n "$choice" ] || exit 0
+
+file=$(printf '%s\n' "$choice" | cut -f2-)
+gtk-launch "$(basename "$file" .desktop)"

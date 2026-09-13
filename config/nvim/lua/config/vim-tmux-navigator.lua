@@ -1,0 +1,1 @@
+/home/mc/marc/github/cachyos/config/nvim/lua/plugins/vim-tmux-navigator.lua

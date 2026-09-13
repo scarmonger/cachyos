@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Function to read designated file, extract file paths, and copy files
+read_and_copy_files() {
+    local designated_file="$1"
+    local destination_dir="$2"
+    local file_operations=""
+
+    # Read each line of the designated file
+    while IFS= read -r line; do
+        # Check if the line contains "import" but not "react"
+        if [[ "$line" =~ import && ! "$line" =~ react ]]; then
+            # Extract file path between quotes
+            file=$(echo "$line" | grep -oP "(?<=['\"])([^'\"]+)(?=['\"])")
+            # Replace "./" with current folder of the designated file
+            file="${file/#.\//$(dirname "$designated_file")\/}"
+            # Replace "../" with up one directory
+            file="${file/..\/$(basename "$(dirname "$designated_file")")\//$(dirname $(dirname "$designated_file"))\/}"
+            # Replace "../../" with up two directories
+            file="${file/../\/$(basename "$(dirname $(dirname "$designated_file"))")\/}"
+            # Replace "../../../../" with up five directories
+            for ((i=0; i<5; i++)); do
+                file="${file/..\//$(dirname "$(dirname "$designated_file")")\/}"
+            done
+            # Append suffix ".tsx"
+            file="${file%.tsx}.tsx"
+            # Copy the file to the destination directory
+            cp "$file" "$destination_dir"
+            echo "Copied: $file to $destination_dir"
+            # Append the operation to file_operations
+            file_operations+="Copied: $file to $destination_dir\n"
+        fi
+    done < "$designated_file"
+
+    # Write file_operations to fileoperation.txt
+    echo -e "$file_operations" > "fileoperation.txt"
+}
+
+# Main script starts here
+read -p "Enter the path to the designated file: " designated_file
+read -p "Enter the path to the destination directory: " destination_dir
+
+# Check if the destination directory exists, if not create it
+if [ ! -d "$destination_dir" ]; then
+    mkdir -p "$destination_dir"
+fi
+
+# Call the function to read designated file, extract file paths, and copy files
+read_and_copy_files "$designated_file" "$destination_dir"

@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+firefox --new-tab "http://127.0.0.1:8085/index.cfm?sfid=view.nzone.generatedsn&accname_list=${1}&forcecron&isclient=false"
+# setelah sukses generate dsn dan masih belum berhasil login ke BE maka copy-kan file hasil generate yang berada di :
+# /home/mc/marc/custom/backend/tugu/soulbackend/main/src/web/tuguinsurance/config/_accdsn.sfc
+# ke folder /home/mc/marc/custom/backend/tugu/soulbackend/client/tuguinsurance/config/_accdsn.sfc
+# apabila di folder client masih belum ada nama client nya maka dibuatkan folder nya.
+
+firefox --new-tab "https://sf7dev-pro.dataon.com/sfpro/index.cfm?sfid=view.nzone.generatedsn&accname_list=${1}&forcecron&isclient=false"
+
+firefox --new-tab "https://sf7qa.dataon.com/sfpro/index.cfm?sfid=view.nzone.generatedsn&accname_list=${1}&forcecron&isclient=false"
+
+firefox --new-tab "https://sf7rel.dataon.com/sfpro/index.cfm?sfid=view.nzone.generatedsn&accname_list=${1}&forcecron&isclient=false"

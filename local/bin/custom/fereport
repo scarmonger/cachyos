@@ -1,0 +1,10 @@
+#!/bin/bash
+
+tmux neww -n fe-report -t fe-start
+tmux send-keys -t fe-start "cd /home/mc/marc/custom/fe-sfreport/" Enter
+
+# Run command
+tmux send-keys -t fe-start "npm run dev" Enter
+
+# Attach to session named "fe-start"
+tmux attach -t fe-start

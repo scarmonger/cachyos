@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Create a new session named "fepath" but do enter session immediately, split panes and change directory in each
+tmux new-session -d -s fepath
+tmux rename-window container
+
+tmux send-keys -t fepath "cd /home/mc/marc/custom/fe-micro-standard/" Enter
+tmux split-window -h -t fepath
+# tmux split-window -h -p 66 -t fepath
+tmux send-keys -t fepath "cd /home/mc/marc/custom/fe-micro-container" Enter
+tmux split-window -v -t fepath
+# tmux split-window -h -p 50 -t fepath
+tmux send-keys -t fepath "cd /home/mc/marc/custom/fe-micro-standard-ent/" Enter
+tmux selectp -L
+tmux split-window -v -t fepath
+tmux send-keys -t fepath "cd /home/mc/marc/custom/fe-micro-custom/" Enter
+# tmux split-window -v -t fepath
+# tmux send-keys -t fepath "cd /home/mc/marc/custom/fe-sfreport/" Enter
+# tmux split-window -v -t fepath
+
+# Set pane synchronization
+# tmux set-window-option -t fepath synchronize-panes on
+
+# Run command in all panes
+# tmux send-keys -t fepath "npm start" Enter
+
+# Attach to session named "fepath"
+tmux attach -t fepath
+

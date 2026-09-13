@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Create a new session named "feupdate" but do enter session immediately, split panes and change directory in each
+tmux new-session -d -s feupdate
+tmux rename-window container
+
+tmux send-keys -t feupdate "cd /home/mc/marc/custom/fe-micro-standard/" Enter
+tmux send-keys -t feupdate "npm --legacy-peer-deps i" Enter
+tmux send-keys -t feupdate "npm run build" Enter
+tmux split-window -h -t feupdate
+# tmux split-window -h -p 66 -t feupdate
+
+tmux send-keys -t feupdate "cd /home/mc/marc/custom/fe-micro-container" Enter
+tmux send-keys -t feupdate "npm --legacy-peer-deps i" Enter
+tmux send-keys -t feupdate "npm run build" Enter
+tmux split-window -v -t feupdate
+# tmux split-window -h -p 50 -t feupdate
+
+tmux send-keys -t feupdate "cd /home/mc/marc/custom/fe-micro-standard-ent/" Enter
+tmux send-keys -t feupdate "npm --legacy-peer-deps i" Enter
+tmux selectp -L
+tmux split-window -v -t feupdate
+
+tmux send-keys -t feupdate "cd /home/mc/marc/custom/fe-micro-custom/" Enter
+tmux send-keys -t feupdate "npm --legacy-peer-deps i" Enter
+# tmux split-window -v -t feupdate
+# tmux send-keys -t feupdate "cd /home/mc/marc/custom/fe-sfreport/" Enter
+# tmux split-window -v -t feupdate
+
+# Set pane synchronization
+# tmux set-window-option -t feupdate synchronize-panes on
+
+# Run command in all panes
+# tmux send-keys -t feupdate "npm start" Enter
+
+# Attach to session named "feupdate"
+tmux attach -t feupdate
+

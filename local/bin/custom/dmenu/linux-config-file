@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# define text editor used
+DMEDITOR="nvr "
+
+# create an array
+declare -a options=(
+	"i3config - /home/mc/marc/GitHub/ubuntu/config/i3/config"
+	"ubuntu-i3 - $HOME/marc/GitHub/ubuntu/config/i3/ubuntu-i3.md"
+	"ranger - $HOME/.config/ranger/rc.conf"
+	"hosts - /etc/hosts"
+	"alias - /home/mc/github/dotfile/.aliases"
+	"zshrc - $HOME/.zshrc"
+	"v - $HOME/.config/nvim/init.vim"
+	"vs - $HOME/Dropbox/linux/dotfiles/.config/nvim/shortcut.vim"
+	"dwm - $HOME/github/suckless/dwm/config.def.h"
+	"st - $HOME/github/suckless/st/config.def.h"
+	"dmenu - $HOME/github/suckless/dmenu-5.2/config.def.h"
+	"conf - $HOME/.local/bin/custom/dm-config-file"
+	"samba - $HOME/github/dotfile/etc/smb.conf"
+	"linux-config-file - $HOME/.local/bin/custom/linux-config-file"
+	"favourite file - $HOME/.local/bin/custom/fave-file"
+	"alacritty.yml - /home/mc/.config/alacritty.yml"
+	"dunst - /home/mc/.config/dunst/dunstrc"
+	"pi - $HOME/.config/picom.conf"
+	"lf - /home/mc/github/dotfile/lf-ueberzug/lfrc-ueberzug"
+	"icon - /home/mc/.config/lf/icons"
+	"bookmark - $XDG_CONFIG_HOME/shell/bm-dirs"
+	"logind - /etc/systemd/logind.conf"
+	#"profile - $HOME/.bash_profile"
+	#"bashrc - $HOME/.bashrc"
+	#"ranger rifle - $HOME/.config/ranger/rifle.conf"
+	#"ranger scope - $HOME/.config/ranger/scope.sh"
+	#"q - $HOME/.config/qutebrowser/config.py"
+	#"qm - $HOME/.config/qutebrowser/quickmarks"
+	#"mirrorlist - /etc/pacman.d/mirrorlist"
+	#"qb - $HOME/.config/qutebrowser/bookmarks/urls"
+)
+
+# piping the above array into dmenu
+# we use "printf '%s\n'" to format the array one item to a line
+choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Edit Config:')
+
+if [[ "$choice" ]]; then
+	cfg=$(printf '%s\n' "${choice}" | awk '{print $NF}')
+	$DMEDITOR "$cfg"
+else
+	echo "Program terminated." && exit 1
+fi

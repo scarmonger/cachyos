@@ -1,0 +1,8 @@
+trashed 'package-lock.json'        from_dir /home/mc
+trashed 'package.json_'        from_dir /home/mc
+         untrashed /home/mc/package.json_
+trashed 'package.json_'        from_dir /home/mc
+trashed 'package.json_0'        from_dir /home/mc
+         untrashed /home/mc/package.json_0
+trashed package.json_0        from_dir /home/mc
+trashed package.json_0        from_dir /home/mc

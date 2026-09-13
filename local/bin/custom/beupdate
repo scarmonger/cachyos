@@ -1,0 +1,27 @@
+#!/bin/bash
+sfclone_client --dir /home/mc/marc/custom/backend/pjlhuillier/soulbackend --update
+
+# cd /home/mc/marc/custom/fe-micro-custom/
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-micro-container/
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-micro-standard/
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-micro-standard-ent/
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-sfreport/
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-micro-container/src/lib
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-micro-standard/src/lib
+# git checkout master
+# git pull
+# cd /home/mc/marc/custom/fe-micro-custom/src/lib
+# git checkout master
+# git pull

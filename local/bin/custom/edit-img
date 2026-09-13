@@ -1,0 +1,4 @@
+#!/bin/sh
+recent_jpeg=$(find /home/mc/Pictures/ -type f -name "*.png" -exec stat -c "%Y %n" {} \; | sort -n | tail -n 1 | cut -d ' ' -f 2-)
+
+swappy -f "$recent_jpeg"

@@ -1,0 +1,8 @@
+set selection-clipboard clipboard
+
+# Pressing semicolon opens the inputbar and types ":" automatically
+map ; feedkeys ":"
+#map ; focus_inputbar
+
+# Map colon to start a link follow/search selection (replacing default semicolon)
+#map : follow
