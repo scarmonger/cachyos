@@ -1,0 +1,35 @@
+[user]
+	email = psikomania@yahoo.com
+	name = scarmonger
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait --merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+# [merge]
+# 	tool = nvim
+# [mergetool "nvim"]
+#   cmd = nvim -d "$LOCAL" "$BASE" "$REMOTE" "$MERGED" \
+#         -c "wincmd w" \
+#         -c "wincmd J"
+#   trustExitCode = true
+[mergetool]
+	keepBackup = false
+[difftool]
+    prompt = true
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[safe]
+	directory = /home/mc/marc/custom/source/soulbackend
+	directory = /home/mc/.sfclone/repositories/SunFish7BackEnd/branch/master
+	directory = /home/mc/marc/custom/source/soulbackend
+	directory = /home/mc/.sfclone/repositories/SunFish7BackEnd/branch/master
+	directory = /home/mc/marc/custom/source/soulbackend
+	directory = /home/mc/.sfclone/repositories/SunFish7BackEnd/branch/master
+	directory = /home/mc/marc/custom/source/soulbackend
+	directory = /home/mc/.sfclone/repositories/SunFish7BackEnd/branch/master
+	directory = /home/mc/marc/custom/source/soulbackend
+	directory = /home/mc/.sfclone/repositories/SunFish7BackEnd/branch/master
+[core]
+	editor = nvim

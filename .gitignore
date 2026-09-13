@@ -1,0 +1,11 @@
+config/zsh/.zcompdump*
+__pycache__/
+
+config/tmux/plugins
+config/nvim/lazy-lock.json
+config/zsh/ohmyzsh/cache
+config/zsh/.zsh_history
+config/nvim/lua/plugins/dankcolors.lua
+dump.html
+/config/kitty/dank-tabs.conf
+/config/kitty/dank-theme.conf
