@@ -24,6 +24,9 @@ thunar --bulk-rename
 # Setup default app untuk suatu filetype
 xdg-mime default projectlibre.desktop application/octet-stream
 
+xdg-mime default mpv.desktop audio/mpeg
+xdg-mime default mpv.desktop video/webm
+
 ## check mime filetype
 xdg-mime query filetype nama_file.pod
 > octet-stream
@@ -32,3 +35,12 @@ xdg-mime query filetype nama_file.pod
 sudo pacman -S imagemagick expac --noconfirm
 i imv swayimg
 yay -S --noconfirm windsurf zellij pinta librewolf-bin gradia
+
+ln -ivs ~/marc/github/cachyos/config/fish/ ~/.config/
+ln -ivs ~/marc/github/cachyos/config/zellij ~/.config/
+
+ln -ivs ~/marc/github/cachyos/config/keepassxc/ ~/.config/
+ln -ivs ~/marc/github/cachyos/config/swayimg/ ~/.config/
+ln -ivs ~/marc/github/cachyos/config/imv/ ~/.config/
+
+ln -ivs ~/marc/github/cachyos/config/mpv ~/.config/

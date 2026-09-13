@@ -125,7 +125,23 @@ i libreoffice-still
 yay -S wps-office ttf-wps-fonts freetype2-wps libtiff5 --noconfirm
 yay -S visual-studio-code-bin
 
-sudo pacman -S macchanger thunderbird --noconfirm
+# change mac address
+
+sudo pacman -S macchanger
+sudo macchanger -s eno1
+sudo macchanger -m 6c:0b:84:22:be:c4 eno1
+
+sudo EDITOR=nano crontab -e
+@reboot macchanger -m 6c:0b:84:22:be:c4 eno1
+@reboot tailscale up
+
+sudo apt upgrade
+
+> [!NOTE] Notes
+> sudo tailscale up
+> sudo tailscale down
+
+sudo pacman -S thunderbird --noconfirm
 sudo pacman -S --noconfirm networkmanager-l2tp strongswan xl2tpd
 > nm to call vpn setup
 
@@ -194,19 +210,8 @@ git remote set-url origin git@github.com:scarmonger/cachyos.git
 ```
 ln -ivs ~/marc/github/cachyos/.gitconfig ~/
 
-ln -ivs ~/marc/github/cachyos/config/fish/ ~/.config/
-ln -ivs ~/marc/github/cachyos/config/zellij ~/.config/
-
-ln -ivs ~/marc/github/cachyos/config/keepassxc/ ~/.config/
-ln -ivs ~/marc/github/cachyos/config/swayimg/ ~/.config/
-ln -ivs ~/marc/github/cachyos/config/imv/ ~/.config/
-
-ln -ivs ~/marc/github/cachyos/config/mpv ~/.config/
-
 ln -ivs ~/marc/virtualbox "/home/mc/VirtualBox VMs"
-
-
-ln -ivs /home/mc/marc/github/cachyos/myclirc ~/.myclirc
+ln -ivs /home/mc/marc/github/cachyos/config/myclirc ~/.myclirc
 
 ln -ivs /home/mc/marc/custom/source/commandbox/box ~/.local/bin/
 ln -ivs /home/mc/marc/custom/source/commandbox/jre ~/.local/bin/
@@ -254,45 +259,15 @@ sudo pacman -S virtualbox linux612-virtualbox-host-modules
 # rustdesk
 sudo pacman -U rustdesk-1.4.4-0-x86_64.pkg.tar.zst
 
-
-
 # thunderbird setup
 Help -> troubleshooting information 
 search and click link -> about:profiles -> create a new profile -> choose folder
 
-# Librewolf setting
-1. Izinkan Penyimpanan Permanen untuk WhatsApp
-Pastikan opsi "Delete cookies and site data when LibreWolf is closed" tidak menghapus data untuk situs yang sudah kamu kecualikan.
-
-2. Matikan "ResistFingerprinting" (Opsional tapi Direkomendasikan)
-Cek about:config (Cara Paksa)
-Cari: privacy.resistFingerprinting.
-Pastikan nilainya adalah false. 
-Dan untuk item resist lainnya khusus yang time di buat false
-
-<!-- 3. tambahkan extension spoof-timezone dan rubah timezone sesuai selera -->
-<!-- https://addons.mozilla.org/en-US/firefox/addon/spoof-timezone/ -->
-
-# Screenshot
-https://github.com/AlexanderVanhee/Gradia
-
-# Screenshare
-sudo pacman -S pipewire wireplumber xdg-desktop-portal-gnome xdg-desktop-portal
-systemctl --user restart xdg-desktop-portal
-
-Verifikasi Cepat
-Setelah melakukan langkah di atas, Anda bisa menguji apakah sistem "siap" melakukan sharing dengan perintah ini di terminal:
-systemctl --user status pipewire 
-> (Pastikan statusnya active)
-systemctl --user status xdg-desktop-portal-gnome 
-> (Pastikan tidak ada pesan error merah)
-
-# dbeaver
-sudo rm /usr/share/applications/io.dbeaver.DBeaver.desktop
-cp ~/marc/github/cachyos/local/share/applications/dbeaver.desktop  ~/.local/share/applications/dbeaver.desktop
 
 # Clamav
 https://wiki.archlinux.org/title/ClamAV
+
+i clamav
 
 clamscan -r ~/ -l ~/scanresult.txt
 
@@ -306,12 +281,7 @@ sudo systemctl enable clamav-daemon.socket
 sudo systemctl start clamav-daemon.socket
 sudo systemctl stop clamav-daemon.socket
 
-
-# Setting default apps
-xdg-mime query filetype nama_file.pod
-
-xdg-mime default mpv.desktop audio/mpeg
-xdg-mime default mpv.desktop video/webm
+curl https://secure.eicar.org/eicar.com.txt | clamscan -
 
 # yt-dlp
 sudo rm ~/.local/bin/yt-dlp
