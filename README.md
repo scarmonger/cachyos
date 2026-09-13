@@ -58,6 +58,8 @@ pip install python-gnupg --break-system-packages
 make install
 
 sudo pacman -S zsh
+rm ~/.zshrc
+ln -ivs ~/marc/github/cachyos/.zshrc ~/
 ln -ivs ~/marc/github/cachyos/.zshenv ~/
 rm -rf ~/.config/zsh/
 ln -ivs ~/marc/github/cachyos/config/zsh/ ~/.config/

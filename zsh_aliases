@@ -1,6 +1,4 @@
 #!/bin/sh
-alias hx='helix'
-alias ze='zellij'
 alias t="tmux"
 # alias tt="tmux attach -t t1 || tmux new -s t1"
 # alias tt="tmux attach -t ws || tmux new -s ws ws"
@@ -272,7 +270,7 @@ alias cpu10="ps auxf | sort -nr -k 3 | head -10"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 
 
-alias so="source /home/mc/.config/zsh/.zshrc"
+alias so="source /home/mc/.zshrc"
 #alias sox="source ~/.xinitrc"
 alias v='nvim'
 alias vim='nvim'
