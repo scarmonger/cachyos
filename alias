@@ -1,0 +1,107 @@
+#!/bin/sh
+
+# source /usr/share/cachyos-fish-config/conf.d/done.fish
+alias so="source ~/.config/fish/config.fish"
+alias tso="tmux source ~/.config/tmux/tmux.conf"
+
+alias v='nvim'
+alias vim='nvim'
+alias t="tmux"
+alias r='VISUAL=nvim source ranger'
+alias h="history | sed 's/^[[:space:]]*[0-9]*[[:space:]]*//' | rofi -dmenu -i -l 30 -p 'history' -theme /usr/share/rofi/themes/Adapta-Nokto.rasi | wl-copy "
+alias apa='veracrypt ~/Dropbox/linux/cl ~/bin/ && export PATH="$HOME/bin/otomation:$PATH"'
+alias adp='export PATH="$HOME/bin/otomation:$PATH"'
+alias zathura="GTK_IM_MODULE=none zathura"
+
+alias now="date +"%Y%m%d%H%M" | wl-copy"
+
+alias npms="NODE_OPTIONS=--max-old-space-size=8096 npm start"
+
+# alias sats="cd /home/mc/marc/custom/backend/atlas/soulbackend/main/src/web/ && box"
+# alias sdac="cd /home/mc/marc/custom/backend/daikinhr/soulbackend/main/src/web/ && box"
+# alias sctt="cd /home/mc/marc/custom/backend/vallourec_sea/soulbackend/main/src/web/ && box"
+# alias spjl="cd /home/mc/marc/custom/backend/pjlhuillier/soulbackend/main/src/web/ && box"
+#
+
+alias remotemypc="xfreerdp +clipboard +fonts /sound /mic /smart-sizing /multimon /network:auto /cert-ignore /u:mc /d:WORKGROUP /v:mc-pc"
+
+alias myctt="mycli -u sfnbc_vallourec_sea_admin -h 192.168.101.70 dbSF_NBC_VALLOUREC_SEA -p 2K4%1e8t187529291929"
+alias mydac="mycli -u sfnbc_daikinhr_admin -h 192.168.102.120 dbSF_NBC_DAIKINHR -p 0151KoV2201172290395"
+alias myatlaspetrochemindo="mycli -u sfnbc_atlaspetrochemindo_fin -h 192.168.102.120 -P 3306 dbSF_NBC_ATLASPETROCHEMINDO -p 'i060)Z5#662831081576'"
+alias mypjlhuillier="mycli -u sfnbc_pjlhuillier_fin -h 192.168.102.120 -P 3306 dbsf_nbc_pjlhuillier -p '65GJ0nv2823319841280'"
+
+alias subupdate="git submodule update --remote --merge"
+alias clone="sfclone_client --dir /home/mc/marc/custom/backend/"
+
+alias jrp="echo -n 'PT Jasaraharja Putera' | wl-copy"
+alias tgu="echo -n 'PT Asuransi Tugu Pratama Indonesia Tbk' | wl-copy"
+alias mdh="echo -n 'Mandaya Hospital Group' | wl-copy"
+alias ctt="echo -n 'PT Citra Tubindo Tbk' | wl-copy"
+alias ats="echo -n 'PT Atlas Petrochem Indo' | wl-copy"
+
+alias dec="gpg --quiet --use-embedded-filename"
+alias cps="rsync -aurviP --backup --suffix=.backup "
+
+# Check xdg-mime
+alias xf="xdg-mime query filetype "
+#example: $ xdg-mime query filetype photo.jpeg
+alias xd="xdg-mime default "
+#example:
+#$ xdg-mime default feh.desktop image/jpeg
+#$ xdg-mime default wps-office-et.desktop text/html
+
+alias v1="cd ~/marc/github/cachyos/;v"
+alias blkid="sudo blkid"
+alias scan='clamscan --recursive --infected  --max-filesize=4000M -l ~/scanlog.txt --move=/home/mc/clamav/ /'
+
+alias owning="sudo chown -R mc:mc *"
+alias p1="ping www.gmail.com -s 1000"
+alias p2="ping 192.168.0.1 -s 1000"
+alias extip="curl icanhazip.com"
+alias i="sudo pacman -S"
+alias ui="sudo pacman -Rs"
+
+# top 5 processes that using most memory
+alias mem5="ps auxf | sort -nr -k 4 | head -5"
+alias cpu10="ps auxf | sort -nr -k 3 | head -10"
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
+alias cam="ffplay /dev/video0"
+
+
+function ex
+    if test -f $argv[1]
+        switch $argv[1]
+            case '*.tar.bz2'
+                tar xjf $argv[1]
+            case '*.tar.gz'
+                tar xzf $argv[1]
+            case '*.tar.xz'
+                tar xJf $argv[1]
+            case '*.bz2'
+                bunzip2 $argv[1]
+            case '*.rar'
+                unrar x $argv[1]
+            case '*.gz'
+                gunzip $argv[1]
+            case '*.tar'
+                tar xf $argv[1]
+            case '*.tbz2'
+                tar xjf $argv[1]
+            case '*.tgz'
+                tar xzf $argv[1]
+            case '*.zip'
+                unzip $argv[1]
+            case '*.Z'
+                uncompress $argv[1]
+            case '*.7z'
+                7z x $argv[1]
+            case '*'
+                echo "'$argv[1]' cannot be extracted via ex()"
+        end
+    else
+        echo "'$argv[1]' is not a valid file"
+    end
+end
+
+
+alias umo="sudo umount /dev/sd$1"

@@ -1,0 +1,6 @@
+[General]
+HotspotName=mc-hotspot
+HotspotPassword=BDF56C06513F4A7E5165D46336
+ManageVirtualConnections=true
+SystemConnectionsByDefault=true
+UnlockModemOnDetection=true

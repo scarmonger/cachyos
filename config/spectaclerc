@@ -1,0 +1,18 @@
+[Annotations]
+annotationToolType=6
+rectangleFillColor=255,0,0,0
+rectangleStrokeColor=255,0,0
+
+[General]
+clipboardGroup=PostScreenshotCopyImage
+
+[ImageSave]
+lastImageSaveLocation=file:///home/mc/Pictures/Screenshots/Screenshot_20260913_000408.png
+translatedScreenshotsFolder=Screenshots
+
+[VideoSave]
+translatedScreencastsFolder=Screencasts
+
+[ViewerWindow]
+1920x1080 screen: Height=570
+1920x1080 screen: Width=901

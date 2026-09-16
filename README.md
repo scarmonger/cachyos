@@ -1,6 +1,15 @@
 sudo pacman -Syu
 sync firefox
 
+# add alias to fish
+echo "source ~/marc/github/cachyos/alias" >> /home/mc/.config/fish/config.fish
+
+## install fisher for plugins
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
+## install plugins for fish
+fisher install IlanCosman/tide@v6
+fisher install icezyclon/zoxide.fish
 
 # clone repo
 
@@ -27,6 +36,7 @@ sudo echo "UUID=6b617826-89bc-444c-9b72-9bcf0c44eb73 /home/mc/marc/ ext4 errors=
 
 otg-rtl:
 sudo echo "UUID=11d2f506-0797-45dd-8b51-cbc0e9b2c6fa /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
+sudo echo "UUID=8f4825e2-0016-43c2-994a-bb2830ddaea9 /home/mc/Templates/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
 
 sudo mount -a
 
@@ -58,12 +68,7 @@ pip install python-gnupg --break-system-packages
 make install
 
 sudo pacman -S zsh
-rm ~/.zshrc
-ln -ivs ~/marc/github/cachyos/.zshrc ~/
-ln -ivs ~/marc/github/cachyos/.zshenv ~/
-rm -rf ~/.config/zsh/
-ln -ivs ~/marc/github/cachyos/config/zsh/ ~/.config/
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+echo "source /home/mc/marc/github/cachyos/zsh-addon" >> ~/.zshrc
 
 mkdir -p ~/.local/bin
 ln -ivs ~/marc/github/cachyos/local/bin/custom ~/.local/bin
@@ -133,17 +138,23 @@ sudo pacman -S macchanger
 sudo macchanger -s eno1
 sudo macchanger -m 6c:0b:84:22:be:c4 eno1
 
+sudo pacman -S cronie
 sudo EDITOR=nano crontab -e
 @reboot macchanger -m 6c:0b:84:22:be:c4 eno1
 @reboot tailscale up
 
-sudo apt upgrade
+sudo systemctl enable --now cronie
+sudo systemctl status cronie
 
 > [!NOTE] Notes
 > sudo tailscale up
 > sudo tailscale down
 
 sudo pacman -S thunderbird --noconfirm
+## thunderbird setup
+Help -> troubleshooting information 
+search and click link -> about:profiles -> create a new profile -> choose folder
+
 sudo pacman -S --noconfirm networkmanager-l2tp strongswan xl2tpd
 > nm to call vpn setup
 
@@ -261,9 +272,6 @@ sudo pacman -S virtualbox linux612-virtualbox-host-modules
 # rustdesk
 sudo pacman -U rustdesk-1.4.4-0-x86_64.pkg.tar.zst
 
-# thunderbird setup
-Help -> troubleshooting information 
-search and click link -> about:profiles -> create a new profile -> choose folder
 
 
 # Clamav
@@ -294,3 +302,4 @@ chmod a+rx ~/.local/bin/yt-dlp  # Make executable
 # Gemini
 sudo npm install -g @google/gemini-cli
 
+Paksa Mode Gelap untuk Semua Situs Web (Auto Dark Mode)Jika Anda ingin memaksa seluruh halaman web tampil gelap, gunakan fitur eksperimental:Ketik chrome://flags di bilah alamat (address bar), lalu tekan Enter.Ketik dark mode pada kotak pencarian di bagian atas.Cari opsi Auto Dark Mode for Web Contents.Ubah menu drop-down dari Default menjadi Enabled

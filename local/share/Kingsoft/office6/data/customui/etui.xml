@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mso:customUI ver="1.0.1" xmlns:mso="http://schemas.microsoft.com/office/2009/07/customui">
+   <mso:ribbon>
+      <mso:qat menuOrder="1" default="1">
+         <mso:control idK="OpenFile"/>
+         <mso:control idK="SaveFile"/>
+         <mso:control idK="PrintToPDF"/>
+         <mso:control idK="Print"/>
+         <mso:control idK="PrintPreview"/>
+         <mso:control idK="Undo"/>
+         <mso:control idK="Redo"/>
+      </mso:qat>
+      <mso:tabs/>
+      <mso:contextualTabs/>
+   </mso:ribbon>
+   <shortcuts type="mso">
+      <mso>
+         <shortcut cmd="CellFillColorInHomeTab" key="Alt+H"/>
+         <shortcut cmd="CommaStyleInHomeTab" key="Ctrl+Shift+C"/>
+         <shortcut cmd="DeleteSheetInHomeTab" key="Ctrl+Shift+Del"/>
+         <shortcut cmd="FillDown" key="Ctrl+'"/>
+         <shortcut cmd="FillDown" key="Ctrl+Shift+'"/>
+         <shortcut cmd="FillDown" key="Ctrl+Shift+,"/>
+         <shortcut cmd="FillRight" key="Ctrl+Shift+."/>
+         <shortcut cmd="KRbLogicGroupVisibleToggleCmd" key="Ctrl+F1"/>
+         <shortcut cmd="MoveCopySheet" key="Ctrl+Shift+D"/>
+         <shortcut cmd="PTPivotTableOptions" key="Ctrl+P"/>
+         <shortcut cmd="PivotTableWizardInDataTab" key="Ctrl+Alt+P"/>
+         <shortcut cmd="RbSplitColumns" key="Ctrl+Alt+T"/>
+         <shortcut cmd="SelectAll" key="Ctrl+Shift+Space"/>
+         <shortcut cmd="TotalRow" key="Ctrl+Shift+T"/>
+         <shortcut cmd="app_exportrepeat_datatab" key="Ctrl+Alt+D"/>
+         <shortcut cmd="app_exportunique_datatab" key="Alt+U"/>
+         <shortcut cmd="rFormatPainter" key="Alt+F"/>
+         <shortcut cmd="rFreeze" key="Ctrl+Shift+Z"/>
+         <shortcut cmd="rFreezeTopRow" key="Alt+Z"/>
+         <shortcut cmd="rHideColumn" key="Ctrl+0"/>
+         <shortcut cmd="rUnfreeze" key="Alt+Shift+Z"/>
+         <shortcut cmd="rUnhideColumns" key="Ctrl+Shift+0"/>
+         <shortcut cmd="rnRecentLineWrap" key="Ctrl+Shift+W"/>
+         <shortcut cmd="CellAutoFitSelection" key="Alt+,"/>
+         <shortcut cmd="AutoFit" key="Ctrl+Alt+,"/>
+      </mso>
+      <kso>
+         <shortcut cmd="CellFillColorInHomeTab" key="Alt+H"/>
+         <shortcut cmd="PTPivotTableOptions" key="Ctrl+F12"/>
+         <shortcut cmd="PrintPreview" key="Ctrl+P"/>
+      </kso>
+   </shortcuts>
+</mso:customUI>

@@ -1,0 +1,4 @@
+[Layout]
+Options=caps:escape_shifted_capslock,altwin:swap_ralt_rwin
+ResetOldOptions=true
+Use=true

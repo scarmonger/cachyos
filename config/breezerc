@@ -1,0 +1,7 @@
+[Common]
+OutlineCloseButton=true
+ShadowColor=0,255,255
+ShadowStrength=230
+
+[Windeco]
+DrawBorderOnMaximizedWindows=true

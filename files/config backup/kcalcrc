@@ -1,0 +1,7 @@
+[Font]
+ButtonFont=Noto Sans,15,-1,0,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+DisplayFont=Noto Sans,15,-1,0,700,0,0,0,0,0,0,0,0,0,0,1,,0,0
+HistoryFont=Noto Sans,15,-1,0,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+
+[General]
+ShowHistory=true
