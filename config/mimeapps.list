@@ -1,8 +1,16 @@
 [Added Associations]
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
+application/vnd.ms-excel=wps-office-et.desktop;libreoffice-calc.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=wps-office-et.desktop;libreoffice-calc.desktop;org.kde.ark.desktop;org.pwmt.zathura-cb.desktop;
+application/wps-office.xls=wps-office-et.desktop;libreoffice-calc.desktop;org.kde.ark.desktop;org.pwmt.zathura-cb.desktop;
+application/wps-office.xlsx=wps-office-et.desktop;libreoffice-calc.desktop;org.kde.ark.desktop;org.pwmt.zathura-cb.desktop;
 
 [Default Applications]
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
+application/vnd.ms-excel=wps-office-et.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=wps-office-et.desktop;
+application/wps-office.xls=wps-office-et.desktop;
+application/wps-office.xlsx=wps-office-et.desktop;
 text/html=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop

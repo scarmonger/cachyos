@@ -7,14 +7,14 @@ alias tso="tmux source ~/.config/tmux/tmux.conf"
 alias v='nvim'
 alias vim='nvim'
 alias t="tmux"
-alias r='VISUAL=nvim source ranger'
+alias r='VISUAL=nvim ranger'
 alias h="history | sed 's/^[[:space:]]*[0-9]*[[:space:]]*//' | rofi -dmenu -i -l 30 -p 'history' -theme /usr/share/rofi/themes/Adapta-Nokto.rasi | wl-copy "
 alias apa='veracrypt ~/Dropbox/linux/cl ~/bin/ && export PATH="$HOME/bin/otomation:$PATH"'
 alias adp='export PATH="$HOME/bin/otomation:$PATH"'
 alias zathura="GTK_IM_MODULE=none zathura"
+alias df="df -h -x squashfs -x tmpfs -x devtmpfs"
 
 alias now="date +"%Y%m%d%H%M" | wl-copy"
-
 alias npms="NODE_OPTIONS=--max-old-space-size=8096 npm start"
 
 # alias sats="cd /home/mc/marc/custom/backend/atlas/soulbackend/main/src/web/ && box"

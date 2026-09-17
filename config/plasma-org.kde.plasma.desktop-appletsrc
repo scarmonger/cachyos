@@ -6,8 +6,8 @@ RightButton;NoModifier=org.kde.contextmenu
 RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][158]
-ItemGeometries-1440x900=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-162:1200,272,192,256,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,192,192,0;
-ItemGeometriesHorizontal=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-162:1200,272,192,256,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,192,192,0;
+ItemGeometries-1440x900=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,208,208,0;Applet-162:1200,272,192,256,0;
+ItemGeometriesHorizontal=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,208,208,0;Applet-162:1200,272,192,256,0;
 activityId=ff0ac9cc-88e4-4f1d-beef-f94df4770a95
 formfactor=0
 immutability=1
@@ -374,7 +374,6 @@ DialogWidth=810
 cursorPosition=95
 fontSize=10
 noteId=33a789e5-28c9-42bc-a904-28c6663f17
-scrollY=1422
 
 [Containments][23][Applets][119][Shortcuts]
 global=Meta+Alt+N
@@ -595,9 +594,9 @@ Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///usr/share/wallpapers/cachyos-wallpapers/BlueLady.png
+Image=file:///usr/share/wallpapers/cachyos-wallpapers/Spectrum.png
 SlidePaths=/home/mc/.local/share/wallpapers/,/usr/share/wallpapers/,/home/mc/marc/wallpaper/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/steam.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/Dota 2.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95
+screenMapping=desktop:/Dota 2.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/steam.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95

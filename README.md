@@ -11,6 +11,13 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher install IlanCosman/tide@v6
 fisher install icezyclon/zoxide.fish
 
+## functions
+function inv; nvim (fzf --preview 'bat --color=always {}'); end
+funcsave inv
+
+## Setup enviroment variables
+set -Ux DEFAULT_RECIPIENT "psikomania@yahoo.com"
+
 # clone repo
 
 git clone https://github.com/scarmonger/cachyos ~/marc/github/cachyos/
@@ -66,6 +73,9 @@ git clone https://gitlab.com/Ragnyll/ranger-gpg.git
 cd ranger-gpg
 pip install python-gnupg --break-system-packages
 make install
+
+cd ~/.config/ranger/plugins
+git clone https://github.com/maximtrp/ranger-archives.git
 
 sudo pacman -S zsh
 echo "source /home/mc/marc/github/cachyos/zsh-addon" >> ~/.zshrc

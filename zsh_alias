@@ -1,0 +1,366 @@
+#!/bin/sh
+alias t="tmux"
+# alias tt="tmux attach -t t1 || tmux new -s t1"
+# alias tt="tmux attach -t ws || tmux new -s ws ws"
+alias zz="zellij -s z1 || zellij attach z1"
+alias apa='veracrypt ~/Dropbox/linux/cl ~/bin/ && export PATH="$HOME/bin/otomation:$PATH"'
+alias adp='export PATH="$HOME/bin/otomation:$PATH"'
+alias mvc='veracrypt ~/Dropbox/linux/cl ~/bin/'
+alias zathura="GTK_IM_MODULE=none zathura"
+alias hyprctl='HYPRLAND_INSTANCE_SIGNATURE=$(ls -t /run/user/$UID/hypr/ 2>/dev/null | head -n 1) hyprctl'
+
+# Common use
+alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias tarnow='tar -acf '
+alias untar='tar -zxvf '
+alias wget='wget -c '
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias hw='hwinfo --short' # Hardware Info
+alias big="expac -H 'M' '%m\t%n' | sort -h | nl" # Sort installed packages according to size in MB
+alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
+alias update='sudo pacman -Syu'
+
+# Cleanup orphaned packages
+alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
+
+# Get the error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+# Recent installed packages
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+
+############################################################################################################
+alias ap="PATH=$PATH:~/bin/otomation/"
+alias updateyt="python3 -m pip install -U 'yt-dlp[default]'"
+alias now="date +"%Y%m%d%H%M" | xclip -selection clipboard" # Linux with xclip
+# alias fd="fdfind"
+alias g1="veracrypt ~/Dropbox/linux/cl ~/.config/script"
+alias npms="NODE_OPTIONS=--max-old-space-size=8096 npm start"
+
+# alias sats="cd /home/mc/marc/custom/backend/atlas/soulbackend/main/src/web/ && box"
+# alias sdac="cd /home/mc/marc/custom/backend/daikinhr/soulbackend/main/src/web/ && box"
+# alias sctt="cd /home/mc/marc/custom/backend/vallourec_sea/soulbackend/main/src/web/ && box"
+# alias spjl="cd /home/mc/marc/custom/backend/pjlhuillier/soulbackend/main/src/web/ && box"
+
+alias remotemypc="xfreerdp +clipboard +fonts /sound /mic /smart-sizing /multimon /network:auto /cert-ignore /u:mc /d:WORKGROUP /v:mc-pc"
+alias vbcompact="VBoxManage modifymedium disk /home/mc/marc/virtualbox/win11/win11.vdi --compact"
+
+alias myctt="mycli -u sfnbc_vallourec_sea_admin -h 192.168.101.70 dbSF_NBC_VALLOUREC_SEA -p 2K4%1e8t187529291929"
+alias mydac="mycli -u sfnbc_daikinhr_admin -h 192.168.102.120 dbSF_NBC_DAIKINHR -p 0151KoV2201172290395"
+alias myatlaspetrochemindo="mycli -u sfnbc_atlaspetrochemindo_fin -h 192.168.102.120 -P 3306 dbSF_NBC_ATLASPETROCHEMINDO -p 'i060)Z5#662831081576'"
+alias mypjlhuillier="mycli -u sfnbc_pjlhuillier_fin -h 192.168.102.120 -P 3306 dbsf_nbc_pjlhuillier -p '65GJ0nv2823319841280'"
+
+alias subupdate="git submodule update --remote --merge"
+alias clone="sfclone_client --dir /home/mc/marc/custom/backend/"
+
+alias jrp="echo -n 'PT Jasaraharja Putera' | wl-copy"
+alias tgu="echo -n 'PT Asuransi Tugu Pratama Indonesia Tbk' | wl-copy"
+alias mdh="echo -n 'Mandaya Hospital Group' | wl-copy"
+alias ctt="echo -n 'PT Citra Tubindo Tbk' | wl-copy"
+alias ats="echo -n 'PT Atlas Petrochem Indo' | wl-copy"
+
+alias bu="dconf dump /org/gnome/ > ~/marc/GitHub/ubuntu/gnome-backup"
+alias burestore="dconf load /org/gnome/ < ~/marc/GitHub/ubuntu/gnome-backup"
+
+alias dec="gpg --quiet --use-embedded-filename"
+
+# unsorted
+alias x="xmodmap ~/.config/.Xmodmap"
+alias lb="lsblk"
+alias cps="rsync -aurviP --backup --suffix=.backup "
+alias phone="ssh u0_a570@192.168.0.7 -p 8022"
+alias qfont="fc-list | grep -i " #query for font installed
+alias cfont="ffc-cache -vf"      #clear font cache
+# Check xdg-mime
+alias xf="xdg-mime query filetype "
+#example: $ xdg-mime query filetype photo.jpeg
+alias xd="xdg-mime default "
+#example:
+#$ xdg-mime default feh.desktop image/jpeg
+#$ xdg-mime default wps-office-et.desktop text/html
+
+# Configuration file
+alias cfh="cd /etc;sudo nvim hosts"
+alias cfhr="cd /etc;sudo nvim hosts && ranger /etc"
+alias cfnr="cd ~/github/dotfile; nvim applysymlink.sh && ranger ~/github/dotfile"
+alias cfn="cd ~/github/dotfile; nvim applysymlink.sh"
+alias cfa="cd ~/github/dotfile; nvim .aliases"
+
+alias cfw="cd ~/github/suckless/dwm && nvim config.def.h"
+alias cfm="cd ~/github/suckless/dmenu && nvim config.def.h"
+alias cft="cd ~/github/suckless/st && nvim config.def.h"
+alias cfb="cd ~/github/suckless/blocks; nvim config.h"
+alias cfx="cd ~/; nvim .xinitrc"
+alias cfz="cd ~/; nvim .zshrc"
+alias cfr="cd ~/.config/ranger/; nvim rc.conf"
+
+# Git
+
+alias gs="git status"
+alias gb="git branch"
+alias gbd="git branch -d" # delete branch
+alias gc="git clone"
+alias gcl="git clean -fdx"
+alias gl="git log --oneoline"
+alias gcom="git checkout master"
+alias gr="git reset"
+alias gco="git checkout"
+
+alias cdd="cd ~/github/dotfile"
+alias cdw="cd ~/github/suckless/dwm"
+alias cdm="cd ~/github/suckless/dmenu-5.2"
+alias cds="cd ~/github/suckless/st"
+
+# Jump to folder
+alias p="cd ~/Dropbox/Dataon/Project/"
+alias d="cd ~/Dropbox"
+alias o="cd ~/Downloads"
+alias a="cd ~/Dropbox/Dataon/"
+alias s="cd ~/github/suckless/st"
+alias w="cd ~/github/suckless/dwm"
+alias b="cd ~/.local/bin"
+alias c="cd ~/.local/config"
+alias m="cd ~/marc"
+alias n="cd ~/Dropbox/notes/"
+alias na="cd ~/Dropbox/notes/dataon"
+alias np="cd ~/Dropbox/notes/personal"
+alias nt="cd ~/Dropbox/notes/tech"
+alias dot="cd ~/github/dotfile"
+alias cdf="cd ~/files"
+alias myp="cd ~/Dropbox/MyProject"
+alias rea="cd ~/Dropbox/MyProject/react-app-src"
+alias src="cd ~/Desktop/react-app/src"
+
+alias dc="/home/mc/Dropbox/linux/dotfiles/.local/bin/custom"
+
+alias gp="cd ~/Documents/ && yt-dlp -f '\''bestaudio'\'' "
+
+alias tso="tmux source ~/.config/tmux/tmux.conf"
+alias nw="tmux neww"
+alias ks="tmux kill-server"
+# alias tt="tmux attach -t ws || tmux new -s ws ws"
+alias tf="tmux attach -t fe-server"
+alias tb="tmux attach -t be-server"
+alias clf="tmux split -h lf; lf"
+
+#alias ya="yt-dlp -o '%(channel)s_%(title)s.%(ex wst)s'\'' -f '\''bestaudio'\'' '"
+#alias ya="yt-dlp -o '~/secondary/youtube/audio/%(channel)s_%(title)s.%(ext)s' -f 'bestaudio' "
+alias ys="yt-dlp -o '~/%(channel)s_%(title)s_%(height)s.%(ext)s' -f 18 "
+alias yh="yt-dlp -o '~/%(channel)s_%(title)s_%(height)s.%(ext)s' -f 22 "
+alias yf="yt-dlp -o '~/%(channel)s_%(title)s_%(height)s.%(ext)s' -f 'bestvideo[height<=1080][ext=mp4]+ba[ext=m4a]' "
+alias yf="yt-dlp -o '~/%(channel)s-%(title)s.%(ext)s' -f 'bestvideo[height<=1080][ext=mp4]+ba[ext=m4a]' "
+
+# Chris titus
+# # ex - archive extractor
+# # usage: ex <file>
+# ls, the common ones I use a lot shortened for rapid fire usage
+# alias ls='lsd'
+# alias l='ls -lFh'   #size,show type,human readable
+# alias la='ls -lAFh' #long list,show almost all,show type,human readable
+# alias lr='ls -tRFh' #sorted by date,recursive,show type,human readable
+# alias lt='ls -ltFh' #long list,sorted by date,show type,human readable
+# alias ll='ls -l'    #long list
+# alias ldot='ls -ld .*'
+# alias lS='ls -1FSsh'
+# alias lart='ls -1Fcart'
+# alias lrt='ls -1Fcrt'
+
+alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
+
+alias grep='grep --color'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
+
+# alias t='tail -f'
+
+# Command line head / tail shortcuts
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g L="| less"
+alias -g M="| most"
+alias -g LL="2>&1 | less"
+alias -g CA="2>&1 | cat -A"
+alias -g NE="2> /dev/null"
+alias -g NUL="> /dev/null 2>&1"
+#alias -g P="2>&1| pygmentize -l pytb"
+
+alias dud='du -d 1 -h'
+alias duf='du -sh *'
+# alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
+alias h='history'
+alias hgrep="fc -El 0 | grep"
+alias help='man'
+alias p='ps -f'
+alias sortnr='sort -n -r'
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Battery
+# alias batstat='sudo tlp-stat -b'
+# alias batfull='sudo tlp fullcharge'
+# alias bat30='sudo tlp setcharge 25 30 BAT1'
+# alias bat90='sudo tlp setcharge 85 90 BAT1'
+# alias bat95='sudo tlp setcharge 90 95 BAT1'
+
+alias blkid="sudo blkid"
+alias dd='sudo dd if=~/Downloads/file.iso of=/dev/sdc bs=1M status=progress'
+alias umt='sudo umount /dev/sdc1'
+alias scan='clamscan --recursive --infected  --max-filesize=4000M -l ~/scanlog.txt --move=/home/mc/clamav/ /'
+alias rnet='sudo systemctl restart NetworkManager'
+alias syn='rsync -urvP '
+
+# Operating system specific aliases
+if [[ $OSTYPE == darwin* ]]; then
+  alias flush='dscacheutil -flushcache'
+  # Apps
+  alias browse="open -a /Applications/Google\ Chrome.app"
+  # * Browse Azure Portal
+  alias azure="browse https://preview.portal.azure.com"
+fi
+
+alias own="sudo chown -R mc:mc *"
+alias p1="ping www.gmail.com -s 1000"
+alias p2="ping 192.168.0.1 -s 1000"
+
+# init window name for project libre
+alias wm="wmname LG3D"
+
+alias hist='history | dmenu -i -l 20 -p "history" | xclip -sel c'
+alias df="df -h -x squashfs -x tmpfs -x devtmpfs"
+alias lsmount="mount | column -t"
+alias extip="curl icanhazip.com"
+
+alias jabra='bluetoothctl power on; bluetoothctl connect 50:C9:71:5A:23:90'
+alias jbl='bluetoothctl power on; bluetoothctl connect F4:BC:DA:A4:37:A5'
+alias i="sudo pacman -S"
+alias ui="sudo pacman -Rs"
+alias up="sudo pacman -Syu --noconfirm"
+alias qs="sudo pacman -Qs | grep"
+alias mki="makepkg -si"
+alias mkw="cdw; rm config.h && sudo make clean install"
+alias mks="cds;rm config.h && sudo make clean install"
+
+# top 5 processes that using most memory
+alias mem5="ps auxf | sort -nr -k 4 | head -5"
+alias cpu10="ps auxf | sort -nr -k 3 | head -10"
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
+
+
+alias so="source /home/mc/.zshrc"
+#alias sox="source ~/.xinitrc"
+alias v='nvim'
+alias vim='nvim'
+#alias vimdiff='nvim -d'
+alias r='VISUAL=nvim source ranger'
+#alias h='history | dmenu -i -l 20 -p "history" | xclip -sel c'
+#alias h='history | awk '{$1=""; print $0}' | rofi -dmenu -i -l 50 -p "history" | wl-copy'
+alias h="history | sed 's/^[[:space:]]*[0-9]*[[:space:]]*//' | rofi -dmenu -i -l 30 -p 'history' -theme /usr/share/rofi/themes/Adapta-Nokto.rasi | wl-copy "
+
+# OS
+alias pow='sudo poweroff'
+alias reb='sudo reboot'
+alias sus="sudo systemctl suspend;slock;"
+alias full="sudo tlp fullcharge"
+alias cam="ffplay /dev/video0"
+alias rn="sudo systemctl restart NetworkManager"
+
+# mouse
+alias rtl='xmodmap -e "pointer = 1 2 3"'
+alias ltr='xmodmap -e "pointer = 3 2 1"'
+
+# Suffix - opening file with default apps in zsh
+alias -s {txt}='nvim'
+alias -s {pdf,PDF}='zathura'
+alias -s {jpg,JPG,png,PNG}='feh'
+alias -s {ods,ODS,odt,ODT,odp,ODP,doc,DOC,docx,DOCX}='wps'
+alias -s {xls,XLS,xlsx,XLSX,xlsm,XLSM,csv,CSV}='et'
+alias -s {ppt,PPT,pptx,PPTX}='wpp'
+alias -s {html,HTML}='chromium'
+alias -s {mp4,MP4,mov,MOV,mkv,MKV}='vlc'
+alias -s {zip,ZIP,war,WAR}="unzip -l"
+alias -s {jar,JAR}="java -jar"
+alias -s gz="tar -tf"
+alias -s {tgz,TGZ}="tar -tf"
+alias -s {tar.gz}="tar -xvf"
+
+# Function
+# Git
+
+gmm() {
+  git add .
+  git commit -m "$1"
+}
+
+gpush() {
+  git add .
+  git commit -m "$1"
+  git push
+}
+
+aliasname() {
+  command $firstParam $secondParam
+}
+
+rsq() {
+  WINDOW_ID=$(xdotool search --onlyvisible --name qutebrowser)
+  xdotool windowsize $WINDOW_ID 1500 1000
+  xdotool windowmove $WINDOW_ID 10 10
+}
+
+ex() {
+  if [ -f $1 ]; then
+    case $1 in
+    *.tar.bz2) tar xjf $1 ;;
+    *.tar.gz) tar xzf $1 ;;
+    *.tar.xz) tar xJf $1 ;;
+    *.bz2) bunzip2 $1 ;;
+    *.rar) unrar x $1 ;;
+    *.gz) gunzip $1 ;;
+    *.tar) tar xf $1 ;;
+    *.tbz2) tar xjf $1 ;;
+    *.tgz) tar xzf $1 ;;
+    *.zip) unzip -d $1 ;;
+    *.Z) uncompress $1 ;;
+    *.7z) 7z x $1 ;;
+    *) echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+setbg() {
+  fullpath="$(pwd)/$1"
+  cp "$fullpath" ~/Desktop/wallpaper.jpg
+  feh --bg-scale ~/Desktop/wallpaper.jpg &
+  notify-send -i "~/Desktop/wallpaper.jpg" "Wallpaper Changed."
+}
+
+mou() {
+  sudo mount /dev/sd$1 ~/$2
+}
+
+alias umo="sudo umount /dev/sd$1"
+
+alias b1="sudo brightnessctl set 10%"
+alias b2="sudo brightnessctl set 50%"
+alias b3="sudo brightnessctl set 100%"
+
+alias inv='nvim "$(fzf --preview="bat --color=always {}")"'
+
