@@ -239,8 +239,6 @@ ln -ivs /home/mc/marc/github/cachyos/config/myclirc ~/.myclirc
 ln -ivs /home/mc/marc/custom/source/commandbox/box ~/.local/bin/
 ln -ivs /home/mc/marc/custom/source/commandbox/jre ~/.local/bin/
 
-sudo ln -ivs /home/mc/marc/github/cachyos/etc/clamav/clamd.conf /etc/clamav
-sudo ln -ivs /home/mc/marc/github/cachyos/etc/clamav/virus-event.bash /etc/clamav
 
 cp /home/mc/marc/github/ubuntu/HubApps /home/mc/.config/microsoft-edge/Default/HubApps
 
@@ -268,8 +266,10 @@ sudo pacman -S python-pandas --noconfirm
 
 # virtualbox
 
-uname -r : 6.12.62-1-MANJARO
-sudo pacman -S virtualbox linux612-virtualbox-host-modules
+uname -r : 7.2.5-1-cachyos
+sudo pacman -S virtualbox virtualbox-host-dkms
+
+restart sebelum coba run vbox
 
 <!-- 6.18.2-2-cachyos -->
 <!-- sudo pacman -S linux-cachyos-headers virtualbox virtualbox-host-dkms -->
@@ -289,7 +289,12 @@ https://wiki.archlinux.org/title/ClamAV
 
 i clamav
 
+sudo ln -ivs /home/mc/marc/github/cachyos/etc/clamav/clamd.conf /etc/clamav
+sudo ln -ivs /home/mc/marc/github/cachyos/etc/clamav/virus-event.bash /etc/clamav
+
+freshclam
 clamscan -r ~/ -l ~/scanresult.txt
+
 
 ps aux | grep clamd
 
@@ -300,6 +305,16 @@ sudo systemctl stop clamav-daemon
 sudo systemctl enable clamav-daemon.socket
 sudo systemctl start clamav-daemon.socket
 sudo systemctl stop clamav-daemon.socket
+
+sudo systemctl edit clamav-clamonacc.service
+```
+[Service]
+ExecStart=/usr/sbin/clamonacc -F --fdpass --log=/var/log/clamav/clamonacc.log
+```
+sudo systemctl start clamav-clamonacc.service
+sudo systemctl enable clamav-clamonacc.service
+
+sudo systemctl enable --now clamav-freshclam.service
 
 curl https://secure.eicar.org/eicar.com.txt | clamscan -
 

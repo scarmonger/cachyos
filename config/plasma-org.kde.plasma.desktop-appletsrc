@@ -371,9 +371,10 @@ DialogHeight=630
 DialogWidth=810
 
 [Containments][23][Applets][119][Configuration][General]
-cursorPosition=95
+cursorPosition=525
 fontSize=10
 noteId=33a789e5-28c9-42bc-a904-28c6663f17
+scrollY=8046
 
 [Containments][23][Applets][119][Shortcuts]
 global=Meta+Alt+N
@@ -594,9 +595,9 @@ Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///usr/share/wallpapers/cachyos-wallpapers/Spectrum.png
+Image=file:///usr/share/wallpapers/cachyos-wallpapers/CachyOS_GreenSpace.png
 SlidePaths=/home/mc/.local/share/wallpapers/,/usr/share/wallpapers/,/home/mc/marc/wallpaper/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/Dota 2.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/steam.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95
+screenMapping=desktop:/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/steam.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/Dota 2.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95
