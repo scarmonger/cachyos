@@ -175,6 +175,7 @@ yay -S --noconfirm zoom
 yay -S microsoft-edge-stable-bin --noconfirm
 
 i remmina freerdp
+i seahorse
 
 ## Android screen sharing
 sudo pacman -S scrcpy
@@ -295,9 +296,6 @@ sudo ln -ivs /home/mc/marc/github/cachyos/etc/clamav/virus-event.bash /etc/clama
 freshclam
 clamscan -r ~/ -l ~/scanresult.txt
 
-
-ps aux | grep clamd
-
 sudo systemctl enable clamav-daemon
 sudo systemctl start clamav-daemon
 sudo systemctl stop clamav-daemon
@@ -306,17 +304,8 @@ sudo systemctl enable clamav-daemon.socket
 sudo systemctl start clamav-daemon.socket
 sudo systemctl stop clamav-daemon.socket
 
-sudo systemctl edit clamav-clamonacc.service
-```
-[Service]
-ExecStart=/usr/sbin/clamonacc -F --fdpass --log=/var/log/clamav/clamonacc.log
-```
-sudo systemctl start clamav-clamonacc.service
-sudo systemctl enable clamav-clamonacc.service
-
-sudo systemctl enable --now clamav-freshclam.service
-
-curl https://secure.eicar.org/eicar.com.txt | clamscan -
+## Check for virus definition update
+clamscan --version
 
 # yt-dlp
 sudo rm ~/.local/bin/yt-dlp
@@ -328,3 +317,4 @@ chmod a+rx ~/.local/bin/yt-dlp  # Make executable
 sudo npm install -g @google/gemini-cli
 
 Paksa Mode Gelap untuk Semua Situs Web (Auto Dark Mode)Jika Anda ingin memaksa seluruh halaman web tampil gelap, gunakan fitur eksperimental:Ketik chrome://flags di bilah alamat (address bar), lalu tekan Enter.Ketik dark mode pada kotak pencarian di bagian atas.Cari opsi Auto Dark Mode for Web Contents.Ubah menu drop-down dari Default menjadi Enabled
+

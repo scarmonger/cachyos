@@ -35,7 +35,7 @@ DialogWidth=810
 [Containments][158][Applets][160][Configuration][General]
 command=kdialog --messagebox 'Times Up'
 runCommand=true
-savedAt=2026,9,16,8,58,37.336
+savedAt=2026,9,22,19,10,46.542
 
 [Containments][158][Applets][161]
 immutability=1
@@ -156,6 +156,9 @@ plugin=org.kde.plasma.pager
 [Containments][165][Applets][168]
 immutability=1
 plugin=org.kde.plasma.icontasks
+
+[Containments][165][Applets][168][Configuration][General]
+launchers=
 
 [Containments][165][Applets][169]
 immutability=1
@@ -371,10 +374,11 @@ DialogHeight=630
 DialogWidth=810
 
 [Containments][23][Applets][119][Configuration][General]
-cursorPosition=525
+cursorPosition=989
 fontSize=10
 noteId=33a789e5-28c9-42bc-a904-28c6663f17
-scrollY=8046
+scrollX=6
+scrollY=15300
 
 [Containments][23][Applets][119][Shortcuts]
 global=Meta+Alt+N
@@ -401,26 +405,6 @@ DialogWidth=810
 
 [Containments][23][Applets][155][Shortcuts]
 global=Meta+Alt+D
-
-[Containments][23][Applets][24]
-immutability=1
-plugin=org.kde.plasma.kickoff
-
-[Containments][23][Applets][24][Configuration]
-popupHeight=524
-popupWidth=681
-
-[Containments][23][Applets][24][Configuration][ConfigDialog]
-DialogHeight=540
-DialogWidth=720
-
-[Containments][23][Applets][24][Configuration][General]
-favoritesPortedToKAstats=true
-icon=org.cachyos.hello
-systemFavorites=suspend\\,hibernate\\,reboot\\,shutdown
-
-[Containments][23][Applets][24][Configuration][Shortcuts]
-global=Alt+F1
 
 [Containments][23][Applets][25]
 immutability=1
@@ -502,7 +486,7 @@ runCommand=true
 savedAt=2026,9,12,21,51,11.79
 
 [Containments][23][General]
-AppletOrder=24;26;25;46;27;102;50;119;155;39;154
+AppletOrder=25;26;46;27;102;50;119;155;39;154
 
 [Containments][4][Wallpaper][org.kde.image][General]
 Image=/usr/share/wallpapers/cachyos-wallpapers/north.png
@@ -595,9 +579,9 @@ Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///usr/share/wallpapers/cachyos-wallpapers/CachyOS_GreenSpace.png
+Image=file:///home/mc/marc/wallpaper/mountain_view.jpg
 SlidePaths=/home/mc/.local/share/wallpapers/,/usr/share/wallpapers/,/home/mc/marc/wallpaper/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/steam.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/Dota 2.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95
+screenMapping=desktop:/steam.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/Dota 2.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95,desktop:/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop,0,ff0ac9cc-88e4-4f1d-beef-f94df4770a95

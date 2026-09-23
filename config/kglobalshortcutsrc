@@ -297,8 +297,6 @@ _launch=none
 ShowOSD=Display\tMeta+Ctrl+P
 
 [services][org.kde.spectacle.desktop]
-CurrentMonitorScreenShot=none
-OpenWithoutScreenshot=none
 RecordRegion=Meta+Shift+R
 
 [services][org.ksnip.ksnip.desktop]

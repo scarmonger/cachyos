@@ -28,7 +28,7 @@ Mode=Constant
 mousemarkEnabled=true
 screenedgeEnabled=false
 trackmouseEnabled=true
-translucencyEnabled=true
+virtualdesktopsonlyonprimaryEnabled=true
 
 [TabBoxAlternative]
 DesktopMode=2

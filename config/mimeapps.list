@@ -1,17 +1,29 @@
 [Added Associations]
+application/json=nvim.desktop;
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
 application/vnd.ms-excel=wps-office-et.desktop;libreoffice-calc.desktop;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=wps-office-et.desktop;libreoffice-calc.desktop;org.kde.ark.desktop;org.pwmt.zathura-cb.desktop;
 application/wps-office.xls=wps-office-et.desktop;libreoffice-calc.desktop;org.kde.ark.desktop;org.pwmt.zathura-cb.desktop;
 application/wps-office.xlsx=wps-office-et.desktop;libreoffice-calc.desktop;org.kde.ark.desktop;org.pwmt.zathura-cb.desktop;
+application/x-docbook+xml=nvim.desktop;
+application/x-yaml=nvim.desktop;
+text/markdown=nvim.desktop;
+text/plain=nvim.desktop;
+text/x-cmake=nvim.desktop;
 
 [Default Applications]
+application/json=nvim.desktop;
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
 application/vnd.ms-excel=wps-office-et.desktop;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=wps-office-et.desktop;
 application/wps-office.xls=wps-office-et.desktop;
 application/wps-office.xlsx=wps-office-et.desktop;
+application/x-docbook+xml=nvim.desktop;
+application/x-yaml=nvim.desktop;
 text/html=google-chrome.desktop
+text/markdown=nvim.desktop;
+text/plain=nvim.desktop;
+text/x-cmake=nvim.desktop;
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/mailto=google-chrome.desktop
