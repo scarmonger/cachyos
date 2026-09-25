@@ -1,0 +1,202 @@
+#!/usr/bin/python3
+from selenium import webdriver
+#from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+import pyperclip
+import time
+from datetime import date
+
+today = date.today()
+d1 = input("Date:")
+if d1 == "":
+    d1 = today.strftime("%d")
+print("d1 =", d1)
+
+
+import pandas as pd
+
+# Read the CSV file
+df = pd.read_csv('/home/mc/Dropbox/project.csv', sep=";", header=None, names=['a', 'b', 'c', 'd'])
+
+while True:
+
+# Request user input
+    user_input = input("Project Name: ").strip().upper()
+    if user_input == '':
+        # Get the first record in the first column
+        first_record = df.iloc[0]
+        print(f"Project Name: {first_record['a']} - {first_record['b']}{first_record['c']} {first_record['d']}")
+        proj_name = first_record['b']
+        proj_phase = first_record['c']
+        remark = first_record['d']
+        break
+    else:
+        # Find the row(s) that match the input in column 'a'
+        matching_rows = df.loc[df['a'].str.upper() == user_input]
+
+        if not matching_rows.empty:
+            # Get the first matching row
+            match = matching_rows.iloc[0] 
+            
+            # Access 'b' and 'c' directly from the matching row
+            proj_name = match['b']
+            proj_phase = match['c']
+            remark = match['d']
+            
+            # Output the result
+            print(f"Project Name: {match['a']} - {proj_name}{proj_phase} - { remark }")
+            break
+        else:
+            print("No matching data found.")
+
+# proj_phase = proj_phase.replace("-", "").strip()
+print(f"phase: + { proj_phase }")
+
+subject = input("Subject[200]/Description:")
+
+if subject != '':
+    pyperclip.copy(subject)
+else:
+    subject = remark
+
+print(subject)
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
+options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
+options.add_argument("--profile-directory=Default")
+driver = webdriver.Chrome(options=options)
+#driver = webdriver.Chrome()
+driver.implicitly_wait(30)
+
+driver.get('https://sf7doffice.sunfishhr.com/standard/hrm.helpdesk.add')
+
+# task = driver.find_element(
+#     "xpath", '/html/body/div[1]/div/section/section/div/section/div[2]/div/main/div[2]/div[2]/div/div/div[2]/button').click()
+
+# Pilih task
+time.sleep(5.5)
+print('pilih task')
+
+task = driver.find_element(
+    "xpath", '/html/body/div/div[1]/section/section/div/div[1]/div/section/div[2]/div/main/div/div/div[1]/form/div[2]/div[2]/div/div/div/div/div[1]/span[1]/input').click()
+# driver.find_element(
+#     "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_CATEGORY_CODE"]').send_keys(
+#     Keys.ARROW_DOWN
+# )
+driver.find_element(By.XPATH, "//div[text()='Support']").click()
+
+driver.find_element(
+    "xpath", '/html/body/div/div[1]/section/section/div/div[1]/div/section/div[2]/div/main/div/div/div[1]/form/div[4]/div[2]/div/div/input').send_keys(
+    subject + Keys.TAB + subject 
+)
+
+print('External Radio Button')
+driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_IS_EXTERNAL"]').click()
+
+time.sleep(0.5)
+
+# Pilih Priority
+print('Pilih priority')
+driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_PRIORITY"]').send_keys('no impact' + 
+     Keys.ARROW_DOWN + Keys.RETURN + Keys.TAB
+)
+
+# Pilih tanggal start 
+# print('Pilih tanggal')
+
+wait = WebDriverWait(driver,10)
+# klik start date
+start = wait.until(EC.element_to_be_clickable((By.ID,"wpform_standard_hrm_helpdesk_add_PLAN_DATE")))
+start.click()
+
+# klik tanggal 
+wait.until(EC.element_to_be_clickable(
+    (By.XPATH,"//div[@class='ant-picker-cell-inner' and text()='" + str(int(d1)) + "']")
+)).click()
+
+# klik end date input
+end = wait.until(EC.element_to_be_clickable(
+    (By.XPATH,"//input[@placeholder='End date']")
+))
+end.click()
+
+# klik tanggal 17 lagi
+wait.until(EC.element_to_be_clickable(
+    (By.XPATH,"//div[@class='ant-picker-cell-inner' and text()='" + str(int(d1)) + "']")
+)).click()
+
+
+# Pilih project
+print('Pilih project')
+# driver.find_element(
+#     "xpath", '/html/body/div[1]/div/section/section/div/section/div[2]/div/main/div/div/div[2]/form/div[9]/div[2]/div/div/div/div/div[1]').click()
+# /html/body/div/div/section/section/div/section/div[2]/div/main/div/div/div[2]/form/div[9]/div[2]/div/div/div[2]/div/div
+inp_project = driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_PROJECT_CODE"]')
+inp_project.send_keys(proj_name)
+time.sleep(0.5)
+inp_project.send_keys(Keys.ARROW_DOWN + Keys.RETURN) 
+
+time.sleep(0.5)
+#Pilih Phase
+inp_phase = driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_TIMELINE_ID"]')
+time.sleep(0.5)
+
+if proj_name == 'Indonesia Eximbank':
+    inp_phase.send_keys(Keys.RETURN + Keys.RETURN + Keys.TAB) 
+else:
+    inp_phase.send_keys(proj_phase + Keys.RETURN + Keys.TAB) 
+
+# Primary assignee
+assignee = driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_ASSIGNEE"]')
+assignee.click()
+time.sleep(0.5);
+assignee.send_keys('marctinius' + Keys.ARROW_DOWN + Keys.RETURN + Keys.TAB)
+
+# Select Module
+task = driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_MODULE_NAME"]').send_keys(
+    'support' + Keys.ARROW_DOWN + Keys.RETURN
+)
+
+# submit
+driver.find_element(
+    "xpath", '//*[@id="extra-button"]').click()
+time.sleep(0.5);
+driver.find_element(
+    "xpath", '/html/body/div[2]/div/div[2]/div/div[2]/div/div/div[2]/button[2]').click()
+
+time.sleep(2);
+
+current_url = driver.current_url
+print("Current URL:", current_url)
+
+if subject != '':
+    pyperclip.copy(subject)
+
+#Respond
+driver.find_element(
+    "xpath", '/html/body/div[1]/div/section/section/div/section/div[2]/div/div/div/div[2]/div/div/div[2]/div[1]/div/div[1]/div/div[2]/button').click()
+
+driver.find_element(
+    # "xpath", '/html/body/div[2]/div/div[2]/div/div[2]/div/div/div[2]/button[2]').click()
+    "xpath", '/html/body/div[3]/div/div[2]/div/div[2]/div/div/div[2]/button[2]').click()
+
+#Done
+time.sleep(1.5)
+
+driver.find_element(
+    "xpath", '/html/body/div[1]/div/section/section/div/section/div[2]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/div[4]/button').click()
+print(subject)
+driver.find_element(
+    "xpath", '/html/body/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/div/form/div[1]/div[2]/div/div/div/textarea').send_keys(subject + Keys.TAB + subject + Keys.TAB * 2 + Keys.RETURN)
+

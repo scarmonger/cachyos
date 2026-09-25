@@ -1,0 +1,183 @@
+#!/usr/bin/python3
+
+from selenium import webdriver
+#from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+import pyperclip
+import time
+from datetime import date, timedelta
+
+today = date.today()
+d1 = today.strftime("%d")
+
+print("d1 =", d1)
+d2 = (today + timedelta(days=14)).strftime("%d")
+
+import pandas as pd
+
+# Read the CSV file
+df = pd.read_csv('/home/mc/Dropbox/project.csv', sep=";", header=None, names=['a', 'b', 'c', 'd'])
+
+while True:
+
+# Request user input
+    user_input = input("Project Name: ").strip().upper()
+    if user_input == '':
+        # Get the first record in the first column
+        first_record = df.iloc[0]
+        print(f"Project Name: {first_record['a']} - {first_record['b']}{first_record['c']}")
+        proj_name = first_record['b']
+        proj_phase = first_record['c']
+        break
+    else:
+        # Find the row(s) that match the input in column 'a'
+        matching_rows = df.loc[df['a'].str.upper() == user_input]
+
+        if not matching_rows.empty:
+            # Get the first matching row
+            match = matching_rows.iloc[0] 
+            
+            # Access 'b' and 'c' directly from the matching row
+            proj_name = match['b']
+            proj_phase = match['c']
+            
+            # Output the result
+            print(f"Project Name: {match['a']} - {proj_name}{proj_phase}")
+            break
+        else:
+            print("No matching data found.")
+
+proj_phase = proj_phase.replace("-", "").strip()
+print(f"Phase: {proj_phase}")
+
+# subject = input("Subject[200]/Description:")
+#
+# if subject != '':
+#     pyperclip.copy(subject)
+# else:
+subject = "Permohonan testing custom project - " + proj_name
+
+print(subject)
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
+options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
+options.add_argument("--profile-directory=Default")
+driver = webdriver.Chrome(options=options)
+#driver = webdriver.Chrome()
+driver.implicitly_wait(30)
+
+driver.get('https://sf7doffice.sunfishhr.com/standard/hrm.helpdesk.add')
+
+# task = driver.find_element(
+#     "xpath", '/html/body/div[1]/div/section/section/div/section/div[2]/div/main/div[2]/div[2]/div/div/div[2]/button').click()
+
+# Pilih task
+print('pilih task')
+
+task = driver.find_element(
+    "xpath", '/html/body/div/div[1]/section/section/div/div[1]/div/section/div[2]/div/main/div/div/div[1]/form/div[2]/div[2]/div/div/div/div/div[1]/span[1]/input')
+
+task.send_keys('Testing' + Keys.ARROW_DOWN + Keys.RETURN)
+
+driver.find_element(
+    "xpath", '/html/body/div/div[1]/section/section/div/div[1]/div/section/div[2]/div/main/div/div/div[1]/form/div[4]/div[2]/div/div/input').send_keys(
+    subject + Keys.TAB + subject 
+)
+
+print('External Radio Button')
+# driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_IS_EXTERNAL"]').click()
+driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_IS_EXTERNAL"]/label[1]/span[2]').click()
+time.sleep(0.5)
+
+# Pilih Priority
+print('Pilih priority')
+driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_PRIORITY"]').send_keys('no impact' + 
+     Keys.ARROW_DOWN + Keys.RETURN + Keys.TAB
+)
+
+# Pilih tanggal start 
+# print('Pilih tanggal')
+
+wait = WebDriverWait(driver,10)
+# klik start date
+start = wait.until(EC.element_to_be_clickable((By.ID,"wpform_standard_hrm_helpdesk_add_PLAN_DATE")))
+start.click()
+
+# klik tanggal 
+wait.until(EC.element_to_be_clickable(
+    (By.XPATH,"//div[@class='ant-picker-cell-inner' and text()='" + str(int(d1)) + "']")
+)).click()
+
+# klik end date input
+end = wait.until(EC.element_to_be_clickable(
+    (By.XPATH,"//input[@placeholder='End date']")
+))
+end.click()
+
+# klik tanggal 17 lagi
+wait.until(EC.element_to_be_clickable(
+    (By.XPATH,"//div[@class='ant-picker-cell-inner' and text()='" +d2+"']")
+)).click()
+
+
+# Pilih project
+print('Pilih project')
+# driver.find_element(
+#     "xpath", '/html/body/div[1]/div/section/section/div/section/div[2]/div/main/div/div/div[2]/form/div[9]/div[2]/div/div/div/div/div[1]').click()
+# /html/body/div/div/section/section/div/section/div[2]/div/main/div/div/div[2]/form/div[9]/div[2]/div/div/div[2]/div/div
+inp_project = driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_PROJECT_CODE"]')
+inp_project.send_keys(proj_name)
+time.sleep(0.5)
+inp_project.send_keys(Keys.ARROW_DOWN + Keys.RETURN) 
+
+time.sleep(0.5)
+#Pilih Phase
+inp_phase = driver.find_element("xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_TIMELINE_ID"]')
+inp_phase.click()
+time.sleep(0.5)
+
+if proj_name == 'Indonesia Eximbank':
+    inp_phase.send_keys(Keys.RETURN + Keys.RETURN + Keys.TAB) 
+else:
+    inp_phase.send_keys(proj_phase + Keys.RETURN + Keys.TAB) 
+
+# Primary assignee and other assignee
+assignee = driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_ASSIGNEE"]')
+assignee.click()
+time.sleep(0.5);
+assignee.send_keys('dini imawati' + Keys.ARROW_DOWN + Keys.RETURN + Keys.TAB + 'novita')
+
+# Select Project Manager
+task = driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_PROJECT_MANAGER"]').send_keys(
+    'Marctinius' + Keys.ARROW_DOWN + Keys.RETURN
+)
+
+# Scope Test
+driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_SCOPE_TEST_TYPE"]').send_keys(Keys.ARROW_DOWN + Keys.ARROW_DOWN + Keys.RETURN + Keys.TAB 
+    + "Melakukan testing terhadap modifikasi agar sesuai dengan CSF")
+
+# Testing Environment
+driver.find_element(
+    "xpath", '//*[@id="wpform_standard_hrm_helpdesk_add_ENV_OPERATING_SYSTEM"]').send_keys("Windows"
+    + Keys.TAB + "React"
+    + Keys.TAB + "MariaDB"
+    + Keys.TAB + "https://sf7.sunfishhr.com/"
+    + Keys.TAB 
+    + Keys.TAB 
+    + Keys.TAB + "Chrome"
+    + Keys.TAB + "0")
+
+if subject != '':
+    pyperclip.copy(subject)
+

@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+#!/usr/bin/python
+delay = 8
+remark = "Matchup payroll"
+
+from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+from datetime import datetime, timedelta
+
+import pyperclip
+import time
+
+import sys
+# ts tgu 1 p - partial/normal timesheets
+# ts tgu 1   - full isi timesheet
+
+
+# First argument (like $1 in Bash)
+if len(sys.argv) > 1:  # Ensure at least 2 elements (including script name) to prevent error
+    arg1 = sys.argv[1]  
+    print(f"First argument: {arg1}")
+
+# Second argument (like $2 in Bash)
+if len(sys.argv) > 2:  # Ensure at least 3 elements (including script name) to prevent error
+    print(f"Second argument Project Initial: {sys.argv[2]}")
+
+# Read the CSV file
+import pandas as pd
+
+df = pd.read_csv('/home/mc/Dropbox/project.csv', sep=";", header=None, names=['a', 'b', 'c', 'd'])
+
+if len(sys.argv) == 1:  # Kalau tidak ada nama project yang dimasukkan, syntax ini mengecek jumlah kata yang di input, jika hanya ada nama script maka sys.argv jumlahnya hanya 1
+    first_record = df.iloc[0]
+    print(f"Project Name: {first_record['a']} - {first_record['b']}")
+else:
+    result = df.loc[df['a'] == sys.argv[1], ['b','c','d']]
+
+    # Output the result
+    if not result.empty:
+        proj_name = result['b'].iloc[0] + result['c'].iloc[0] # Get value from 'b+c' column
+        remark = result['d'].iloc[0]  # Get value from 'd' column
+        print(f"The corresponding data is: {proj_name}")
+    else:
+        print("No matching data found, system is quitting.")
+        sys.exit()
+
+if len(sys.argv) > 2:  # Ensure at least 3 elements (including script name)
+    days_ago = sys.argv[2]
+    index = 17 - int(days_ago)
+    select_day = '/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div/div/div[' + str(index) + ']/div/button'
+    print(select_day)
+
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
+options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
+options.add_argument("--profile-directory=Default")
+driver = webdriver.Chrome(options=options)
+#driver = webdriver.Chrome()
+driver.implicitly_wait(30)
+
+driver.get('https://sf7doffice.sunfishhr.com/standard/hrm.time-and-attendance.attendance-request.timesheet-request')
+
+time.sleep(delay)
+
+## Wait up to 10 seconds for the element to be present
+#wait = WebDriverWait(driver, 10)
+#element = wait.until(EC.presence_of_element_located((By.ID, "myElementId")))
+#
+## Now it's safe to interact with the element
+#element.click()
+
+# Exception
+if len(sys.argv) > 2:  # Ensure at least 3 elements (including script name) to prevent error
+    if proj_name == "Indonesia Eximbank ":
+        remark = "UAT"
+        print(remark)
+
+# Pick date
+print("Pick Date")
+#if int(days_ago) > 0:
+driver.find_element("xpath",select_day).click()
+
+print("Input Project 1")
+project1 = driver.find_element("xpath",'//*[@id="timesheets_0_hdn_selprojectphase"]')
+project1.click()
+project1.send_keys(proj_name)
+time.sleep(1)
+driver.find_element("xpath",'/html/body/div[1]/div/section/section/div/section/main/div/form/div/div[1]/div/div[3]/div/div[2]/div[1]/div[1]/div/div[7]/div[1]/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div/div[2]/div[1]/div/div/div[1]').click()
+time.sleep(1)
+
+# Get Actual Start Time
+actualStartElement = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/div/div[1]/div[2]')
+actualStartTime = actualStartElement.text
+print("actualStartTime: " + actualStartTime)
+
+# Get Actual End Time
+actualEndElement = driver.find_element("xpath",'/html/body/div[1]/div/section/section/div/section/main/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/div/div[2]/div[2]')
+actualEndTime = actualEndElement.text
+print("actualEndTime: " + actualEndTime)
+
+# Processing Start Time
+#adjStartTime = None  # Placeholder for result
+#startHour = actualStartTime[:2]  # Slices the last two characters
+#startMinute = int(actualStartTime[-2:])  # Slices the last two characters
+# print(f"startMinute:  {startMinute}")
+#
+# while True:
+#     startMinute += 1  # Increment A
+#
+#     if startMinute % 5 == 0:  # Check if A is divisible by 5
+#         adjStartMinute = startMinute  # Store the result in x
+#         break  # Exit the loop
+#
+# print(f"Loop stopped. adjStartMinute = {adjStartMinute}")  # Output the result
+
+# Convert string to datetime object
+start_time = datetime.strptime(actualStartTime, "%H:%M")
+
+# Substract 5 minutes
+new_start_time = start_time + timedelta(minutes=5)
+
+# Convert back to string
+formatted_start_time = new_start_time.strftime("%H:%M")
+
+
+# Processing End Time
+adjEndTime = None  # Placeholder for result
+
+# Convert string to datetime object
+# if int(days_ago) > 0:
+end_time = datetime.strptime(actualEndTime, "%H:%M")
+
+# Substract 5 minutes
+new_end_time = end_time - timedelta(minutes=5)
+
+# Convert back to string
+formatted_end_time = new_end_time.strftime("%H:%M")
+
+if len(sys.argv) > 3:  # Ensure at least 3 elements (including script name)
+    if sys.argv[3] == "p":
+        endMinute = int(formatted_start_time[-2:])  # Slices the last two characters
+        formatted_end_time = "17:" + str(endMinute)
+
+print(f"formatted_end_time = {formatted_end_time}")  # Output the result
+
+print("Input Start Time 1")
+stime1 = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/form/div/div[1]/div/div[3]/div/div[2]/div[1]/div[1]/div/div[7]/div[1]/div/div[2]/div/div[1]/div/div/div[1]/div/div/div[1]/span/div[2]/span/input')
+stime1.click()
+stime1.send_keys(formatted_start_time)
+
+
+print("Input End Time 1 and the rest")
+etime1 = driver.find_element("xpath",'//*[@id="sf7-content"]/main/div/form/div/div[1]/div/div[3]/div/div[2]/div[1]/div[1]/div/div[7]/div[1]/div/div[2]/div/div[1]/div/div/div[1]/div/div/div[2]/span/div[2]/span/input')
+etime1.send_keys(Keys.BACKSPACE * 5 + "12:00" + Keys.TAB * 3 + "pmc" + Keys.RETURN + Keys.TAB * 2 + " " + Keys.TAB + Keys.SPACE)
+
+# print("Click Add Task")
+# driver.find_element("xpath",'//*[@id="sf7-content"]/main/div/form/div/div[1]/div/div[3]/div/div[2]/div[1]/div[3]/button').click()
+
+print("Input Project 2")
+project2 = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/form/div/div[1]/div/div[3]/div/div[2]/div[1]/div[2]/div/div[7]/div[1]/div/div[1]/div/div[2]/div/div/div/div/div[1]/span[1]/input')
+project2.click()
+project2.send_keys(proj_name + Keys.RETURN + Keys.TAB * 2 + "13:00" + Keys.TAB * 2 + formatted_end_time + Keys.TAB * 3 + "pmc" + Keys.RETURN + Keys.TAB * 2 + " ")
+
+autoSort = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/form/div/div[1]/div/div[3]/div/div[1]/div/div[2]/button')
+autoSort.click()
+
+remark1 = driver.find_element("xpath", '//*[@id="timesheets_0_remark"]').send_keys(remark)
+remark2 = driver.find_element("xpath", '//*[@id="timesheets_1_remark"]').send_keys(remark + Keys.TAB * 9)

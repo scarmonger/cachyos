@@ -1,0 +1,225 @@
+#!/usr/bin/python3
+from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException 
+
+import time
+import pyperclip
+import sys, getopt
+
+# project_code = input("Project Name:")
+# if project_code == "":
+#     project_code = "dac"
+#
+# projectdict = {
+#         "mdh": "Mandaya Hospital",
+#         "ceb": "Cebuana Lhuillier",
+#         "ctt": "Citra Tubindo Tbk",
+#         "ats": "ATLAS PETROCHEM INDO",
+#         "kpn": "Konawe Panca Mineral",
+#         "dac": "Daikin Airconditioning Indonesia, PT",
+#         "yij": "Yupi Indo Jelly Gum, PT",
+#         "hcm": "Hitachi Construction Machinery",
+#         "eli": "Evergreen Logistics Indonesia",
+#         "sib": "Shimano Batam",
+#         "mtb": "PT. Mitsubishi Tanabe Pharma Indonesia"
+# }
+# print (projectdict[project_code])
+
+import pandas as pd
+
+# Read the CSV file
+df = pd.read_csv('/home/mc/Dropbox/project.csv', sep=";", header=None, names=['a', 'b', 'c', 'd'])
+while True:
+
+# Request user input
+    user_input = input("Project Name: ").strip().upper()
+    if user_input == '':
+        # Get the first record in the first column
+        first_record = df.iloc[0]
+        print(f"Project Name: {first_record['a']} - {first_record['b']}")
+        proj_name = first_record['b']
+        break
+    else:
+        # Compare input with column 1 (case-insensitive) and get the corresponding value from column 2
+        result = df.loc[df['a'].str.upper() == user_input, 'b']
+
+    # Output the result
+    if not result.empty:
+        proj_name = result.values[0]
+        print(f"The corresponding data is: {proj_name}")
+        break
+    else:
+        print("No matching data found.")
+
+
+
+doc_type = input("Document type:").upper()
+if doc_type == "":
+    doc_type = "PPR"
+
+docdict = {
+    "PTS": "FM-IM-PTS-Project Team Structure",
+    "TIM": "FM-IM-TIM-Timeline Proposal",
+    "ASN": "FM-IM-ASN-Assessment Notes",
+    "DMF": "FM-IM-DMF-Data Migration",
+    "STD": "FM-IM-STD-Standard System Delivery",
+    "SDL": "FM-IM-SDL-Software Delivery",
+    "ENV": "FM-IM-ENV-Environment Configuration",
+    "SSC": "FM-IT-SSC-Server Security Checklist",
+    "TRA": "FM-IM-TRA-Training Attendance",
+    "TRD": "FM-IM-TRD-Training Delivery",
+    "TFE": "FM-IM-TFE-Training Feedback",
+    "SVE": "FM-IM-SVE-System Verification",
+    "LAF": "FM-IM-LAF-Launch Acceptance Form",
+    "CSF": "FM-IM-CSF-Customization Specification Form",
+    "CCF": "FM-IM-CCF-Customization Completion Report",
+    "CRQ": "FM-IM-CRQ-Change Request",
+    "CDF": "FM-IM-CDF-Customization Delivery Form",
+    "UAT": "FM-QA-UAT-User Acceptance",
+    "IMC": "FM-IM-IMC-Implementation Conclusion",
+    "SUS": "FM-IM-SUS-Project Suspension",
+    "SRQ": "FM-IM-SRQ-Service Request",
+    "PPR": "FM-IM-PPR-Project Progress Report",
+    "MOM": "FM-MR-MOM-Minutes of Meeting",
+    "CSS": "FM-MR-CSS-Customer Satisfaction Survey-English",
+    "HOR": "FM-SM-HOR-Handover Readiness"
+}
+
+print (docdict[doc_type])
+
+subject = input("Subject:")
+#sys.exit()
+# start add-on, run driver from file path
+#from selenium.webdriver.chrome.service import Service
+#
+#service = Service(executable_path="/home/mc/Downloads/chromedriver")
+#driver = webdriver.Chrome(service=service)
+# end add-on
+username = 'marctinius'
+password = 'AkuLelakimu'
+
+driver = webdriver.Chrome()
+#driver.maximize_window()
+driver.implicitly_wait(30)
+
+driver.get('http://support.dataon.com/insys')
+#driver.get('https://sf7demo.dataon.com/')
+
+driver.find_element("xpath",'//input[@id="loginUsername-inputEl"]').send_keys(username)
+driver.find_element("xpath",'//input[@id="loginPassword-inputEl"]')\
+        .send_keys(password)
+driver.find_element("xpath",'//input[@id="loginPassword-inputEl"]')\
+        .send_keys(Keys.ENTER)
+#login_button = driver.find_element("xpath",'//*[@id="login_button-btnEl"]')
+#login_button.click()
+
+#print (login_button)
+
+# Check if element exists
+# def check_exists_by_xpath(xpath):
+#     try:
+#         driver.find_element("xpath",xpath)
+#     except NoSuchElementException:
+#         return False
+#     return True
+
+# login_button_exists = check_exists_by_xpath('//*[@id="login_button-btnEl"]')
+
+# print(login_button_exists)
+
+# if login_button_exists:
+#     print("Click?")
+#     login_button = driver.find_element("xpath",'//*[@id="login_button-btnEl"]')
+#     login_button.click()
+#     print("Clicked")
+#     login_button.click()
+#     print("Click again")
+
+# Bersiap untuk membuka tab baru dan pindah tab
+# Setup wait for later
+time.sleep(0.5)
+wait = WebDriverWait(driver, 3)
+
+# Store the ID of the original window
+original_window = driver.current_window_handle
+
+# Check we don't have other windows open already
+assert len(driver.window_handles) == 1
+
+# Click for document directory
+driver.find_element("xpath",'//button[@id="documents-btnEl"]').click()
+
+# Wait for the new window or tab
+#wait.until(EC.number_of_windows_to_be(2))
+
+# Loop through until we find a new window handle
+for window_handle in driver.window_handles:
+    if window_handle != original_window:
+        driver.switch_to.window(window_handle)
+        break
+
+#print (driver.title)
+#print (driver.current_url)
+
+# Wait for the new tab to finish loading content
+wait.until(EC.title_is("Document Management System"))
+
+# click FOR new document, ada error menggunakan .click() saja maka perlu ada tambahan execute_script
+button = driver.find_element("xpath",'//*[@id="btnTrans"]')
+driver.execute_script("arguments[0].click();",button)
+
+# Click for date
+driver.find_element("xpath",'//*[@id="newDocDate-inputEl"]').click()
+# Click for second row of the month
+driver.find_element("xpath",'//*[@class="x-datepicker x-layer x-datepicker-default x-unselectable"]/div/table/tbody/tr[2]/td[1]').click()
+
+#time.sleep(9.5)
+
+# driver.find_element("xpath",'//*[@id="cbxTitle-inputEl"]').send_keys(projectdict[project_code])
+driver.find_element("xpath",'//*[@id="cbxTitle-inputEl"]').send_keys(proj_name)
+
+
+#WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="x-boundlist-item"][1]')))
+driver.find_element("xpath",'//*[@class="x-boundlist-item x-boundlist-item-over"][1]').click()
+driver.find_element("xpath",'//*[@id="cbxList-inputEl"]').send_keys(docdict[doc_type])
+driver.find_element("xpath",'//*[@class="x-boundlist-item x-boundlist-item-over"][1]').click()
+
+if subject == "":
+    driver.find_element("xpath",'//*[@id="newDocSubject-inputEl"]').send_keys(' ')
+else:
+    driver.find_element("xpath",'//*[@id="newDocSubject-inputEl"]').send_keys(subject)
+    print(subject)
+
+
+tmp = []
+for tmp in driver.find_elements(By.CLASS_NAME,"x-btn-inner"):
+    title = tmp.text
+    if title == "Save":
+        tmp.click()
+        break
+
+doc_no = driver.find_element("xpath",'//*[@class="x-window ux-notification-window x-layer x-window-default x-closable x-window-closable x-window-default-closable"]/div[2]').text
+print (doc_no)
+
+pyperclip.copy(doc_no)
+
+driver.quit()
+
+#driver.find_element("xpath",'//*[@id="//div[@class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"]/div/div/div"]').click()
+#hoverable = driver.find_element("xpath",'//aside//span[@aria-label="clock-circle"]')
+#ActionChains(driver).move_to_element(hoverable).perform()
+
+#userinput = driver.find_element("xpath",'//input[@id="loginPassword-inputEl"]')
+#
+#ActionChains(driver)\
+#    .send_keys('AkuLelakimu')\
+#    .key_down(Keys.RETURN)\
+#    .perform()
+#print ('I waited and I finally found the element')

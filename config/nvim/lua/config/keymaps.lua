@@ -50,7 +50,7 @@ vim.keymap.set("i", "<C-v>", '<C-r>"', { desc = "paste from the last yank, delet
 vim.keymap.set("i", "<C-b>", "<C-r>0", { desc = "paste from last yank" })
 vim.keymap.set("v", "<leader>y", '"ry', { desc = "copy into r register" })
 vim.keymap.set("n", "<leader>yy", '"ryy', { desc = "copy into r register" })
-vim.keymap.set("n", "<leader>p", '"rp', { desc = "paste from r register" })
+vim.keymap.set("n", "<leader>r", '"rp', { desc = "paste from r register" })
 
 vim.keymap.set("n", "<leader>ta", "ggVG", { desc = "select all" })
 vim.keymap.set("n", "<leader>th", ':! thorium-browser "<c-r>%"<CR>', { desc = "preview markdown" })

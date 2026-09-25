@@ -1,34 +1,50 @@
+# main
+
+(Focus) Switch to desktop : M + {A,S,D,F,E,R,T}
+(Move) Window to desktop : M + {A,S,D,F,E,R,T}
+(Move) Window one desktop to the right : M+Sh+I, M+Ctrl+Sh+L
+(Move) Window one desktop to the left : M+Sh+U, M+Ctrl+Sh+H
+
 sudo pacman -Syu
 sync firefox
 
-# add alias to fish
+## add alias to fish
+
 echo "source ~/marc/github/cachyos/alias" >> /home/mc/.config/fish/config.fish
 
-## install fisher for plugins
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+### install fisher for plugins
 
-## install plugins for fish
+curl -sL <https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish> | source && fisher install jorgebucaran/fisher
+
+### install plugins for fish
+
 fisher install IlanCosman/tide@v6
 fisher install icezyclon/zoxide.fish
 
-## functions
+### functions
+
 function inv; nvim (fzf --preview 'bat --color=always {}'); end
 funcsave inv
 
-## Setup enviroment variables
-set -Ux DEFAULT_RECIPIENT "psikomania@yahoo.com"
+### Setup enviroment variables
 
-# clone repo
+set -Ux DEFAULT_RECIPIENT "<psikomania@yahoo.com>"
 
-git clone https://github.com/scarmonger/cachyos ~/marc/github/cachyos/
+### add path
 
+fish_add_path /home/mc/marc/github/cachyos/local/bin/custom
+fish_add_path /home/mc/marc/github/cachyos/local/bin/work
 
-# Setup /etc/sudoers
+## clone repo
+
+git clone <https://github.com/scarmonger/cachyos> ~/marc/github/cachyos/
+
+## Setup /etc/sudoers
 
 sudo visudo
 add this on the end of file : Defaults !tty_tickets
 
-# mount drive
+## mount drive
 
 mkdir -p ~/marc/
 
@@ -47,19 +63,20 @@ sudo echo "UUID=8f4825e2-0016-43c2-994a-bb2830ddaea9 /home/mc/Templates/ ext4 er
 
 sudo mount -a
 
-# Install Yay
+## Install Yay
+
 sudo pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
+git clone <https://aur.archlinux.org/yay.git>
 cd yay
 makepkg -si
 
-# install essentials 
+## install essentials
 
-```
+```bash
 sudo pacman -S vi nvim wl-clipboard lazygit
 ln -ivs /home/mc/marc/github/cachyos/config/nvim ~/.config/
 
-sudo pacman -S ranger kitty zoxide trash-cli bat 
+sudo pacman -S ranger kitty zoxide trash-cli bat
 sudo pacman -S python python-pip
 yay -S mmtui-bin
 
@@ -83,13 +100,15 @@ echo "source /home/mc/marc/github/cachyos/zsh-addon" >> ~/.zshrc
 mkdir -p ~/.local/bin
 ln -ivs ~/marc/github/cachyos/local/bin/custom ~/.local/bin
 ```
-## Rubah default shell bin bash menjadi zsh (harus logout)
+
+### Rubah default shell bin bash menjadi zsh (harus logout)
 
 chsh -s /usr/bin/zsh
 restart
 
-## Tmux
-```
+### Tmux
+
+```sh
 i tmux
 mkdir -p ~/.config/tmux-plugins
 ln -ivs /home/mc/marc/github/cachyos/config/nvim/lua/plugins/vim-tmux-navigator.lua ~/.config/nvim/lua/config/
@@ -101,34 +120,41 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux-plugins/tpm
 ctrl + B + capital I = install plugin
 ctrl + space + capital I = install plugin
 
-# Dropbox Headless Install via command line
+## Dropbox Headless Install via command line
 
 The Dropbox daemon is only compatible with 64-bit Linux servers. To install, run the following command in your Linux terminal.
 
-cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+cd ~ && wget -O - "<https://www.dropbox.com/download?plat=lnx.x86_64>" | tar xzf -
 
 Next, run the Dropbox daemon from the newly created .dropbox-dist folder.
 
 ~/.dropbox-dist/dropboxd
 
-
-wget -O ~/.local/bin/dropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"
+wget -O ~/.local/bin/dropbox "<https://www.dropbox.com/download?dl=packages/dropbox.py>"
 chmod +x ~/.local/bin/dropbox
 
 sudo pacman -S libappindicator
 
-# Install google-chrome
+## Install google-chrome
 
 i chromium
-yay -S --noconfirm google-chrome 
+yay -S --noconfirm google-chrome
 
-# Install other app (sudo pacman -S)
+## install secret-key
+
+secret-tool store --label="kp" application kp username mc
+i seahorse
+
+## Install other app (sudo pacman -S)
+
+i npm
+sudo npm install -g markdownlint-cli2
 
 sudo pacman -S ksnip --noconfirm
 rm -rf ~/.config/ksnip/
 ln -ivs ~/marc/github/cachyos/config/ksnip/ ~/.config/
 
-sudo pacman -S ncdu copyq  --noconfirm
+sudo pacman -S ncdu copyq --noconfirm
 
 sudo pacman -S zathura-cb zathura-djvu zathura-pdf-poppler zathura-ps foliate --noconfirm
 ln -ivs ~/marc/github/cachyos/config/zathura ~/.config/
@@ -142,7 +168,7 @@ i libreoffice-still
 yay -S wps-office ttf-wps-fonts freetype2-wps libtiff5 --noconfirm
 yay -S visual-studio-code-bin
 
-# change mac address
+## change mac address
 
 sudo pacman -S macchanger
 sudo macchanger -s eno1
@@ -161,63 +187,68 @@ sudo systemctl status cronie
 > sudo tailscale down
 
 sudo pacman -S thunderbird --noconfirm
-## thunderbird setup
-Help -> troubleshooting information 
+
+### thunderbird setup
+
+Help -> troubleshooting information
 search and click link -> about:profiles -> create a new profile -> choose folder
 
 sudo pacman -S --noconfirm networkmanager-l2tp strongswan xl2tpd
+
 > nm to call vpn setup
 
-i nushell jq 
+i nushell jq
 yay -S jqp-bin
 
-yay -S --noconfirm zoom 
+yay -S --noconfirm zoom
 yay -S microsoft-edge-stable-bin --noconfirm
 
 i remmina freerdp
-i seahorse
+i gnome-calculator, thunar
 
-## Android screen sharing
+### Android screen sharing
+
 sudo pacman -S scrcpy
 
 Steps:
+
 1. Enable Developer Options → USB Debugging on your phone
 2. Connect phone via USB
 3. Run: `scrcpy`
 4. Additional: Developer Options -> show taps : on
 
-# projectlibre
+## projectlibre
 
-yay -S --noconfirm projectlibre 
+yay -S --noconfirm projectlibre
 
 archlinux-java status
 sudo archlinux-java set java-25-openjdk
 
-https://aur.archlinux.org/packages/projectlibre
-https://wiki.archlinux.org/title/Java#Switching_between_JVM
+<https://aur.archlinux.org/packages/projectlibre>
+<https://wiki.archlinux.org/title/Java#Switching_between_JVM>
 
-# github-cli authentication
+## github-cli authentication
 
 i github-cli
 
-https://cli.github.com/manual/
+<https://cli.github.com/manual/>
 
 git config --global user.email "<psikomania@yahoo.com>"
 git config --global user.name "scarmonger"
 
-## Generate a new SSH Key
+### Generate a new SSH Key
 
-ssh-keygen -t ed25519 -C "psikomania@yahoo.com"
+ssh-keygen -t ed25519 -C "<psikomania@yahoo.com>"
 
-## Start the ssh-agent in the background
+### Start the ssh-agent in the background
 
 eval "$(ssh-agent -s)"
 
-## Adding SSF Key to SSH-Agent
+### Adding SSF Key to SSH-Agent
 
 ssh-add ~/.ssh/id_ed25519
 
-## Adding a new SSH key to your github account
+### Adding a new SSH key to your github account
 
 gh auth login
 gh auth refresh -h github.com -s admin:ssh_signing_key
@@ -226,12 +257,11 @@ check method currently use to communicating with github
 git remote -v
 
 set the method using ssh instead of https
-git remote set-url origin git@github.com:scarmonger/cachyos.git
+git remote set-url origin <git@github.com>:scarmonger/cachyos.git
 
-# Create symlink
+## Create symlink
 
-
-```
+```sh
 ln -ivs ~/marc/github/cachyos/.gitconfig ~/
 
 ln -ivs ~/marc/virtualbox "/home/mc/VirtualBox VMs"
@@ -246,17 +276,16 @@ cp /home/mc/marc/github/ubuntu/HubApps /home/mc/.config/microsoft-edge/Default/H
 <!-- ln -ivs ~/marc/.thunderbird ~/.thunderbird -->
 ```
 
-# Tailscale
+## Tailscale
 
-curl -fsSL https://tailscale.com/install.sh | sh
+curl -fsSL <https://tailscale.com/install.sh> | sh
 sudo tailscale up
 
-# Wallpaper
+## Wallpaper
 
-git clone https://github.com/mylinuxforwork/wallpaper.git /home/mc/marc/pics/wallpaper
+git clone <https://github.com/mylinuxforwork/wallpaper.git> /home/mc/marc/pics/wallpaper
 
-
-# Install python,pip & selenium
+## Install python,pip & selenium
 
 yay -S python-clipman mycli --noconfirm
 python3 -m pip install --user selenium --break-system-packages
@@ -265,7 +294,7 @@ pip install pykeepass --break-system-packages
 sudo pacman -S python-pandas --noconfirm
 <!-- yay -S pyinstaller python-selenium -->
 
-# virtualbox
+## virtualbox
 
 uname -r : 7.2.5-1-cachyos
 sudo pacman -S virtualbox virtualbox-host-dkms
@@ -280,13 +309,17 @@ restart sebelum coba run vbox
 <!-- yay -S virtualbox-ext-oracle -->
 <!-- sudo modprobe -r kvm_intel -->
 
-# rustdesk
+## rustdesk
+
 sudo pacman -U rustdesk-1.4.4-0-x86_64.pkg.tar.zst
 
+**Supaya Rust tidak ikut diupdate secara rutin**
+pada /etc/pacman.d/ cari, unremark dan tambahkan:
+IgnorePkg = rustdesk
 
+## Clamav
 
-# Clamav
-https://wiki.archlinux.org/title/ClamAV
+<https://wiki.archlinux.org/title/ClamAV>
 
 i clamav
 
@@ -304,17 +337,27 @@ sudo systemctl enable clamav-daemon.socket
 sudo systemctl start clamav-daemon.socket
 sudo systemctl stop clamav-daemon.socket
 
-## Check for virus definition update
+### Check for virus definition update
+
 clamscan --version
 
-# yt-dlp
+## yt-dlp
+
 sudo rm ~/.local/bin/yt-dlp
 
-curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
-chmod a+rx ~/.local/bin/yt-dlp  # Make executable
+curl -L <https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp> -o ~/.local/bin/yt-dlp
+chmod a+rx ~/.local/bin/yt-dlp # Make executable
 
-# Gemini
+## Gemini
+
 sudo npm install -g @google/gemini-cli
 
 Paksa Mode Gelap untuk Semua Situs Web (Auto Dark Mode)Jika Anda ingin memaksa seluruh halaman web tampil gelap, gunakan fitur eksperimental:Ketik chrome://flags di bilah alamat (address bar), lalu tekan Enter.Ketik dark mode pada kotak pencarian di bagian atas.Cari opsi Auto Dark Mode for Web Contents.Ubah menu drop-down dari Default menjadi Enabled
+
+## Error saat install package
+
+Corrupted file detected and repaired: /boot/ba4f1adcb6af4dd4b55597e904b0d599/limine_history/initramfs_sha256_80d4d0f1ec25fc703e244b50e1cce89e4ce441e89d9374f056055b2bf6643fa3
+
+sudo limine-mkinitcpio
+sudo limine-update
 

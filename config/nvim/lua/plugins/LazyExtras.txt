@@ -1,0 +1,23 @@
+https://github.com/iamcco/markdown-preview.nvim?utm_source=gemini
+https://github.com/hakonharnes/img-clip.nvim
+
+  Enabled Plugins: (9)
+    ● ai.copilot-chat  CopilotChat.nvim  blink.cmp  edgy.nvim
+    ● coding.blink  blink.cmp  friendly-snippets  blink.compat  catppuccin
+    ● coding.mini-comment  mini.comment  nvim-ts-context-commentstring
+    ● coding.mini-snippets  cmp-mini-snippets  friendly-snippets  mini.snippets  blink.cmp  nvim-cmp
+      Manage and expand snippets (alternative to Luasnip)
+    ● coding.mini-surround  mini.surround
+    ● editor.aerial  aerial.nvim  edgy.nvim  lualine.nvim  telescope.nvim  trouble.nvim
+      Aerial Symbol Browser
+    ● editor.snacks_explorer    snacks.nvim
+      Snacks File Explorer
+    ● editor.snacks_picker    nvim-lspconfig  snacks.nvim  alpha-nvim  dashboard-nvim  flash.nvim  mini.starter  todo-comments.nvim
+      Fast and modern file picker
+    ● formatting.prettier  mason.nvim  conform.nvim  none-ls.nvim
+
+  Enabled Languages: (4)
+    ● lang.json    SchemaStore.nvim  nvim-lspconfig  nvim-treesitter
+    ● lang.markdown    markdown-preview.nvim  mason.nvim  nvim-lspconfig  render-markdown.nvim  conform.nvim  none-ls.nvim  nvim-lint
+    ● lang.typescript  lang.typescript.vtsls  mason.nvim  mini.icons  nvim-lspconfig  mason-nvim-dap.nvim  nvim-dap
+    ● lang.typescript.vtsls  nvim-lspconfig

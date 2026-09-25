@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #!/usr/bin/python
 
-from helpers import get_secret
+from helpers import get_secret, get_mailpass
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -18,6 +18,7 @@ import sys
 # ts tgu 1 p - partial/normal timesheets
 # ts tgu 1   - full isi timesheet
 
+pw = get_mailpass()
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
@@ -29,7 +30,7 @@ driver.get('https://mail.dataon.com:3000/')
 
 #userinput = driver.find_element("xpath",'//input[@id="userName"]')
 userinput = driver.find_element("xpath",'/html/body/div/div[1]/div[1]/form/div[2]/div[2]/input')
-userinput.send_keys('marctinius' + Keys.TAB + 'Zimbra.11223' + Keys.RETURN)
+userinput.send_keys('marctinius' + Keys.TAB + pw + Keys.RETURN)
 
 userinput = driver.find_element("xpath",'/html/body/div[4]/div[1]/div/div/div[2]/div/table/tbody/tr[1]/td[3]/div/div/table/tbody/tr/td[2]/div/input')
 userinput.send_keys('daily reset' + Keys.TAB + Keys.RETURN)
@@ -46,8 +47,8 @@ iframe = iframe = driver.find_element(By.CSS_SELECTOR, "body > iframe")
 
 driver.switch_to.frame(iframe)
 
-with open("dump.html", "w", encoding="utf-8") as f:
-    f.write(driver.page_source)
+# with open("dump.html", "w", encoding="utf-8") as f:
+#     f.write(driver.page_source)
 
 wait = WebDriverWait(driver, 10)
 cell = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'sf7-email-template-content')]//table//tr[1]/td[4]")))
@@ -59,9 +60,9 @@ pyperclip.copy(pw)
 import subprocess
 from pykeepass import PyKeePass
 
-DATABASE = "/home/mc/Dropbox/dataon.kdbx"
+DATABASE = "/home/mc/Dropbox/demo.kdbx"
 MASTER_PASSWORD = get_secret()
-ENTRY_TITLE = "sf7demo"
+ENTRY_TITLE = "demo"
 
 new_password = subprocess.check_output(
     ["wl-paste", "--no-newline"],
@@ -73,28 +74,17 @@ kp = PyKeePass(
     password=MASTER_PASSWORD,
 )
 
-# Cari group 'internal'
-group = kp.find_groups(name='internal', first=True)
+entry = kp.find_entries(
+    title=ENTRY_TITLE,
+    first=True,
+)
 
-if group:
-    # Cari entry spesifik di dalam group 'internal'
-    entry = kp.find_entries(
-        title=ENTRY_TITLE,
-        group=group,
-        first=True,
-    )
-
-    if entry:
-        entry.password = new_password
-        kp.save()
-        print("Password updated successfully!")
-    else:
-        print(f"Entry '{ENTRY_TITLE}' tidak ditemukan di dalam group 'internal'.")
-else:
-    print("Group 'internal' tidak ditemukan.")
+entry.password = new_password
+kp.save()
 
 
 # print(f"Password updated: {ENTRY_TITLE}")
-print("pw: " + pw)
+#print("pw: " + pw)
+print(pw)
 
 driver.quit()

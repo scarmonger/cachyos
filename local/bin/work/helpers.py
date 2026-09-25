@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import secretstorage
-
+from pykeepass import PyKeePass
 
 def get_secret():
     connection = secretstorage.dbus_init()
@@ -20,16 +20,79 @@ def get_secret():
     return item.get_secret().decode()
 
 
-def main():
-    secret = get_secret()
+def get_sfpass():
+    DATABASE = "/home/mc/Dropbox/demo.kdbx"
+    MASTER_PASSWORD = get_secret()
+    ENTRY_TITLE = "sf7doffice"
 
-    print("Secret berhasil diambil.")
+# Buka database KeePass
+    kp = PyKeePass(
+        str(DATABASE),
+        password=MASTER_PASSWORD,
+    )
 
-    # Untuk testing saja
-    print("Secret:", secret)
+# Cari entry (menggunakan recursive=True agar mencari di sub-group 'internal')
+    entry = kp.find_entries(
+        title=ENTRY_TITLE,
+        first=True,
+        recursive=True
+    )
 
-    print("Program melanjutkan eksekusi...")
+    if entry:
+        # Mengambil password dari entry
+        retrieved_password = entry.password
+        
+        # Mengambil username jika dibutuhkan
+        retrieved_username = entry.username 
+        
+        # print(f"Password untuk '{ENTRY_TITLE}': {retrieved_password}")
+        print(f"...")
+    else:
+        print(f"Entry '{ENTRY_TITLE}' tidak ditemukan!")
 
+    return retrieved_password
 
-if __name__ == "__main__":
-    main()
+def get_mailpass():
+    DATABASE = "/home/mc/Dropbox/demo.kdbx"
+    MASTER_PASSWORD = get_secret()
+    ENTRY_TITLE = "zimbra"
+
+# Buka database KeePass
+    kp = PyKeePass(
+        str(DATABASE),
+        password=MASTER_PASSWORD,
+    )
+
+# Cari entry (menggunakan recursive=True agar mencari di sub-group 'internal')
+    entry = kp.find_entries(
+        title=ENTRY_TITLE,
+        first=True,
+        recursive=True
+    )
+
+    if entry:
+        # Mengambil password dari entry
+        retrieved_password = entry.password
+        
+        # Mengambil username jika dibutuhkan
+        retrieved_username = entry.username 
+        
+        # print(f"Password untuk '{ENTRY_TITLE}': {retrieved_password}")
+        print(f"Success")
+    else:
+        print(f"Entry '{ENTRY_TITLE}' tidak ditemukan!")
+
+    return retrieved_password
+# def main():
+#     secret = get_secret()
+#
+#     print("Secret berhasil diambil.")
+#
+#     # Untuk testing saja
+#     print("Secret:", secret)
+#
+#     print("Program melanjutkan eksekusi...")
+#
+#
+# if __name__ == "__main__":
+#     main()

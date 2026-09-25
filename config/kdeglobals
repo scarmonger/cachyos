@@ -164,6 +164,10 @@ View Style=DetailTree
 [KShortcutsDialog Settings]
 Dialog Size=600,480
 
+[PreviewSettings]
+EnableRemoteFolderThumbnail=false
+MaximumRemoteSize=0
+
 [WM]
 activeBackground=227,229,231
 activeBlend=227,229,231

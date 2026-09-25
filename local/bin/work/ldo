@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+from selenium import webdriver
+
+import pyperclip
+import time
+
+import sys
+
+from helpers import get_pass
+
+pw = get_pass()
+
+# with open("/home/mc/Dropbox/pw", "r") as file:
+#     pw = file.read()
+# #print(pw)
+
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
+options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
+options.add_argument("--profile-directory=Default")
+driver = webdriver.Chrome(options=options)
+driver.implicitly_wait(15)
+
+driver.get('https://sf7doffice.sunfishhr.com/auth')
+
+# Logout
+logout_xpath = '/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button/span[2]'
+
+logout_buttons = driver.find_elements("xpath", logout_xpath)
+
+if logout_buttons:
+    logout_buttons[0].click()
+    print("Logout button clicked.")
+
+driver.implicitly_wait(10)
+
+time.sleep(4)
+#userinput = driver.find_element("xpath",'//input[@id="userName"]')
+userinput = driver.find_element("xpath",'/html/body/div/section/div[2]/div/div[2]/div/div/div/div/form/div[1]/div[2]/div[1]/div/input')
+userinput.send_keys('marctinius')
+
+userinput = driver.find_element("xpath",'//input[@id="password"]')
+userinput.send_keys(pw)
+
+
+userinput = driver.find_element("xpath",'//button[@type="submit"]')
+userinput.click()
+
