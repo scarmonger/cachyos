@@ -6,9 +6,9 @@ import time
 
 import sys
 
-from helpers import get_pass
+from helpers import get_sfpass
 
-pw = get_pass()
+pw = get_sfpass()
 
 # with open("/home/mc/Dropbox/pw", "r") as file:
 #     pw = file.read()

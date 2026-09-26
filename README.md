@@ -361,3 +361,4 @@ Corrupted file detected and repaired: /boot/ba4f1adcb6af4dd4b55597e904b0d599/lim
 sudo limine-mkinitcpio
 sudo limine-update
 
+

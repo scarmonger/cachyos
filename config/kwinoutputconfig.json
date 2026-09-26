@@ -23,7 +23,7 @@
                 "brightness": 0.05,
                 "colorPowerTradeoff": "PreferEfficiency",
                 "colorProfileSource": "sRGB",
-                "connectorName": "HDMI-A-1",
+                "connectorName": "HDMI-A-2",
                 "customModes": [
                 ],
                 "detectedDdcCi": true,
@@ -34,6 +34,7 @@
                 "hdrIccProfilePath": "",
                 "highDynamicRange": false,
                 "iccProfilePath": "",
+                "maxBitsPerColor": 0,
                 "mode": {
                     "flags": 0,
                     "height": 1080,
@@ -134,7 +135,6 @@
                 "hdrIccProfilePath": "",
                 "highDynamicRange": false,
                 "iccProfilePath": "",
-                "maxBitsPerColor": 0,
                 "mode": {
                     "flags": 1,
                     "height": 1080,
@@ -185,7 +185,6 @@
                 "hdrIccProfilePath": "",
                 "highDynamicRange": false,
                 "iccProfilePath": "",
-                "maxBitsPerColor": 0,
                 "mode": {
                     "flags": 0,
                     "height": 900,
