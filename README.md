@@ -8,41 +8,38 @@
 sudo pacman -Syu
 sync firefox
 
-## add alias to fish
+## apabila error ketika update pacman
+❯ sudo pacman -Syu
+error: cachyos: signature from "CachyOS <admin@cachyos.org>" is invalid
+:: Synchronizing package databases...
+ cachyos-v3 is up to date
+ cachyos-extra-v3 is up to date
+ cachyos-core-v3 is up to date
+ cachyos                               515.5 KiB  2.66 MiB/s 00:00 [------------------------------------] 100%
+ core is up to date
+ extra is up to date
+ multilib is up to date
+error: cachyos: signature from "CachyOS <admin@cachyos.org>" is invalid
+error: failed to synchronize all databases (unexpected error)
 
-echo "source ~/marc/github/cachyos/alias" >> /home/mc/.config/fish/config.fish
+```sh
+# 1. Remove the old/corrupted GPG keyring directory
+sudo rm -rf /etc/pacman.d/gnupg/
 
-### install fisher for plugins
+# 2. Re-initialize a fresh local keyring environment
+sudo pacman-key --init
 
-curl -sL <https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish> | source && fisher install jorgebucaran/fisher
+# 3. Install/sync the latest keyrings before populating
+sudo pacman -Sy archlinux-keyring cachyos-keyring
 
-### install plugins for fish
+# 4. Populate the default keys for both Arch and CachyOS
+sudo pacman-key --populate archlinux cachyos
 
-fisher install IlanCosman/tide@v6
-fisher install icezyclon/zoxide.fish
+# 5. Perform a full system upgrade
+sudo pacman -Syyu
 
-### functions
-
-function inv; nvim (fzf --preview 'bat --color=always {}'); end
-funcsave inv
-
-### Setup enviroment variables
-
-set -Ux DEFAULT_RECIPIENT "<psikomania@yahoo.com>"
-
-### add path
-
-fish_add_path /home/mc/marc/github/cachyos/local/bin/custom
-fish_add_path /home/mc/marc/github/cachyos/local/bin/work
-
-## clone repo
-
-git clone <https://github.com/scarmonger/cachyos> ~/marc/github/cachyos/
-
-## Setup /etc/sudoers
-
-sudo visudo
-add this on the end of file : Defaults !tty_tickets
+sudo cachyos-rate-mirrors
+sudo pacman -Syyu
 
 ## mount drive
 
@@ -62,19 +59,33 @@ sudo echo "UUID=11d2f506-0797-45dd-8b51-cbc0e9b2c6fa /home/mc/marc/ ext4 errors=
 sudo echo "UUID=8f4825e2-0016-43c2-994a-bb2830ddaea9 /home/mc/Templates/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
 
 sudo mount -a
+systemctl daemon-reload
+
+
+## Install google-chrome
+
+sudo pacman -S chromium
 
 ## Install Yay
-
+```sh 
 sudo pacman -S --needed git base-devel
-git clone <https://aur.archlinux.org/yay.git>
+git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+
+yay -S --noconfirm google-chrome
+```
 
 ## install essentials
 
 ```bash
-sudo pacman -S vi nvim wl-clipboard lazygit
+sudo pacman -S vi nvim wl-clipboard lazygit rofi
 ln -ivs /home/mc/marc/github/cachyos/config/nvim ~/.config/
+
+## Setup /etc/sudoers
+
+sudo visudo
+add this on the end of file : Defaults !tty_tickets
 
 sudo pacman -S ranger kitty zoxide trash-cli bat
 sudo pacman -S python python-pip
@@ -101,6 +112,7 @@ mkdir -p ~/.local/bin
 ln -ivs ~/marc/github/cachyos/local/bin/custom ~/.local/bin
 ```
 
+
 ### Rubah default shell bin bash menjadi zsh (harus logout)
 
 chsh -s /usr/bin/zsh
@@ -123,22 +135,17 @@ ctrl + space + capital I = install plugin
 ## Dropbox Headless Install via command line
 
 The Dropbox daemon is only compatible with 64-bit Linux servers. To install, run the following command in your Linux terminal.
-
-cd ~ && wget -O - "<https://www.dropbox.com/download?plat=lnx.x86_64>" | tar xzf -
-
+```bash
+cd ~ && wget -O - https://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -
 Next, run the Dropbox daemon from the newly created .dropbox-dist folder.
 
 ~/.dropbox-dist/dropboxd
 
-wget -O ~/.local/bin/dropbox "<https://www.dropbox.com/download?dl=packages/dropbox.py>"
+wget -O ~/.local/bin/dropbox https://www.dropbox.com/download?dl=packages/dropbox.py
 chmod +x ~/.local/bin/dropbox
+```
 
 sudo pacman -S libappindicator
-
-## Install google-chrome
-
-i chromium
-yay -S --noconfirm google-chrome
 
 ## install secret-key
 
@@ -161,12 +168,14 @@ ln -ivs ~/marc/github/cachyos/config/zathura ~/.config/
 
 sudo pacman -S keepassxc obsidian veracrypt --noconfirm
 sudo pacman -S dbeaver filezilla --noconfirm
-sudo pacman -S telegram-desktop tailscale --noconfirm
+sudo pacman -S telegram-desktop --noconfirm
 sudo pacman -S gimp obs-studio --noconfirm
 i libreoffice-still
 
 yay -S wps-office ttf-wps-fonts freetype2-wps libtiff5 --noconfirm
 yay -S visual-studio-code-bin
+
+sudo pacman -S thunderbird --noconfirm
 
 ## change mac address
 
@@ -181,12 +190,16 @@ sudo EDITOR=nano crontab -e
 
 sudo systemctl enable --now cronie
 sudo systemctl status cronie
+sudo systemctl start tailscaled
 
 > [!NOTE] Notes
 > sudo tailscale up
 > sudo tailscale down
 
-sudo pacman -S thunderbird --noconfirm
+## Tailscale
+
+curl -fsSL <https://tailscale.com/install.sh> | sh
+sudo tailscale up
 
 ### thunderbird setup
 
@@ -204,7 +217,7 @@ yay -S --noconfirm zoom
 yay -S microsoft-edge-stable-bin --noconfirm
 
 i remmina freerdp
-i gnome-calculator, thunar
+i gnome-calculator thunar
 
 ### Android screen sharing
 
@@ -220,6 +233,7 @@ Steps:
 ## projectlibre
 
 yay -S --noconfirm projectlibre
+sudo pacman -S jdk25-openjdk
 
 archlinux-java status
 sudo archlinux-java set java-25-openjdk
@@ -244,6 +258,9 @@ ssh-keygen -t ed25519 -C "<psikomania@yahoo.com>"
 
 eval "$(ssh-agent -s)"
 
+fish:
+eval (ssh-agent -c)
+
 ### Adding SSF Key to SSH-Agent
 
 ssh-add ~/.ssh/id_ed25519
@@ -257,7 +274,9 @@ check method currently use to communicating with github
 git remote -v
 
 set the method using ssh instead of https
-git remote set-url origin <git@github.com>:scarmonger/cachyos.git
+```
+git remote set-url origin git@github.com:scarmonger/cachyos.git
+```
 
 ## Create symlink
 
@@ -273,17 +292,14 @@ ln -ivs /home/mc/marc/custom/source/commandbox/jre ~/.local/bin/
 
 cp /home/mc/marc/github/ubuntu/HubApps /home/mc/.config/microsoft-edge/Default/HubApps
 
-<!-- ln -ivs ~/marc/.thunderbird ~/.thunderbird -->
 ```
 
-## Tailscale
-
-curl -fsSL <https://tailscale.com/install.sh> | sh
-sudo tailscale up
 
 ## Wallpaper
 
-git clone <https://github.com/mylinuxforwork/wallpaper.git> /home/mc/marc/pics/wallpaper
+```
+git clone https://github.com/mylinuxforwork/wallpaper.git /home/mc/marc/pics/wallpaper
+```
 
 ## Install python,pip & selenium
 
@@ -314,8 +330,10 @@ restart sebelum coba run vbox
 sudo pacman -U rustdesk-1.4.4-0-x86_64.pkg.tar.zst
 
 **Supaya Rust tidak ikut diupdate secara rutin**
-pada /etc/pacman.d/ cari, unremark dan tambahkan:
+pada /etc/pacman.conf cari, unremark dan tambahkan:
 IgnorePkg = rustdesk
+
+sudo vi /etc/pacman.conf
 
 ## Clamav
 
@@ -344,10 +362,11 @@ clamscan --version
 ## yt-dlp
 
 sudo rm ~/.local/bin/yt-dlp
-
-curl -L <https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp> -o ~/.local/bin/yt-dlp
+```
+curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
 chmod a+rx ~/.local/bin/yt-dlp # Make executable
 
+```
 ## Gemini
 
 sudo npm install -g @google/gemini-cli
@@ -360,5 +379,4 @@ Corrupted file detected and repaired: /boot/ba4f1adcb6af4dd4b55597e904b0d599/lim
 
 sudo limine-mkinitcpio
 sudo limine-update
-
 
