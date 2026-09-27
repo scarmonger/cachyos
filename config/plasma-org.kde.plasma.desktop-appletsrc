@@ -406,6 +406,17 @@ DialogWidth=810
 [Containments][23][Applets][155][Shortcuts]
 global=Meta+Alt+D
 
+[Containments][23][Applets][190]
+immutability=1
+plugin=org.kde.plasma.kickoff
+
+[Containments][23][Applets][190][Configuration]
+popupHeight=509
+popupWidth=647
+
+[Containments][23][Applets][190][Configuration][General]
+favoritesPortedToKAstats=true
+
 [Containments][23][Applets][25]
 immutability=1
 plugin=org.kde.plasma.pager
@@ -486,7 +497,7 @@ runCommand=true
 savedAt=2026,9,12,21,51,11.79
 
 [Containments][23][General]
-AppletOrder=25;26;46;27;102;50;119;155;39;154
+AppletOrder=25;26;46;27;102;50;119;155;39;154;190
 
 [Containments][4][Wallpaper][org.kde.image][General]
 Image=/usr/share/wallpapers/cachyos-wallpapers/north.png
@@ -579,7 +590,7 @@ Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///home/mc/marc/wallpaper/lofoten1.jpg
+Image=file:///home/mc/marc/wallpaper/black-whole.jpg
 SlidePaths=/home/mc/.local/share/wallpapers/,/usr/share/wallpapers/,/home/mc/marc/wallpaper/
 
 [ScreenMapping]
