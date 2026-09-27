@@ -143,7 +143,10 @@ Next, run the Dropbox daemon from the newly created .dropbox-dist folder.
 
 wget -O ~/.local/bin/dropbox https://www.dropbox.com/download?dl=packages/dropbox.py
 chmod +x ~/.local/bin/dropbox
+
+dropbox autostart y
 ```
+
 
 sudo pacman -S libappindicator
 
@@ -247,8 +250,13 @@ i github-cli
 
 <https://cli.github.com/manual/>
 
-git config --global user.email "<psikomania@yahoo.com>"
+```
+git config --global user.email "psikomania@yahoo.com"
 git config --global user.name "scarmonger"
+
+git config user.email "psikomania@yahoo.com"
+git config user.name "scarmonger"
+```
 
 ### Generate a new SSH Key
 
