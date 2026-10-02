@@ -78,7 +78,7 @@ def get_mailpass():
         retrieved_username = entry.username 
         
         # print(f"Password untuk '{ENTRY_TITLE}': {retrieved_password}")
-        print(f"Success")
+        # print(f"Success")
     else:
         print(f"Entry '{ENTRY_TITLE}' tidak ditemukan!")
 

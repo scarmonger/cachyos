@@ -1,4 +1,4 @@
---https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+-- https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 return {
   -- Disable mini.pairs
   { "nvim-mini/mini.pairs", enabled = false },

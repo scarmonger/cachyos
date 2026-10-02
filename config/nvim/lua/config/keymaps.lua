@@ -53,10 +53,8 @@ vim.keymap.set("n", "<leader>yy", '"ryy', { desc = "copy into r register" })
 vim.keymap.set("n", "<leader>r", '"rp', { desc = "paste from r register" })
 
 vim.keymap.set("n", "<leader>ta", "ggVG", { desc = "select all" })
-vim.keymap.set("n", "<leader>th", ':! thorium-browser "<c-r>%"<CR>', { desc = "preview markdown" })
-vim.keymap.set("n", "<leader>tf", ':! firefox "<c-r>%"<CR>', { desc = "preview markdown" })
-vim.keymap.set("n", "<leader>tp", ":let @r = @+<cr>", { desc = "copy to clipboard" })
--- vim.keymap.set("n", "<leader>tk", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+-- vim.keymap.set("n", "<leader>tv", ":let @r = @+<cr>", { desc = "copy to clipboard" })
+--
 vim.keymap.set(
   "n",
   "<leader>tr",
