@@ -589,8 +589,8 @@ Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///home/mc/marc/wallpaper/black-whole.jpg
-SlidePaths=/home/mc/.local/share/wallpapers/,/usr/share/wallpapers/,/home/mc/marc/wallpaper/
+Image=file:///usr/share/wallpapers/cachyos-wallpapers/Cachy_Topography1.jpg
+SlidePaths=/usr/share/wallpapers/,/home/mc/marc/wallpaper/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
