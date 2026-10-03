@@ -56,11 +56,21 @@ sudo echo "UUID=6b617826-89bc-444c-9b72-9bcf0c44eb73 /home/mc/marc/ ext4 errors=
 
 otg-rtl:
 sudo echo "UUID=11d2f506-0797-45dd-8b51-cbc0e9b2c6fa /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
+
 sudo echo "UUID=8f4825e2-0016-43c2-994a-bb2830ddaea9 /home/mc/Templates/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
+
+i3i12100:
+sudo echo "UUID=42a81fd4-b149-49a7-9103-a221c9cad43b /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
 
 sudo mount -a
 systemctl daemon-reload
 
+cd ~/Downloads && wget https://github.com/scarmonger/cachyos/archive/refs/heads/master.zip
+mv master.zip ~/marc/github/cachyos.zip
+cd ~/marc/github
+unzip cachyos.zip
+mv cachyos-master cachyos
+rm cachyos.zip
 
 ## Install google-chrome
 
@@ -148,7 +158,7 @@ yay -S dropbox
 ```
 
 
-sudo pacman -S libappindicator
+sudo pacman -S python-gpgme libappindicator
 
 ## install secret-key
 
@@ -282,6 +292,7 @@ check method currently use to communicating with github
 git remote -v
 
 set the method using ssh instead of https
+git clone git@github.com:scarmonger/cachyos.git
 ```
 git remote set-url origin git@github.com:scarmonger/cachyos.git
 ```

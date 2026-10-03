@@ -374,11 +374,9 @@ DialogHeight=630
 DialogWidth=810
 
 [Containments][23][Applets][119][Configuration][General]
-cursorPosition=94
+cursorPosition=0
 fontSize=10
 noteId=33a789e5-28c9-42bc-a904-28c6663f17
-scrollX=5
-scrollY=1404
 
 [Containments][23][Applets][119][Shortcuts]
 global=Meta+Alt+N
@@ -505,6 +503,7 @@ PreviewImage=/usr/share/wallpapers/cachyos-wallpapers/north.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43]
+ItemGeometries-0x0=Applet-143:1680,16,224,208,0;Applet-123:1632,288,272,272,0;Applet-157:1616,640,272,112,0;Applet-156:1632,832,208,192,0;
 ItemGeometries-1920x1080=Applet-143:1680,16,224,208,0;Applet-123:1632,288,272,272,0;Applet-157:1616,640,272,112,0;Applet-156:1632,832,208,192,0;
 ItemGeometriesHorizontal=Applet-143:1680,16,224,208,0;Applet-123:1632,288,272,272,0;Applet-157:1616,640,272,112,0;Applet-156:1632,832,208,192,0;
 activityId=ff0ac9cc-88e4-4f1d-beef-f94df4770a95
