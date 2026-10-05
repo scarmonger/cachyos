@@ -12,6 +12,9 @@ return {
       lsp = { enabled = true },
     },
     require("render-markdown").setup({
+      heading = {
+        enabled = false,
+      },
       bullet = {
         enabled = true,
         render_modes = false,
