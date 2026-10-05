@@ -440,6 +440,9 @@ launchers=
 immutability=1
 plugin=org.kde.plasma.marginsseparator
 
+[Containments][23][Applets][28][Applets][37]
+plugin=org.kde.plasma.keyboardindicator
+
 [Containments][23][Applets][39]
 immutability=1
 plugin=org.kde.plasma.showdesktop
@@ -503,9 +506,9 @@ PreviewImage=/usr/share/wallpapers/cachyos-wallpapers/north.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43]
-ItemGeometries-0x0=Applet-143:1680,16,224,208,0;Applet-123:1632,288,272,272,0;Applet-157:1616,640,272,112,0;Applet-156:1632,832,208,192,0;
+ItemGeometries-0x0=Applet-123:1264,288,272,272,0;Applet-143:1312,16,224,208,0;Applet-157:1264,640,272,112,0;Applet-156:1328,784,208,192,0;
 ItemGeometries-1920x1080=Applet-143:1680,16,224,208,0;Applet-123:1632,288,272,272,0;Applet-157:1616,640,272,112,0;Applet-156:1632,832,208,192,0;
-ItemGeometriesHorizontal=Applet-143:1680,16,224,208,0;Applet-123:1632,288,272,272,0;Applet-157:1616,640,272,112,0;Applet-156:1632,832,208,192,0;
+ItemGeometriesHorizontal=Applet-123:1264,288,272,272,0;Applet-143:1312,16,224,208,0;Applet-157:1264,640,272,112,0;Applet-156:1328,784,208,192,0;
 activityId=ff0ac9cc-88e4-4f1d-beef-f94df4770a95
 formfactor=0
 immutability=1
@@ -587,10 +590,6 @@ savedAt=2026,9,13,2,44,26.998
 [Containments][43][Wallpaper][org.kde.image][General]
 Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
-
-[Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///usr/share/wallpapers/cachyos-wallpapers/Cachy_Topography1.jpg
-SlidePaths=/usr/share/wallpapers/,/home/mc/marc/wallpaper/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
