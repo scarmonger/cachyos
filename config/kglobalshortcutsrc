@@ -297,7 +297,9 @@ _launch=none
 ShowOSD=Display\tMeta+Ctrl+P
 
 [services][org.kde.spectacle.desktop]
+ActiveWindowScreenShot=Print
 RecordRegion=Meta+Shift+R
+_launch=Meta+Print
 
 [services][org.ksnip.ksnip.desktop]
 _launch=Meta+Alt+K
