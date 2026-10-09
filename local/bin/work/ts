@@ -12,6 +12,7 @@ import pyperclip
 import time
 
 import sys
+import requests
 # ts tgu 1 p - partial/normal timesheets
 # ts tgu 1   - full isi timesheet
 
@@ -60,6 +61,66 @@ driver = webdriver.Chrome(options=options)
 #driver = webdriver.Chrome()
 driver.implicitly_wait(30)
 
+# -------------------------------------------------------------
+# Inject Auth Interceptor script on page load via Chrome DevTools Protocol
+# -------------------------------------------------------------
+js_interceptor = """
+(function () {
+  function copyAuth(authHeader) {
+    const getCookie = (name) =>
+      (document.cookie.match("(^|; )" + name + "=([^;]*)") || [])[2] || "";
+
+    const data = `authorization = "${authHeader}"\\n _c_data_jwt = "${getCookie("_c_data_jwt")}"`;
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(data).then(() => {
+        console.log(
+          "%c[SUCCESS] Auth tokens copied to clipboard!",
+          "color: #00ff00; font-weight: bold; font-size: 14px;",
+        );
+        console.log(data);
+      }).catch(err => console.error("Clipboard write error: ", err));
+    } else {
+      console.log("[Auth Interceptor Captured Data]:", data);
+    }
+  }
+
+  // Intercept Fetch requests
+  const originalFetch = window.fetch;
+  window.fetch = async function (...args) {
+    const [url, config] = args;
+    if (config && config.headers) {
+      const headers = config.headers;
+      const auth =
+        headers["Authorization"] ||
+        headers["authorization"] ||
+        (headers.get && headers.get("Authorization"));
+      if (auth) copyAuth(auth);
+    }
+    return originalFetch.apply(this, args);
+  };
+
+  // Intercept XMLHttpRequest
+  const originalSetHeader = XMLHttpRequest.prototype.setRequestHeader;
+  XMLHttpRequest.prototype.setRequestHeader = function (header, value) {
+    if (header.toLowerCase() === "authorization") {
+      copyAuth(value);
+    }
+    return originalSetHeader.apply(this, arguments);
+  };
+
+  console.log(
+    "%c[Interceptor Active] Click any button or refresh data on SunFish HR to copy fresh tokens.",
+    "color: #00bfff; font-size: 13px;",
+  );
+})();
+"""
+
+driver.execute_cdp_cmd(
+    "Page.addScriptToEvaluateOnNewDocument",
+    {"source": js_interceptor}
+)
+# -------------------------------------------------------------
 driver.get('https://sf7doffice.sunfishhr.com/standard/hrm.time-and-attendance.attendance-request.timesheet-request')
 
 time.sleep(delay)

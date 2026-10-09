@@ -218,6 +218,7 @@ chmod a+rx ~/.local/bin/yt-dlp # Make executable
 yay -S python-clipman mycli --noconfirm
 python3 -m pip install --user selenium --break-system-packages
 pip install pykeepass --break-system-packages
+pip install requests --break-system-packages
 
 sudo pacman -S python-pandas --noconfirm
 

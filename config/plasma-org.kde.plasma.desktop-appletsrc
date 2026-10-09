@@ -6,6 +6,7 @@ RightButton;NoModifier=org.kde.contextmenu
 RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][158]
+ItemGeometries-0x0=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,208,208,0;Applet-162:1200,272,192,256,0;
 ItemGeometries-1440x900=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,208,208,0;Applet-162:1200,272,192,256,0;
 ItemGeometriesHorizontal=Applet-159:576,0,272,272,0;Applet-189:416,352,560,432,0;Applet-160:1168,640,272,112,0;Applet-161:1200,16,208,208,0;Applet-162:1200,272,192,256,0;
 activityId=ff0ac9cc-88e4-4f1d-beef-f94df4770a95
@@ -589,8 +590,9 @@ Image=file:///usr/share/wallpapers/cachyos-wallpapers/wave2.png
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][43][Wallpaper][org.kde.slideshow][General]
-Image=file:///usr/share/wallpapers/cachyos-wallpapers/Cachy_Topography1.jpg
-SlidePaths=/usr/share/wallpapers/,/home/mc/marc/wallpaper/
+Image=file:///home/mc/marc/pictures/wallpaper/escape_velocity.jpg
+SlideInterval=300
+SlidePaths=/usr/share/wallpapers/,/home/mc/marc/pictures/wallpaper/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
