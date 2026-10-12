@@ -19,7 +19,7 @@ tp13:
 sudo echo "UUID=3cb910c9-2e1e-4910-a6a9-c114df09d3cd /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
 
 dell:
-sudo echo "UUID=6b617826-89bc-444c-9b72-9bcf0c44eb73 /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
+sudo echo "UUID=rb617826-89bc-444c-9b72-9bcf0c44eb73 /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
 
 otg-rtl:
 sudo echo "UUID=11d2f506-0797-45dd-8b51-cbc0e9b2c6fa /home/mc/marc/ ext4 errors=remount-ro 0 1" | sudo tee -a /etc/fstab
@@ -32,6 +32,9 @@ sudo echo "UUID=42a81fd4-b149-49a7-9103-a221c9cad43b /home/mc/marc/ ext4 errors=
 sudo mount -a
 systemctl daemon-reload
 
+sudo systemctl enable sshd
+sudo systemctl start sshd
+
 ## github-cli authentication
 
 sudo pacman -S --noconfirm github-cli
@@ -42,13 +45,15 @@ sudo pacman -S --noconfirm github-cli
 git config --global user.email "psikomania@yahoo.com"
 git config --global user.name "scarmonger"
 
-git config user.email "mc@i3.com"
-git config user.name "i3"
+git config user.email "mc@dell.com"
+git config user.name "dell"
 ```
 
 ### Generate a new SSH Key
 
-ssh-keygen -t ed25519 -C "<psikomania@yahoo.com>"
+```sh
+ssh-keygen -t ed25519 -C "psikomania@yahoo.com"
+```
 
 ### Start the ssh-agent in the background
 
@@ -66,10 +71,9 @@ ssh-add ~/.ssh/id_ed25519
 gh auth login
 gh auth refresh -h github.com -s admin:ssh_signing_key
 
-check method currently use to communicating with github
-git remote -v
+mkdir -p ~/marc/github/
+cd ~/marc/github/
 
-set the method using ssh instead of https
 git clone git@github.com:scarmonger/cachyos.git
 
 ```
@@ -80,6 +84,13 @@ git remote set-url origin git@github.com:scarmonger/cachyos.github
 
 cd ~/marc/github/cachyos/
 ./link_dotfile.sh
+
+## Setup /etc/sudoers
+
+sudo pacman -S --noconfirm vi nvim wl-clipboard lazygit rofi
+
+sudo visudo
+add this on the end of file : Defaults !tty_tickets
 
 ## Install Yay
 
@@ -93,14 +104,9 @@ makepkg -si
 yay -S --noconfirm google-chrome
 sudo pacman -S --noconfirm chromium
 
-## Setup /etc/sudoers
-
-sudo visudo
-add this on the end of file : Defaults !tty_tickets
 
 ## install essentials
 
-sudo pacman -S --noconfirm vi nvim wl-clipboard lazygit rofi
 sudo pacman -S --noconfirm ranger kitty zoxide trash-cli bat
 sudo pacman -S --noconfirm python python-pip
 yay -S --noconfirm mmtui-bin
@@ -126,7 +132,7 @@ git clone https://github.com/maximtrp/ranger-archives.git
 i --noconfirm tmux
 mkdir -p ~/.config/tmux-plugins
 rm -Rf ~/marc/github/cachyos/config/tmux/plugins/
-git clone https://github.com/tmux-plugins/tpm home/mc/.config/tmux-plugins/tpm
+git clone https://github.com/tmux-plugins/tpm /home/mc/.config/tmux-plugins/tpm
 <!-- ln -ivs /home/mc/marc/github/cachyos/config/nvim/lua/plugins/vim-tmux-navigator.lua ~/.config/nvim/lua/config/ -->
 <!-- ln -ivs ~/marc/github/cachyos/config/tmux ~/.config/ -->
 
