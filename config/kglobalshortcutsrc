@@ -260,6 +260,7 @@ activate widget 119=Meta+Alt+N,none,Activate Sticky Note Widget
 activate widget 152=none,none,Activate Weather Report Widget
 activate widget 155=Meta+Alt+D,none,Activate Dictionary Widget
 activate widget 50=none,none,Activate Timer Widget
+activate widget 6=none,none,Activate Icons-Only Task Manager Widget
 clear history=none,none,Clear Notification History
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
@@ -300,8 +301,6 @@ _launch=none
 ShowOSD=Display\tMeta+Ctrl+P
 
 [services][org.kde.spectacle.desktop]
-CurrentMonitorScreenShot=none
-OpenWithoutScreenshot=none
 RecordRegion=Meta+Shift+R
 _launch=none
 
