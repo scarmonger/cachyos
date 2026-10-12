@@ -44,6 +44,7 @@ sudo pacman -S --noconfirm github-cli
 ```
 git config --global user.email "psikomania@yahoo.com"
 git config --global user.name "scarmonger"
+git config pull.rebase false
 
 git config user.email "mc@dell.com"
 git config user.name "dell"
@@ -84,6 +85,8 @@ git remote set-url origin git@github.com:scarmonger/cachyos.github
 
 cd ~/marc/github/cachyos/
 ./link_dotfile.sh
+
+cp -r ~/marc/github/cachyos/config_cpy/fish ~/.config/
 
 ## Setup /etc/sudoers
 
