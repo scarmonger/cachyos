@@ -1,4 +1,6 @@
 abbr -a -- o 'cd /home/mc/Downloads'
 abbr -a -- v1 'nvim ~/marc/github/cachyos/'
 abbr -a -- v2 'nvim /home/mc/Dropbox/notes/'
-abbr -a -- v3 'nvim /home/mc/marc/notes'
+abbr -a -- gs 'git status'
+
+abbr -a -- hpi 'echo "PT Hartono Plantation Indonesia" | wl-copy'

@@ -14,7 +14,7 @@ alias adp='export PATH="$HOME/bin/otomation:$PATH"'
 alias zathura="GTK_IM_MODULE=none zathura"
 alias df="df -h -x squashfs -x tmpfs -x devtmpfs"
 
-alias now="date +"%Y%m%d%H%M" | wl-copy"
+alias now='date +"%Y-%m-%d %H:%M" | wl-copy'
 alias npms="NODE_OPTIONS=--max-old-space-size=8096 npm start"
 
 # alias sats="cd /home/mc/marc/custom/backend/atlas/soulbackend/main/src/web/ && box"

@@ -1,0 +1,126 @@
+#!/usr/bin/python3
+authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFTVBfSUQiOiJETzEzNDM4NCIsIlVOQU1FIjoibWFyY3Rpbml1cyIsIlVJRCI6MjUyOSwiQ09JRCI6MTMzLCJDT0NPREUiOiJzbm93ZWJyeGZ6dW5mYSIsIldMT0MiOiJCQUxJIiwiSU5TVEFOQ0UiOiJJTkRPREVWTklBR0EiLCJTVkNJRCI6ImluZG9kZXZuaWFnYV80QzUxNkZGMjlGNTE0NDk3ODM3MEYxQUEwMENGOTBGMCIsIk9SSUdJTkFQUCI6IlNGNyIsIlNUUl9FWFAiOiJzdHJfMjAyNi0xMC0wOSAxNTo1OTo1NSIsIklBVCI6MTc5MTU0MDM0NSwiRVhQIjoxNzkxNTQxMzA1LCJBUFAiOiJnb2xhbmciLCJleHAiOjE3OTE1NDEzMDV9.upKnOm3L1_egGGBInUDr-u5p5PKAPnwiqHtAVybtwEk"
+_c_data_jwt = "U2FsdGVkX1/9Mh8cGSCmdgD0zHs71ifLemND4k5JAkNU671mjfa84JQo0BqpYl40IIfg0qrdfpInF1TEXRylevyKD63Mu1Dr21lXYSzfO0fPwUauvQ3+eF6UzRAgsyO5hg/LLXG+XTMCJwev8UWAQn7AD4FqaqEhsQL29JxKD4ATtK2nAAUh4PaObl6ZpK9jEgLKpBeZwbTujfjc1unj8rXMK8WqcP9rDRJtTBEHAd5sY6mcf751HeId5vndpAiwCzdUnmt+FzrBREZhWuFKEK8IANc6W/EDEnWOtDUpBlAXRlVgoHwipb29/p8dVsaVsFFU4efGgkUQqwUqSYjHEtxrFSSec2eqe+Z2eDwR+nOAJ8ukDoEgeO09mp+hSI3fdNBsqw+RArDMvHInvrKOwqRDiqSHnIjLCHdN58Ofg/xFeKOoQDhIk1NAwFyWWFXUO27CLR82NYGJ4IcVsvSKqbxdGyXY+9L7zPRWnlo588L68fY/c9ApKcsKsfkxVVAgqLyVgBxeydvxwbdR1RwjIsD3t12e5MNOgEJ0rtIwWex34OKlG+E0pksQrov6M482AFb4SdZtUHsAaQWvEuiJV+Dz40Pp7Zi6hwTnBgMNY6R/TAeEcIG+XIWp0hcINIiVwDCFuUBWgY9JlYDGadr3AutO+6BeX0bYF/kfkngzOB4="
+
+import requests
+
+from selenium import webdriver
+#from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+import pyperclip
+import time
+
+url = "https://sf7doffice.sunfishhr.com/hrm-go/v1/helpdesk/myticket/create"
+headers = {
+    "Acc-Name": "indodevniaga",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Authorization": authorization,
+    "Company-Code": "snowebrxfzunfa",
+    "Company-Id": "133",
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
+    "Language": "en",
+    "Origin": "https://sf7doffice.sunfishhr.com",
+    "Referer": "https://sf7doffice.sunfishhr.com/standard/hrm.helpdesk.add",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin",
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "coid": "133",
+    "sec-ch-ua": '"Chromium";v="154", "Google Chrome";v="154", "Not A(Brand";v="99"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Linux"'
+}
+
+cookies = {
+    "_ga": "GA1.1.2040622751.1790654837",
+    "CUSTOMIST": "indodevniaga",
+    "COMPANYNAME": "PT%20Indodev%20Niaga%20Internet",
+    "app_name": "Human%20Capital%20Management%20System",
+    "COMPANY_LOGO": "https://sf7doffice.sunfishhr.com/cli7img/indodevniaga/upload/companylogo/company_logo_cid139_04042023082403.png",
+    "_c_data_jwt": _c_data_jwt,
+    "expired_jwt_time": "U2FsdGVkX1/x2afyuGbTEEPj/OwhhloWwzb0vWGI28CGFReIzwX2Gsi8JKikS0mR",
+    "_c_data_1": "U2FsdGVkX19HaMgUmbhFaoX1aFvFjFqScqHmZuRL/tQBIUk1rNbiDMFyviaIDPSh2VcLfvqDTA02/vJlqNvqJYQvJgIQHgpAeU9gqxt4daTXa+GM0CNKErMyxpJbu/3vPI0YAyxVvXM8PSTIxdMWeuH+l0gcya2XvsOlf9YPmuTaciH0Ebv4E/MyQOn8oPDqTSen6mBSvffPAuwdRKla+EASuAIilcFvnffw+DFPKNYnlTwC6kH1W1rYkf0B8TysGWd7hiMfzspg3K1WZRCsAsTgl1milNRx7QmUXuQ/dx7OyogzPwrAL0gbWl22d5dnlQQisCuMasXhXAtUOtIBOqzpw9+weCQCgM5l2CSTQ5LsJQ7lssALSV0V/X7p3GpgKdRHHtgjkQ1vqehUuUfttVi5v32g0xTVsxXRHSU2PHi6kvqAn/WVUc99FRQUz4RpYwQo9p0vcq83HImbBydBoOInO5OC8oZb6roJen2dosG7bhkALj3ugvPOLIQ9j+Rja1jxiLhsUOvrqInx2s5b0b0J0Elk6T5ZdR1gqVb/4SToqBpr8F6VMYSJbGCzfTiM2nBn5xku0RFFgUdPsEY+lulaWUtx9aBkpady9nH2pAXBDR+tq66Cc/RRTq1pmaxNi9xgWB4gIgD6Permi5zreXobs3p9hbsS87NXh4eEObQ=",
+    "relogin_expired_time": "U2FsdGVkX1+emSLEK6/AAXDbvhxyJmqLALyw+EoPP+erxhTOJqoLkocTOJoqSNBT",
+    "_ga_LBLBNGVPQB": "GS2.1.s1791514476$o5$g1$t1791516307$j53$l0$h0"
+}
+
+payload = {
+    "CATEGORY_CODE": "SUP",
+    "HDN_CATEGORY_CODE": "SUP",
+    "SUBJECT": "POC preparation",
+    "DESCRIPTION": "<p>POC preparation</p>",
+    "ADDITIONAL_FIELD": [],
+    "PROJECT_CODE": "SalesSup",
+    "HDN_PROJECT_CODE": "SalesSup",
+    "TIMELINE_ID": 23996,
+    "HDN_TIMELINE_ID": 23996,
+    "ASSIGNEE": "DO134384",
+    "HDN_ASSIGNEE": "DO134384",
+    "OTHER_ASSIGNEE": [],
+    "HDN_OTHER_ASSIGNEE": [],
+    "MODULE_NAME": "Sales Support",
+    "REFERENCE_NO": [],
+    "HDN_REFERENCE_NO": [],
+    "IS_EXTERNAL": 1,
+    "PLAN_DATE": {
+        "START_DATE": "2026-10-07 00:00:00",
+        "END_DATE": "2026-10-07 23:59:00"
+    },
+    "MAN_HOURS": 8,
+    "PRIORITY": 4,
+    "HDN_PRIORITY": 4
+}
+
+response = requests.post(url, headers=headers, cookies=cookies, json=payload)
+res_data = response.json()
+
+print(f"Status Code: {response.status_code}")
+print(response.json())
+
+# 2. Extract Task Code and open URL
+if response.status_code == 200 and res_data.get("STATUS"):
+    task_code = res_data["DATA"]["TASK_CODE"]
+    ticket_url = f"https://sf7doffice.sunfishhr.com/standard/hrm.helpdesk.my-ticket.ticket-details/{task_code}"
+    
+    pyperclip.copy(ticket_url)
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("detach", True)
+    options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
+    options.add_argument("--profile-directory=Default")
+
+    driver = webdriver.Chrome(options=options)
+    driver.get(ticket_url)
+    print(f"Ticket Created: {task_code}")
+    print(f"Opening: {ticket_url}")
+else:
+    print("Failed to create ticket:", res_data)
+
+driver.implicitly_wait(30)
+task = driver.find_element(
+    "xpath", '/html/body/div/div/section/section/div/section/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div/div/button').click()
+
+driver.implicitly_wait(30)
+# task = driver.find_element(
+#     "xpath", '/html/body/div[2]/div/div[2]/div/div[2]/div/div/div[2]/button[2]').click()
+button = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/div/div/div[2]/button[2]')
+driver.execute_script("arguments[0].click();", button)
+
+time.sleep(1)
+
+button = driver.find_element(By.XPATH, '/html/body/div[1]/div/section/section/div/section/div[2]/div/div/div/div/div[2]/div/div/div[1]/div[1]/div/div/div/div/div[2]/div/button[2]/span[2]')
+driver.execute_script("arguments[0].click();", button)
+
+description = driver.find_element("xpath",'/html/body/div[1]/div/section/section/div/section/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div/div/form/div[1]/div[4]/div/div[2]/div[2]/span')
+subject = description.text
+
+textarea = driver.find_element(By.XPATH, '/html/body/div[3]/div/div[2]/div/div[2]/div/div/div[1]/div/div/form/div[1]/div[2]/div/div/div/textarea')
+textarea.send_keys(subject + Keys.TAB + subject + Keys.TAB *2 + Keys.RETURN)

@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+
+import json
+import requests
+
+# API Endpoint URL
+url = "https://sf7doffice.sunfishhr.com/sfpro/?qlid=TimesheetRequest._addRequest"
+
+# Request Headers
+headers = {
+    "Acc-Name": "indodevniaga",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFTVBfSUQiOiJETzEzNDM4NCIsIlVOQU1FIjoibWFyY3Rpbml1cyIsIlVJRCI6MjUyOSwiQ09JRCI6MTMzLCJDT0NPREUiOiJzbm93ZWJyeGZ6dW5mYSIsIldMT0MiOiJCQUxJIiwiSU5TVEFOQ0UiOiJJTkRPREVWTklBR0EiLCJTVkNJRCI6ImluZG9kZXZuaWFnYV80QzUxNkZGMjlGNTE0NDk3ODM3MEYxQUEwMENGOTBGMCIsIk9SSUdJTkFQUCI6IlNGNyIsIlNUUl9FWFAiOiJzdHJfMjAyNi0xMC0wOSAxNTo1OTo1NSIsIklBVCI6MTc9MTU0MTY1NiwiRVhQIjoxNzkxNTQyNjE2LCJBUFAiOiJnb2xhbmciLCJleHAiOjE3OTE1NDI2MTZ9.RBI314aSPiS1zoWxXi7_3VdE01jWAJqwIkFVp0e_PQ0",
+    "Company-Id": "133",
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
+    "Language": "en",
+    "Origin": "https://sf7doffice.sunfishhr.com",
+    "Referer": "https://sf7doffice.sunfishhr.com/standard/hrm.time-and-attendance.attendance-request.timesheet-request",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin",
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "coid": "133",
+    "sec-ch-ua": '"Chromium";v="154", "Google Chrome";v="154", "Not A(Brand";v="99"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Linux"',
+}
+
+# Request Cookies
+cookies = {
+    "_ga": "GA1.1.2040622751.1790654837",
+    "CUSTOMIST": "indodevniaga",
+    "COMPANYNAME": "PT Indodev Niaga Internet",
+    "app_name": "Human Capital Management System",
+    "COMPANY_LOGO": "https://sf7doffice.sunfishhr.com/cli7img/indodevniaga/upload/companylogo/company_logo_cid139_04042023082403.png",
+    "_c_data_jwt": "U2FsdGVkX192IvrFwl2gNRBBdZMZ+f6Lm3jFySwowJjuv0FPUyn9hGVpO1c80y2ulZTkz3hlGMKS+UJFmX9ZE5/nN23PM3eVRSEvftYHjyb1fC/bO6wcSl8+hyoY+1+uuzGH36yO3kshk4D4MbM+jmzgf8jjCuaeyNQRKIw3COwlvAs4oNqktK79iI0/CEgaj423eKX+8ezOOyj1R87HoW+47IHwfdxUy07f+H4CUBytHQgpz2ahcclGT+ScpgjPk/rq1FtYy4jAbt1tGjnjEu+Nwbr2yfkC4LF0+bXTtJF9m6x4UYDlFmkRkGqsJ9IL881Ks5c/0f0MHM4+rlh82jPAZCso1Vs+CbGepxgcrfghlxsXTQTBhnWQbf1G2JNRCtuZyoVC8oOYTtYEv1JdgKTXyuD9njtngFB5tdiqtqxhP9pemUfMRQ3JsNsCISyZaoNhbVQY3z9CHQigS4UoVi7Pbddqe1bW5jXc0RmIvzfI8550u0ThugX4BQaiqF3VJEiGLduVRC0mvXZgWk32cIarhZyiJz9/6OXmDIgsSoXUfG7sp2CH7OOrRGyvNHzNcBxqAJtwlEiO5xEnCgmbAEzP8GaEgLco5rlS8wCFiA2Zj66jifAmdytfB3MEBlqBG0n+6mvy5SbLs0Q6zFFFbh1WSpIkfdtlvgIEv/OkDBg=",
+    "expired_jwt_time": "U2FsdGVkX18C9BLyJUiWRF+oY7WKgrIaua8mXB5xMPEWWCgkvoL3dK3Fxm1IkUWd",
+    "_c_data_1": "U2FsdGVkX1//NS39UD2E9gZFXoEDHhJSUMwmIVEPLIXw0ChUWmOOdiiCeoQYj8vwKv30zYgRoDocirev+FYlydfL9f4l6DA4T+xFsfIH8jm6eugYQda4gdePuTCEUJCfeXeAbfNflg8QUbqDiKe7SujnkURf1cqhwiHMZU8KPR2ETZV5FX0d++agKLTKvMLS2vF8xK50Ze9lpN7glUAhKuYKBY8+dM0oUNPbLtzXm140dWROGOMTPplIyT4rl7+J20ZMvJn3tEmfOfYwOScdfG1pLrPLY/hmqqgIUNKSA49O5QFooiCh+rF99f0C3pOKD0ml6F+qQ/YiaSs2uJeaotDWkiWm60KQ1zGFMOhI4i+2v2+n5uKSfA0pdasOur7gqKuvu8ES5mGrMM2U+sP02ESx6EMQrMSpqbKf/lgdotJ55xmC03hNcS8SG4YAcMT3Lnl/dETW5EWEthilJXmbw/1jwW5QDA3dFEbd1RTI5T90FddrVLSFmsT9ejvp5nWadlWezsILhwl0l6cU6vPk6Xoy4nUNRc97kr5DifVCO49L5gKIW5a127SJz94YFj6r8wTQM2mss7i+aeacZhp4qRbPIqM+uFir2wrBa+J1qPXvG60uw91xGGjG8HWkBH08IGiImYGWNISYJE/mh/sLxJAtb8gR3rn8x26pU6i+YTM=",
+    "relogin_expired_time": "U2FsdGVkX1+6pL5xv89+jrbKqFoXL0hn/CLpyYtDSD4vCjfWvGhbIuZs1yz4Xy91",
+    "_ga_LBLBNGVPQB": "GS2.1.s1791539846$o7$g1$t1791541661$j46$l0$h0",
+}
+
+# Request Payload Body
+payload = {
+    "ENTRIES": {
+        "REQUEST_NO": "",
+        "ACTREQUEST": "submit",
+        "STARTDATE": "2026-10-06",
+        "ENDDATE": "2026-10-06",
+        "ISMAX": False,
+        "REQUESTBY": "DO134384",
+        "REQUESTFOR": "DO134384",
+        "REFDOC": "",
+        "REMARK": "",
+        "TEMPLATE": {"HDN_ROWCOUNT": 0, "DETAIL": []},
+        "HDN_FIELD": [],
+        "DATES": {
+            "10062026": {
+                "HDN_ROWCOUNT": 3,
+                "STATUS": "",
+                "ACTUALSTARTTIME": "2026-10-06 08:04",
+                "ACTUALENDTIME": "2026-10-06 17:12",
+                "SHIFT_CODE": "SHRD00001",
+                "DETAIL": [
+                    {
+                        "dateRange": [
+                            "2026-10-06T01:09:00.000Z",
+                            "2026-10-06T05:00:00.000Z",
+                        ],
+                        "validationValue": 0,
+                        "validationType": 0,
+                        "hdn_seltask": None,
+                        "hdn_selactivity": "TPM07",
+                        "hdn_selproject": None,
+                        "hdn_selprojectphase": "JRN~TLJRN5202606050211",
+                        "task_desc": None,
+                        "remark": "custom",
+                        "minuteDuration": 51,
+                        "hourDuration": 3,
+                        "starttime": "08:09",
+                        "endtime": "12:00",
+                        "flag_startdate": 0,
+                        "flag_enddate": 0,
+                        "chkactivitytype": None,
+                        "chkbillable": None,
+                        "fieldList": [],
+                        "srcflag": "TS",
+                        "id_task": "",
+                        "detail_id": None,
+                        "projectCode": "",
+                        "location": None,
+                        "attachment": [],
+                        "uniqueId": 3014125,
+                        "isDisabled": False,
+                        "isNotComplete": True,
+                        "isDisabledButton": False,
+                        "costcenter_code": None,
+                    },
+                    {
+                        "dateRange": [
+                            "2026-10-06T06:00:00.000Z",
+                            "2026-10-06T08:00:00.000Z",
+                        ],
+                        "validationValue": 0,
+                        "validationType": 0,
+                        "hdn_seltask": None,
+                        "hdn_selactivity": "TPM07",
+                        "hdn_selproject": None,
+                        "hdn_selprojectphase": "JRN~TLJRN5202606050211",
+                        "task_desc": None,
+                        "remark": "custom",
+                        "minuteDuration": 0,
+                        "hourDuration": 2,
+                        "starttime": "13:00",
+                        "endtime": "15:00",
+                        "flag_startdate": 0,
+                        "flag_enddate": 0,
+                        "chkactivitytype": None,
+                        "chkbillable": None,
+                        "fieldList": [],
+                        "srcflag": "TS",
+                        "id_task": "",
+                        "detail_id": None,
+                        "projectCode": "",
+                        "location": None,
+                        "attachment": [],
+                        "uniqueId": 6414919,
+                        "isDisabled": False,
+                        "isNotComplete": True,
+                        "isDisabledButton": False,
+                        "costcenter_code": None,
+                    },
+                    {
+                        "dateRange": [
+                            "2026-10-06T08:00:00.000Z",
+                            "2026-10-06T10:07:00.000Z",
+                        ],
+                        "validationValue": 0,
+                        "validationType": 0,
+                        "hdn_seltask": None,
+                        "hdn_selactivity": "TPM07",
+                        "hdn_selproject": None,
+                        "hdn_selprojectphase": "HCM~TLHCM9202608101052",
+                        "task_desc": None,
+                        "remark": "Chatting with client",
+                        "minuteDuration": 7,
+                        "hourDuration": 2,
+                        "starttime": "15:00",
+                        "endtime": "17:07",
+                        "flag_startdate": 0,
+                        "flag_enddate": 0,
+                        "chkactivitytype": None,
+                        "chkbillable": None,
+                        "fieldList": [],
+                        "srcflag": "TS",
+                        "id_task": "",
+                        "detail_id": None,
+                        "projectCode": "",
+                        "location": None,
+                        "attachment": [],
+                        "uniqueId": 8931689,
+                        "isDisabled": False,
+                        "isNotComplete": True,
+                        "isDisabledButton": False,
+                        "costcenter_code": None,
+                    },
+                ],
+            }
+        },
+    }
+}
+
+# Send POST Request
+response = requests.post(url, headers=headers, cookies=cookies, json=payload)
+
+# Print Status and Response
+print(f"Status Code: {response.status_code}")
+try:
+    print("Response JSON:")
+    print(json.dumps(response.json(), indent=2))
+except json.JSONDecodeError:
+    print("Response Text:")
+    print(response.text)

@@ -20,7 +20,7 @@ options.add_experimental_option("detach", True)
 options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
 options.add_argument("--profile-directory=Default")
 driver = webdriver.Chrome(options=options)
-driver.implicitly_wait(15)
+# driver.implicitly_wait(15)
 
 driver.get('https://sf7doffice.sunfishhr.com/auth')
 
@@ -33,7 +33,7 @@ if logout_buttons:
     logout_buttons[0].click()
     print("Logout button clicked.")
 
-driver.implicitly_wait(10)
+driver.implicitly_wait(5)
 
 time.sleep(4)
 #userinput = driver.find_element("xpath",'//input[@id="userName"]')

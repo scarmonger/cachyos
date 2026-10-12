@@ -6,6 +6,10 @@
 vim.keymap.set("n", ";", ":", {})
 vim.keymap.set("n", ":", ";", {})
 
+-- command abbreviation
+vim.keymap.set("ca", "notes", "cd ~/Dropbox/notes/")
+vim.keymap.set("ca", "cachy", "cd ~/marc/github/cachyos/")
+
 -- vim.keymap.set({ "i", "x", "n", "s" }, "'", '"', {})
 -- vim.keymap.set({ "i", "x", "n", "s" }, '"', "'", {})
 vim.keymap.set("i", "jk", "<esc>", { desc = "escape from insert mode" })
@@ -60,12 +64,6 @@ vim.keymap.set(
   "<leader>tr",
   ":let @+ = expand('%:p')<cr>o<c-r>+<Esc>dF/xv0d:let @+ = @*<cr>i<backspace><esc>:!go run <c-r>+<enter>",
   { desc = "go run" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>tc",
-  ":let @+ = expand('%:p')<cr>o<c-r>+<Esc>dF/xv0d:let @+ = @*<cr>i<backspace><esc>:cd <c-r>+<enter>",
-  { desc = "change cwd to current file location" }
 )
 
 -- snippets
