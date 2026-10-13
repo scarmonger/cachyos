@@ -7,8 +7,25 @@ vim.keymap.set("n", ";", ":", {})
 vim.keymap.set("n", ":", ";", {})
 
 -- command abbreviation
-vim.keymap.set("ca", "notes", "cd ~/Dropbox/notes/")
-vim.keymap.set("ca", "cachy", "cd ~/marc/github/cachyos/")
+vim.keymap.set("ca", "note", "cd ~/Dropbox/notes/")
+vim.keymap.set("ca", "cach", "cd ~/marc/github/cachyos/")
+
+-- Memetakan Alt+1 sampai Alt+3 untuk memasukkan tanda '#' bertingkat di Insert Mode
+-- Anda bisa menambahkannya sesuai kebutuhan (misal sampai Alt+6 untuk ######)
+
+vim.keymap.set("i", "<M-1>", "# ", { desc = "Heading 1" })
+vim.keymap.set("i", "<M-2>", "## ", { desc = "Heading 2" })
+vim.keymap.set("i", "<M-3>", "### ", { desc = "Heading 3" })
+vim.keymap.set("i", "<M-4>", "#### ", { desc = "Heading 4" })
+vim.keymap.set("i", "<M-5>", "##### ", { desc = "Heading 5" })
+vim.keymap.set("i", "<M-6>", "###### ", { desc = "Heading 6" })
+
+vim.keymap.set("n", "<M-1>", "I# <esc>", { desc = "Heading 1" })
+vim.keymap.set("n", "<M-2>", "I## <esc>", { desc = "Heading 2" })
+vim.keymap.set("n", "<M-3>", "I### <esc>", { desc = "Heading 3" })
+vim.keymap.set("n", "<M-4>", "I#### <esc>", { desc = "Heading 4" })
+vim.keymap.set("n", "<M-5>", "I##### <esc>", { desc = "Heading 5" })
+vim.keymap.set("n", "<M-6>", "I###### <esc>", { desc = "Heading 6" })
 
 -- vim.keymap.set({ "i", "x", "n", "s" }, "'", '"', {})
 -- vim.keymap.set({ "i", "x", "n", "s" }, '"', "'", {})
@@ -31,12 +48,6 @@ vim.keymap.set({ "n", "i" }, "<M-h>", "<esc>:bprevious<cr>", { desc = "" })
 vim.keymap.set("n", "<M-r>", ":w | GoRun<cr>", { desc = "GoRun" })
 vim.keymap.set("i", "<M-r>", "<esc>:w | GoRun<cr>", { desc = "GoRun" })
 
-vim.keymap.set(
-  "n",
-  "<C-y>",
-  ":! tmux new-window -n fx '~/.config/helix/yazi-picker-tmux.sh e'<cr>",
-  { desc = "open Yazi" }
-)
 -- vim.keymap.set("n", "<C-d>", '<esc>"_dd', { desc = "delete line when insert mode" })
 vim.keymap.set("i", "<C-d>", '<esc>"_ddi', { desc = "delete line when insert mode" })
 

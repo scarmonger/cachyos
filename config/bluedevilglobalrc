@@ -1,2 +1,5 @@
+[Adapters]
+48:89:E7:55:68:D2_powered=true
+
 [Devices]
 connectedDevices=

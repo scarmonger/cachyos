@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ProjectLibre
+Comment=Project Management Software
+Exec=/usr/lib/jvm/java-17-openjdk/bin/java -jar /home/mc/marc/appimagefile/projectlibre.jar
+Icon=projectlibre
+Terminal=false
+Categories=Office;Development;ProjectManagement;
+

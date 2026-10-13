@@ -21,21 +21,36 @@ options.add_argument(r"--user-data-dir=/home/mc/.config/google-chrome/Default")
 options.add_argument("--profile-directory=Default")
 driver = webdriver.Chrome(options=options)
 # driver.implicitly_wait(15)
+try:
+    # 1. Clear Browser Cache and Cookies using Chrome DevTools Protocol (CDP)
+    print("Clearing browser cache and cookies...")
+    driver.execute_cdp_cmd('Network.clearBrowserCache', {})
+    driver.execute_cdp_cmd('Network.clearBrowserCookies', {})
+    
+    # Alternatively, you can clear all storage (Local Storage, IndexedDB, etc.) if needed:
+    # driver.execute_cdp_cmd('Storage.clearDataForOrigin', {
+    #     "origin": "https://sf7doffice.sunfishhr.com",
+    #     "storageTypes": "all"
+    # })
 
-driver.get('https://sf7doffice.sunfishhr.com/auth')
+    # 2. Open your target URL
+    driver.get('https://sf7doffice.sunfishhr.com/auth')
+    
+except Exception as e:
+    print(f"An error occurred: {e}")
 
-# Logout
-logout_xpath = '/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button/span[2]'
+# # Logout
+# logout_xpath = '/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button/span[2]'
+#
+# logout_buttons = driver.find_elements("xpath", logout_xpath)
+#
+# if logout_buttons:
+#     logout_buttons[0].click()
+#     print("Logout button clicked.")
+#
+# driver.implicitly_wait(5)
 
-logout_buttons = driver.find_elements("xpath", logout_xpath)
-
-if logout_buttons:
-    logout_buttons[0].click()
-    print("Logout button clicked.")
-
-driver.implicitly_wait(5)
-
-time.sleep(4)
+time.sleep(2)
 #userinput = driver.find_element("xpath",'//input[@id="userName"]')
 userinput = driver.find_element("xpath",'/html/body/div/section/div[2]/div/div[2]/div/div/div/div/form/div[1]/div[2]/div[1]/div/input')
 userinput.send_keys('marctinius')
