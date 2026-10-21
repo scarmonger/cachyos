@@ -9,6 +9,7 @@ vim.keymap.set("n", ":", ";", {})
 -- command abbreviation
 vim.keymap.set("ca", "note", "cd ~/Dropbox/notes/")
 vim.keymap.set("ca", "cach", "cd ~/marc/github/cachyos/")
+vim.keymap.set("ca", "obt", "Obsidian tags")
 
 -- Memetakan Alt+1 sampai Alt+3 untuk memasukkan tanda '#' bertingkat di Insert Mode
 -- Anda bisa menambahkannya sesuai kebutuhan (misal sampai Alt+6 untuk ######)
@@ -153,3 +154,85 @@ vim.keymap.set("v", "c", '"_c', { noremap = true })
 vim.keymap.set("n", "x", '"_x', { noremap = true })
 vim.keymap.set("n", "X", '"_X', { noremap = true })
 vim.keymap.set("v", "x", '"_x', { noremap = true })
+
+local function link_file_under_cursor()
+  local line = vim.api.nvim_get_current_line()
+
+  -- Extract filename enclosed in [[...]] or [...]
+  local original_filename = line:match("%[%[(.-)%]%]") or line:match("%[(.-)%]")
+  if not original_filename or original_filename == "" then
+    vim.notify("No pattern [[file]] or [file] found on current line.", vim.log.levels.WARN)
+    return
+  end
+
+  local target_dir = "/home/mc/Dropbox/"
+
+  -- Search recursively in /home/mc/Dropbox/ using fd or fallback to find
+  local search_cmd = string.format(
+    "fd --type f --fixed-strings --hidden --exclude .git %s %s 2>/dev/null",
+    vim.fn.shellescape(original_filename),
+    vim.fn.shellescape(target_dir)
+  )
+
+  local handle = io.popen(search_cmd)
+  local result = handle:read("*a")
+  handle:close()
+
+  if result == "" then
+    search_cmd = string.format(
+      "find %s -type f -name %s 2>/dev/null",
+      vim.fn.shellescape(target_dir),
+      vim.fn.shellescape(original_filename)
+    )
+    handle = io.popen(search_cmd)
+    result = handle:read("*a")
+    handle:close()
+  end
+
+  local full_path = result:match("([^\r\n]+)")
+  if not full_path or full_path == "" then
+    vim.notify("File not found: " .. original_filename, vim.log.levels.ERROR)
+    return
+  end
+
+  -- Separate directory and filename
+  local dir = full_path:match("(.*/)") or ""
+  local current_file = full_path:match("[^/]+$")
+
+  -- Replace spaces with underscores in the target file name
+  local new_file = current_file:gsub(" ", "_")
+  local final_full_path = dir .. new_file
+
+  -- Rename the file on disk if it contained spaces
+  if current_file ~= new_file then
+    local success, err = os.rename(full_path, final_full_path)
+    if not success then
+      vim.notify("Failed to rename file: " .. (err or "unknown error"), vim.log.levels.ERROR)
+      return
+    end
+    vim.notify(string.format("Renamed on disk: '%s' -> '%s'", current_file, new_file), vim.log.levels.INFO)
+  end
+
+  -- URL-encode any remaining spaces in directory paths (%20)
+  local encoded_path = final_full_path:gsub(" ", "%%20")
+
+  -- Check file extension (case-insensitive)
+  local ext = new_file:match("%.([^%.]+)$")
+  ext = ext and ext:lower() or ""
+
+  local formatted_line
+  if ext == "png" or ext == "jpg" or ext == "jpeg" then
+    formatted_line = string.format("![%s](%s)", new_file, encoded_path)
+  else
+    formatted_line = string.format("[%s](%s)", new_file, encoded_path)
+  end
+
+  -- Replace line under cursor
+  vim.api.nvim_set_current_line(formatted_line)
+end
+
+-- Keymapping for <leader>tc in Normal mode
+vim.keymap.set("n", "<leader>tc", link_file_under_cursor, {
+  desc = "Find, rename spaces on disk, and link file from Dropbox",
+  silent = true,
+})

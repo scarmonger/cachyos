@@ -1,0 +1,164 @@
+#!/usr/bin/python3
+authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJXTE9DIjoiQmFuZHVuZyIsIlNUUl9FWFAiOiJzdHJfMjAyNi0xMC0xOSAxNTozMDozNCIsIklBVCI6MTc5MjM5NTAzNCwiT1JJR0lOQVBQIjoiU0Y3IiwiVUlEIjo1NywiQ09DT0RFIjoiZGF0YW9uMSIsIlVOQU1FIjoiZ29yZG9uIiwiU1ZDSUQiOiJkYXRhb24xX2RlbW9fMDNGQjY1NzAxRjdGNEYzRjkwNkU3MTk1MzI5OTFENDAiLCJFWFAiOjE3OTIzOTg2MzQsIkNPSUQiOjE3MDgsIkVNUF9JRCI6IkRPMTMwMDA3IiwiSU5TVEFOQ0UiOiJEQVRBT04xX0RFTU8ifQ.9hnj6vxkUkpBtXBeg2cfKCrUxhgCObkRk_Y_4397BtQ"
+import requests
+
+from selenium import webdriver
+#from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+import pyperclip
+import time
+url = "https://demo-pro.sunfishhr.com/sf7/?qlid=EmploymentData.add"
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:158.0) Gecko/20100101 Firefox/158.0",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Referer": "https://demo.sunfishhr.com/standard/hrm.employee.employee-information.EmployeeAdd",
+    "Authorization": authorization,
+    "coid": "1708",
+    "Acc-Name": "dataon1_demo",
+    "Company-Id": "1708",
+    "Language": "en",
+    "Content-Type": "application/json",
+    "Origin": "https://demo.sunfishhr.com",
+    "Connection": "keep-alive",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-site",
+    "Priority": "u=0",
+}
+
+payload = {
+    "ENTRIES": {
+        "INPUT_METHOD": "REGULAR",
+        "USER_STATUS": "1",
+        "GENDER": 1,
+        "JOIN_DATE": "2020-10-01 00:00:00",
+        "TAX_FILE_DATE": "2020-10-01 00:00:00",
+        "START_SHIFT_DATE": "2020-10-01 00:00:00",
+        "USER_TYPE": "1",
+        "NOT_HAVE_LDAP": "",
+        "MINEMPAGE": "20",
+        "CHECKSFUSER": "",
+        "ENABLE_LOCALNAME": "N",
+        "ENABLE_SUFFIXNAME": "N",
+        "TEMP_EMPNO": "ID26100327",
+        "CODE_TYPE": "EMPLOYEENO",
+        "SHOWSELFONBOARDING": "N",
+        "SELFONBOARDING": "N",
+        "REQ_NO": "",
+        "STARTSHIFT_ORDERBEGIN": "",
+        "ID_CARD_IMAGE_URL": "",
+        "FIRST_NAME": "Aing",
+        "MIDDLE_NAME": "",
+        "LAST_NAME": "",
+        "OFFICIAL_NAME": "",
+        "ID_NUMBER": "124",
+        "BIRTH_PLACE": "jkt",
+        "MOBILE_PHONE": "",
+        "EMAIL": "",
+        "APP_ID": "",
+        "APP_POS": "",
+        "REASON": "",
+        "EMP_NO": "ID26100327",
+        "HDN_FLOORLOCATION_CODE": "",
+        "HDN_SEATLOCATION_CODE": "",
+        "TAX_NO": "",
+        "TAXFILE_DIGIT": "15",
+        "TAXCO": "",
+        "USER_NAME": "aing2000",
+        "BANK_ACCOUNT": "",
+        "BANK_ACCOUNT_NAME": "",
+        "BANK_EMAIL": "",
+        "EMP_ID": "",
+        "NATIONALITY": "ID",
+        "HDN_NATIONALITY": "ID",
+        "BIRTH_DATE": "2000-01-01 00:00:00",
+        "RELIGION_CODE": "BUDDHIST",
+        "HDN_RELIGION_CODE": "BUDDHIST",
+        "MARITAL_STATUS": "0",
+        "HDN_MARITAL_STATUS": "0",
+        "ADDRESS_TYPE": "A",
+        "HDN_ADDRESS_TYPE": "A",
+        "ADDRESS": "jkt",
+        "PHOTO": "",
+        "EMPLOYMENT_STATUS": "PERMANENT~N~Y~0~month~0",
+        "HDN_EMPLOYMENT_STATUS": "PERMANENT~N~Y~0~month~0",
+        "CURRENT_POSITION": "4548|1052|DIRECT|2|BO,SO",
+        "HDN_CURRENT_POSITION": "4548|1052|DIRECT|2|BO,SO",
+        "JOB_STATUS": "DIRECT",
+        "HDN_JOB_STATUS": "DIRECT",
+        "JOB_GRADE": "2",
+        "HDN_JOB_GRADE": "2",
+        "WORK_LOCATION": "BO",
+        "HDN_WORK_LOCATION": "BO",
+        "COST_CENTER": "1052",
+        "HDN_COST_CENTER": "1052",
+        "SUPERVISOR": "",
+        "HDN_SUPERVISOR": "",
+        "MANAGER": "",
+        "HDN_MANAGER": "",
+        "ALWAYS_PRESENT_CHECKBOX": False,
+        "ALWAYS_PRESENT": "NO",
+        "SHIFTGROUPCODE": "FACTORYAUTO",
+        "HDN_SHIFTGROUPCODE": "FACTORYAUTO",
+        "LEAVE_TYPES": "ANL",
+        "HDN_LEAVE_TYPES": "ANL",
+        "LVGRADE_CODE": "",
+        "HDN_LVGRADE_CODE": "",
+        "LVGRADE_EFFECTIVEDATE": "2020-10-01 00:00:00",
+        "REIM_TYPES": "MED",
+        "HDN_REIM_TYPES": "MED",
+        "HDN_USER_STATUS": "1",
+        "ISSENT_CHECKBOX": False,
+        "ISSENT": "0",
+        "ACSGROUP": "19",
+        "HDN_ACSGROUP": "19",
+        "BANK_CODE": "",
+        "HDN_BANK_CODE": "",
+        "BANK_CURRENCY_CODE": "",
+        "HDN_BANK_CURRENCY_CODE": "",
+        "BANK_DEFAULT_CHECKBOX": False,
+        "BANK_DEFAULT": "0",
+        "BANK_ATTACH": "",
+        "SUBDISTRICT": "",
+        "HDN_SUBDISTRICT": "",
+        "DISTRICT": "",
+        "HDN_DISTRICT": "",
+        "CITY": 5,
+        "HDN_CITY": 5,
+        "STATE": 1,
+        "HDN_STATE": 1,
+        "COUNTRY": 91,
+        "HDN_COUNTRY": 91,
+        "ZIPCODE": "",
+        "TOTAL_CUSTOMFIELD": 10,
+        "CUSTOMFIELD1": "1",
+        "CUSTOMFIELD2": "",
+        "CUSTOMFIELD3": "",
+        "CUSTOMFIELD4": "",
+        "CUSTOMFIELD5": "",
+        "CUSTOMFIELD6": "",
+        "CUSTOMFIELD7": "",
+        "CUSTOMFIELD8": "",
+        "CUSTOMFIELD9": "",
+        "START_SHIFT_DAILY": 1,
+        "HDN_START_SHIFT_DAILY": 1,
+        "DOCUMENT_CONTROL": [],
+    }
+}
+
+response = requests.post(url, headers=headers,  json=payload)
+res_data = response.json()
+
+print(f"Status Code: {response.status_code}")
+print(response.json())
+

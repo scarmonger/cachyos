@@ -1,4 +1,4 @@
 [General]
-IgnoreImages=false
 KeepClipboardContents=false
+SaveImages=true
 Version=6.7.5

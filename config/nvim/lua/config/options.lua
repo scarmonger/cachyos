@@ -24,3 +24,12 @@ vim.opt.iskeyword:append("-") -- hyphenated words recognized by searches / "asdf
 --   },
 --   cache_enabled = 1,
 -- }
+
+-- Keep breakindent enabled so wrapped lines align with the line's start indent
+vim.opt.breakindent = true
+
+-- Optional: Add extra visual indentation spaces (e.g., 2 spaces) to wrapped lines
+vim.opt.breakindentopt = "shift:2,min:20"
+
+-- Optional: Add a subtle indicator character at the start of wrapped lines
+vim.opt.showbreak = "↳ "

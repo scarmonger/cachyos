@@ -6,17 +6,10 @@
                 "allowDdcCi": true,
                 "allowSdrSoftwareBrightness": false,
                 "autoBrightnessCurve": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
+                    [
+                        0,
+                        1
+                    ]
                 ],
                 "autoRotation": "InTabletMode",
                 "automaticBrightness": false,
@@ -24,8 +17,6 @@
                 "colorPowerTradeoff": "PreferEfficiency",
                 "colorProfileSource": "sRGB",
                 "connectorName": "HDMI-A-2",
-                "customModes": [
-                ],
                 "detectedDdcCi": true,
                 "edidHash": "fac7b4dd3c2d2db2bbac8830628e8702",
                 "edidIdentifier": "LEN 26589 16843009 20 2026 0",
@@ -56,26 +47,17 @@
                 "allowDdcCi": true,
                 "allowSdrSoftwareBrightness": false,
                 "autoBrightnessCurve": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
+                    [
+                        0,
+                        1
+                    ]
                 ],
                 "autoRotation": "InTabletMode",
                 "automaticBrightness": false,
-                "brightness": 0.1,
+                "brightness": 0.2,
                 "colorPowerTradeoff": "PreferEfficiency",
                 "colorProfileSource": "sRGB",
                 "connectorName": "HDMI-A-2",
-                "customModes": [
-                ],
                 "detectedDdcCi": true,
                 "edidHash": "9f609bef1816f6db4889232bc18cdb63",
                 "edidIdentifier": "GSM 23497 16843009 1 2021 0",
@@ -86,10 +68,21 @@
                 "iccProfilePath": "",
                 "maxBitsPerColor": 0,
                 "mode": {
-                    "flags": 1,
-                    "height": 1080,
-                    "refreshRate": 74973,
-                    "width": 1920
+                    "cvt": {
+                        "clock": 174500,
+                        "flags": 5,
+                        "hdisplay": 1920,
+                        "hskew": 0,
+                        "hsyncEnd": 2000,
+                        "hsyncStart": 1968,
+                        "htotal": 2080,
+                        "vdisplay": 1080,
+                        "vscan": 0,
+                        "vsyncEnd": 1088,
+                        "vsyncStart": 1083,
+                        "vtotal": 1119
+                    },
+                    "flags": 1
                 },
                 "overscan": 0,
                 "rgbRange": "Automatic",
@@ -107,26 +100,17 @@
                 "allowDdcCi": true,
                 "allowSdrSoftwareBrightness": false,
                 "autoBrightnessCurve": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
+                    [
+                        0,
+                        1
+                    ]
                 ],
                 "autoRotation": "InTabletMode",
                 "automaticBrightness": false,
-                "brightness": 0.1,
+                "brightness": 0.2,
                 "colorPowerTradeoff": "PreferEfficiency",
                 "colorProfileSource": "sRGB",
                 "connectorName": "DP-2",
-                "customModes": [
-                ],
                 "detectedDdcCi": true,
                 "edidHash": "aec50580be3a0ccf9a74fab89ae0b31f",
                 "edidIdentifier": "ACR 44423 2154830088 7 2008 0",
@@ -137,10 +121,21 @@
                 "iccProfilePath": "",
                 "maxBitsPerColor": 0,
                 "mode": {
-                    "flags": 0,
-                    "height": 900,
-                    "refreshRate": 74984,
-                    "width": 1440
+                    "cvt": {
+                        "clock": 136750,
+                        "flags": 6,
+                        "hdisplay": 1440,
+                        "hskew": 0,
+                        "hsyncEnd": 1688,
+                        "hsyncStart": 1536,
+                        "htotal": 1936,
+                        "vdisplay": 900,
+                        "vscan": 0,
+                        "vsyncEnd": 909,
+                        "vsyncStart": 903,
+                        "vtotal": 942
+                    },
+                    "flags": 0
                 },
                 "overscan": 0,
                 "rgbRange": "Automatic",

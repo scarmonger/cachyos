@@ -13,7 +13,8 @@ import time
 
 import requests
 import sys
-# ts tgu 1 p - partial/normal timesheets
+
+# tss tgu 1  - isi timesheet project utama tugu ditambah 2 jam SDP untuk 1 hari yang lalu
 # ts tgu 1   - full isi timesheet
 
 

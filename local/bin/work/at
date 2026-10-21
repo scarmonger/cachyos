@@ -156,7 +156,7 @@ driver.find_element(By.XPATH, "//div[text()='Support']").click()
 
 driver.find_element(
     "xpath", '/html/body/div/div[1]/section/section/div/div[1]/div/section/div[2]/div/main/div/div/div[1]/form/div[4]/div[2]/div/div/input').send_keys(
-    subject + Keys.TAB + subject 
+    str(subject) + Keys.TAB + str(subject)
 )
 
 print('External Radio Button')
@@ -214,7 +214,7 @@ time.sleep(0.5)
 if proj_name == 'Indonesia Eximbank':
     inp_phase.send_keys(Keys.RETURN + Keys.RETURN + Keys.TAB) 
 else:
-    inp_phase.send_keys(proj_phase + Keys.RETURN + Keys.TAB) 
+    inp_phase.send_keys(str(proj_phase) + Keys.RETURN + Keys.TAB) 
 
 # Primary assignee
 assignee = driver.find_element(

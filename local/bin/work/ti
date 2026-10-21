@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFTVBfSUQiOiJETzEzNDM4NCIsIlVOQU1FIjoibWFyY3Rpbml1cyIsIlVJRCI6MjUyOSwiQ09JRCI6MTMzLCJDT0NPREUiOiJzbm93ZWJyeGZ6dW5mYSIsIldMT0MiOiJCQUxJIiwiSU5TVEFOQ0UiOiJJTkRPREVWTklBR0EiLCJTVkNJRCI6ImluZG9kZXZuaWFnYV80QzUxNkZGMjlGNTE0NDk3ODM3MEYxQUEwMENGOTBGMCIsIk9SSUdJTkFQUCI6IlNGNyIsIlNUUl9FWFAiOiJzdHJfMjAyNi0xMC0wOSAxNTo1OTo1NSIsIklBVCI6MTc5MTU0MDM0NSwiRVhQIjoxNzkxNTQxMzA1LCJBUFAiOiJnb2xhbmciLCJleHAiOjE3OTE1NDEzMDV9.upKnOm3L1_egGGBInUDr-u5p5PKAPnwiqHtAVybtwEk"
-_c_data_jwt = "U2FsdGVkX1/9Mh8cGSCmdgD0zHs71ifLemND4k5JAkNU671mjfa84JQo0BqpYl40IIfg0qrdfpInF1TEXRylevyKD63Mu1Dr21lXYSzfO0fPwUauvQ3+eF6UzRAgsyO5hg/LLXG+XTMCJwev8UWAQn7AD4FqaqEhsQL29JxKD4ATtK2nAAUh4PaObl6ZpK9jEgLKpBeZwbTujfjc1unj8rXMK8WqcP9rDRJtTBEHAd5sY6mcf751HeId5vndpAiwCzdUnmt+FzrBREZhWuFKEK8IANc6W/EDEnWOtDUpBlAXRlVgoHwipb29/p8dVsaVsFFU4efGgkUQqwUqSYjHEtxrFSSec2eqe+Z2eDwR+nOAJ8ukDoEgeO09mp+hSI3fdNBsqw+RArDMvHInvrKOwqRDiqSHnIjLCHdN58Ofg/xFeKOoQDhIk1NAwFyWWFXUO27CLR82NYGJ4IcVsvSKqbxdGyXY+9L7zPRWnlo588L68fY/c9ApKcsKsfkxVVAgqLyVgBxeydvxwbdR1RwjIsD3t12e5MNOgEJ0rtIwWex34OKlG+E0pksQrov6M482AFb4SdZtUHsAaQWvEuiJV+Dz40Pp7Zi6hwTnBgMNY6R/TAeEcIG+XIWp0hcINIiVwDCFuUBWgY9JlYDGadr3AutO+6BeX0bYF/kfkngzOB4="
+authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFTVBfSUQiOiJETzEzNDM4NCIsIlVOQU1FIjoibWFyY3Rpbml1cyIsIlVJRCI6MjUyOSwiQ09JRCI6MTMzLCJDT0NPREUiOiJzbm93ZWJyeGZ6dW5mYSIsIldMT0MiOiJCQUxJIiwiSU5TVEFOQ0UiOiJJTkRPREVWTklBR0EiLCJTVkNJRCI6ImluZG9kZXZuaWFnYV85OTIzMjg5QzlDN0I0QjM4OTcyRUU1QUZBQTAxN0U5MSIsIk9SSUdJTkFQUCI6IlNGNyIsIlNUUl9FWFAiOiJzdHJfMjAyNi0xMC0xOSAwOToyNTo0MSIsIklBVCI6MTc5MjM4MDc0OSwiRVhQIjoxNzkyMzgxNzA5LCJBUFAiOiJnb2xhbmciLCJleHAiOjE3OTIzODE3MDl9.fb1aXAyYsJRuUP9atp4m1YYCSmcQLH61X-U2PXyQ37A"
+_c_data_jwt = "U2FsdGVkX1/fAdOgGG1CShb+4cT6BZju0m3ZCyweYZlRd1yQ8p1p8AwwwfaY29dWqpJEdkgtX/Ywk7TOfJFClOENoMK19k/Nz7TNC7No2B1Qwwi4HeXy8CvQXVHKWAKrPoJRkhS+zgTLfm9APsxNci8mOn9L4BCZGB2pfcXV391HosT6lnb3VAWUEvrPM9DC+n+UiI+TRWtsVlcd4Yp9n8/G0UcIUGa8DMAF0QweypF3jegeM/MgpTLCe0pwSs3/r53KSZDna/mrQ5l/gkser9v8V0GRvRXQa2KwDsmjx8DfklU020KkNHttLnCSamznq118+apU1vvDhYAqOGGD9CzPtuGEBzWTeKWe0Pnd5DjFh6XfKpiumhDcdUR8mYcpxChgOSSAMqeQvyTRv4f3Wf0Uz7hXxIGs2Z+KJ3zReSvVtOnFByG08sFmRrXNmt+qQJoDsLMWG7szPIeNftL1LAAnhb04eKEWUBaTNmqg1xtg94mxZtkuzl/V+knk4UAcAfnsinnmIrT/ofz/Xx/9KLVxMGDf44prve0l0oPfg7Mcvm19uIE3U48Z4UJMGku9SRXtLCFniWqrzRENUS4FW1v/tuDfR+vhrGHy3jbKxEdOl7yw49b9VE1VwgNjzWcQR5GDJQXPN9S2oymp7HW8nUc51U6Kc1KuJBK0OyOb2bc="
 
 import requests
 
@@ -16,6 +16,32 @@ from selenium.common.exceptions import NoSuchElementException
 
 import pyperclip
 import time
+import sys
+
+# First argument (like $1 in Bash)
+if len(sys.argv) > 1:  # Ensure at least 2 elements (including script name) to prevent error
+    arg1 = sys.argv[1]  
+    print(f"First argument: {arg1}")
+
+# Read the CSV file
+import pandas as pd
+
+df = pd.read_csv('/home/mc/Dropbox/project.csv', sep=";", header=None, names=['a', 'b', 'c', 'd'])
+
+if len(sys.argv) == 1:  # Kalau tidak ada nama project yang dimasukkan, syntax ini mengecek jumlah kata yang di input, jika hanya ada nama script maka sys.argv jumlahnya hanya 1
+    first_record = df.iloc[0]
+    print(f"Project Name: {first_record['a']} - {first_record['b']}")
+else:
+    result = df.loc[df['a'] == sys.argv[1], ['b','c','d']]
+
+    # Output the result
+    if not result.empty:
+        proj_name = result['b'].iloc[0] + result['c'].iloc[0] # Get value from 'b+c' column
+        remark = result['d'].iloc[0]  # Get value from 'd' column
+        print(f"The corresponding data is: {proj_name}")
+    else:
+        print("No matching data found, system is quitting.")
+        sys.exit()
 
 url = "https://sf7doffice.sunfishhr.com/hrm-go/v1/helpdesk/myticket/create"
 headers = {
