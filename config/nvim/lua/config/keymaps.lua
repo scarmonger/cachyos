@@ -103,7 +103,7 @@ vim.keymap.set("n", "<leader>d", '"_d', { desc = "delete into void" })
 vim.keymap.set("v", "<leader>d", '"_d', { desc = "delete into void" })
 vim.keymap.set("x", "<leader>d", '"_d', { desc = "delete into void" })
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-filepicker<CR>", { desc = "create markdown link" })
+vim.keymap.set({ "n", "i" }, "<C-f>", "<cmd>silent !tmux neww tmux-filepicker<CR>", { desc = "create markdown " })
 -- go back to previous session with <tmux-leader>+L
 
 vim.keymap.set("i", "<C-v>", "<esc>pa", { desc = "paste in insert mode" })
