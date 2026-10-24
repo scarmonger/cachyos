@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  selected=$(find ~/Dropbox/notes -mindepth 1 -maxdepth 15 -type f | fzf)
+fi
+
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+# 1. Format as Markdown link or image based on extension
+filename=$(basename "$selected")
+extension="${filename##*.}"
+extension=$(echo "$extension" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$extension" == "jpg" || "$extension" == "jpeg" || "$extension" == "png" ]]; then
+  markdown_link="![%$filename]($selected)" # Wait, let's keep it clean:
+else
+  markdown_link="[$filename]($selected)"
+fi
+
+# Fix the image tag format to ensure it uses proper syntax
+if [[ "$extension" == "jpg" || "$extension" == "jpeg" || "$extension" == "png" ]]; then
+  markdown_link="![$filename]($selected)"
+else
+  markdown_link="[$filename]($selected)"
+fi
+
+# Cross-platform clipboard support (macOS pbcopy, Wayland wl-copy, X11 xclip/xsel)
+if command -v pbcopy &>/dev/null; then
+  echo -n "$markdown_link" | pbcopy
+elif command -v wl-copy &>/dev/null; then
+  echo -n "$markdown_link" | wl-copy
+elif command -v xclip &>/dev/null; then
+  echo -n "$markdown_link" | xclip -selection clipboard
+elif command -v xsel &>/dev/null; then
+  echo -n "$markdown_link" | xsel --clipboard --input
+fi
+
+# # 1. Format as Markdown link and copy to clipboard
+# filename=$(basename "$selected")
+# markdown_link="[$filename]($selected)"
+#
+# # Cross-platform clipboard support (macOS pbcopy, Wayland wl-copy, X11 xclip/xsel)
+# if command -v pbcopy &>/dev/null; then
+#   echo -n "$markdown_link" | pbcopy
+# elif command -v wl-copy &>/dev/null; then
+#   echo -n "$markdown_link" | wl-copy
+# elif command -v xclip &>/dev/null; then
+#   echo -n "$markdown_link" | xclip -selection clipboard
+# elif command -v xsel &>/dev/null; then
+#   echo -n "$markdown_link" | xsel --clipboard --input
+# fi
+
+# # 2. Tmux session management
+# selected_dir=$(dirname "$selected")
+# selected_name=$(basename "$selected" | tr . _)
+# tmux_running=$(pgrep tmux)
+#
+# if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+#   tmux new-session -s $selected_name -c "$selected_dir"
+#   exit 0
+# fi
+#
+# if ! tmux has-session -t=$selected_name 2>/dev/null; then
+#   tmux new-session -ds $selected_name -c "$selected_dir"
+# fi
+#
+# tmux switch-client -t $selected_name
