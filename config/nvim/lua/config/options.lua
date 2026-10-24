@@ -10,20 +10,6 @@ vim.opt.conceallevel = 0
 vim.opt.iskeyword:append("-") -- hyphenated words recognized by searches / "asdf-asdf" is treated as one word
 -- vim.highlight = "CursorLineNr ctermfg=220 ctermbg=25 gui=bold guifg=#ffd700 guibg=#005faf"
 -- vim.highlight = "LineNr ctermfg=DarkGrey guifg=DarkGrey"
---
---
--- vim.g.clipboard = {
---   name = "xclip",
---   copy = {
---     ["+"] = "xclip -selection clipboard",
---     -- ["*"] = "xclip -selection primary",
---   },
---   paste = {
---     ["+"] = "xclip -selection clipboard -o",
---     -- ["*"] = "xclip -selection primary -o",
---   },
---   cache_enabled = 1,
--- }
 
 -- Keep breakindent enabled so wrapped lines align with the line's start indent
 vim.opt.breakindent = true
@@ -33,3 +19,14 @@ vim.opt.breakindentopt = "shift:2,min:20"
 
 -- Optional: Add a subtle indicator character at the start of wrapped lines
 vim.opt.showbreak = "↳ "
+
+-- markdown-preview setup
+vim.cmd([[
+  function! OpenMarkdownPreview(url)
+    execute "silent !chromium --new-window " . shellescape(a:url) . " &"
+    redraw!
+  endfunction
+]])
+
+vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
+vim.g.mkdp_theme = "light"
