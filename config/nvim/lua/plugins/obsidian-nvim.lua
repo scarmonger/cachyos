@@ -7,13 +7,13 @@ return {
     legacy_commands = false, -- this will be removed in 4.0.0
     workspaces = {
       {
-        name = "personal",
-        path = "~/Dropbox/notes/personal",
+        name = "notes",
+        path = "~/Dropbox/notes/",
       },
-      {
-        name = "dataon",
-        path = "~/Dropbox/notes/dataon",
-      },
+    },
+    -- Turn off warning on conceallevel
+    ui = {
+      enable = false,
     },
   },
 }

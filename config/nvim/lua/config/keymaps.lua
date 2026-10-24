@@ -28,6 +28,9 @@ vim.keymap.set("n", "<M-4>", "I#### <esc>", { desc = "Heading 4" })
 vim.keymap.set("n", "<M-5>", "I##### <esc>", { desc = "Heading 5" })
 vim.keymap.set("n", "<M-6>", "I###### <esc>", { desc = "Heading 6" })
 
+-- vim.keymap.set("n", "<C-BS>", "<esc>:bdelete<CR>", { desc = "Delete buffer", silent = true })
+vim.keymap.set({ "n", "i" }, "<C-\\>", "<esc>:bdelete<cr>", { desc = "" })
+
 -- vim.keymap.set({ "i", "x", "n", "s" }, "'", '"', {})
 -- vim.keymap.set({ "i", "x", "n", "s" }, '"', "'", {})
 vim.keymap.set("i", "jk", "<esc>", { desc = "escape from insert mode" })
@@ -165,7 +168,7 @@ local function link_file_under_cursor()
     return
   end
 
-  local target_dir = "/home/mc/Dropbox/"
+  local target_dir = "/home/mc/Dropbox/notes/"
 
   -- Search recursively in /home/mc/Dropbox/ using fd or fallback to find
   local search_cmd = string.format(
