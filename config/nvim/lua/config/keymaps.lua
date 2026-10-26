@@ -28,6 +28,9 @@ vim.keymap.set("n", "<M-4>", "I#### <esc>", { desc = "Heading 4" })
 vim.keymap.set("n", "<M-5>", "I##### <esc>", { desc = "Heading 5" })
 vim.keymap.set("n", "<M-6>", "I###### <esc>", { desc = "Heading 6" })
 
+-- vim.keymap.set("n", "<C-BS>", "<esc>:bdelete<CR>", { desc = "Delete buffer", silent = true })
+vim.keymap.set({ "n", "i" }, "<M-w>", "<esc>:bdelete<cr>", { desc = "" })
+
 -- vim.keymap.set({ "i", "x", "n", "s" }, "'", '"', {})
 -- vim.keymap.set({ "i", "x", "n", "s" }, '"', "'", {})
 vim.keymap.set("i", "jk", "<esc>", { desc = "escape from insert mode" })
@@ -100,7 +103,7 @@ vim.keymap.set("n", "<leader>d", '"_d', { desc = "delete into void" })
 vim.keymap.set("v", "<leader>d", '"_d', { desc = "delete into void" })
 vim.keymap.set("x", "<leader>d", '"_d', { desc = "delete into void" })
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "change project" })
+vim.keymap.set({ "n", "i" }, "<C-f>", "<cmd>silent !tmux neww tmux-filepicker<CR>", { desc = "create markdown " })
 -- go back to previous session with <tmux-leader>+L
 
 vim.keymap.set("i", "<C-v>", "<esc>pa", { desc = "paste in insert mode" })
@@ -165,7 +168,7 @@ local function link_file_under_cursor()
     return
   end
 
-  local target_dir = "/home/mc/Dropbox/"
+  local target_dir = "/home/mc/Dropbox/notes/"
 
   -- Search recursively in /home/mc/Dropbox/ using fd or fallback to find
   local search_cmd = string.format(

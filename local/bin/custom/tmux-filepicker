@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  selected=$(find ~/Dropbox/notes -mindepth 1 -maxdepth 15 -type f | fzf)
+fi
+
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+# 1. Check for spaces in filename and rename if necessary
+dir=$(dirname "$selected")
+filename=$(basename "$selected")
+
+if [[ "$filename" =~ [[:space:]] ]]; then
+  new_filename=$(echo "$filename" | tr ' ' '_')
+  mv "$selected" "$dir/$new_filename"
+  selected="$dir/$new_filename"
+  filename="$new_filename"
+fi
+
+# 2. Format as Markdown image or standard link based on extension
+extension="${filename##*.}"
+extension=$(echo "$extension" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$extension" == "jpg" || "$extension" == "jpeg" || "$extension" == "png" || "$extension" == "webp" || "$extension" == "gif" || "$extension" == "svg" ]]; then
+  markdown_link="![$filename]($selected)"
+else
+  markdown_link="[$filename]($selected)"
+fi
+
+# 3. Cross-platform clipboard support (macOS pbcopy, Wayland wl-copy, X11 xclip/xsel)
+if command -v pbcopy &>/dev/null; then
+  echo -n "$markdown_link" | pbcopy
+elif command -v wl-copy &>/dev/null; then
+  echo -n "$markdown_link" | wl-copy
+elif command -v xclip &>/dev/null; then
+  echo -n "$markdown_link" | xclip -selection clipboard
+elif command -v xsel &>/dev/null; then
+  echo -n "$markdown_link" | xsel --clipboard --input
+fi

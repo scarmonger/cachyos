@@ -1,4 +1,5 @@
 -- https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+--
 return {
   -- Disable mini.pairs
   { "nvim-mini/mini.pairs", enabled = false },
@@ -9,7 +10,7 @@ return {
         ["markdownlint-cli2"] = {
           args = {
             "--config",
-            '{"MD013": false, "MD022": false, "MD025": false, "MD034": false}',
+            -- '{"MD013": false, "MD022": false, "MD025": false, "MD034": false}',
             "--",
           },
         },

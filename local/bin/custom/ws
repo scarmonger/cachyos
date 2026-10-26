@@ -1,9 +1,8 @@
-tmux new-window 
-tmux new-window 
+tmux new-window -c "~/Dropbox/notes/" -n "nvim" "nvim --listen /tmp/nvim.pipe"
+tmux new-window -c "~/Downloads/"
+tmux previous-window 
 
-#tmux new-window -c ~/marc/GitHub/ubuntu -n nvim nvim
 # tmux split-window -h -l 33% ranger
 #nvim
 #tmux new-window -c 
-#tmux prev-window 
 
