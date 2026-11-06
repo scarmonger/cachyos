@@ -60,7 +60,7 @@ pyperclip.copy(pw)
 import subprocess
 from pykeepass import PyKeePass
 
-DATABASE = "/home/mc/Dropbox/demo.kdbx"
+DATABASE = "/home/mc/Dropbox/demo"
 MASTER_PASSWORD = get_secret()
 ENTRY_TITLE = "demo"
 

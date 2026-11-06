@@ -12,7 +12,7 @@ floating=1
 shell=org.kde.plasma.desktop
 
 [PlasmaViews][Panel 3][Defaults]
-thickness=34
+thickness=36
 
 [PlasmaViews][Panel 32]
 floating=1

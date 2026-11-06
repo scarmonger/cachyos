@@ -21,7 +21,7 @@ def get_secret():
 
 
 def get_sfpass():
-    DATABASE = "/home/mc/Dropbox/demo.kdbx"
+    DATABASE = "/home/mc/Dropbox/demo"
     MASTER_PASSWORD = get_secret()
     ENTRY_TITLE = "sf7doffice"
 
@@ -53,7 +53,7 @@ def get_sfpass():
     return retrieved_password
 
 def get_mailpass():
-    DATABASE = "/home/mc/Dropbox/demo.kdbx"
+    DATABASE = "/home/mc/Dropbox/demo"
     MASTER_PASSWORD = get_secret()
     ENTRY_TITLE = "zimbra"
 

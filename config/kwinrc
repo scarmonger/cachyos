@@ -7,8 +7,16 @@ Id_5=7ca6c32f-d784-440e-970a-26f1f99a3d1b
 Id_6=66610987-efb3-45da-aa41-8d5fad5a249f
 Id_7=db3fced5-81ce-463a-be1f-a19f18dc3be5
 Id_8=ec9dead1-3b98-4a2e-a0f5-d039c63ee539
+Name_1=A
+Name_2=S
+Name_3=D
+Name_4=F
+Name_5=E
+Name_6=R
+Name_7=T
+Name_8=G
 Number=8
-Rows=2
+Rows=1
 
 [Effect-overview]
 BorderActivate=9

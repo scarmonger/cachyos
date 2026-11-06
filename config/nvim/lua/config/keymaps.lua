@@ -11,22 +11,39 @@ vim.keymap.set("ca", "note", "cd ~/Dropbox/notes/")
 vim.keymap.set("ca", "cach", "cd ~/marc/github/cachyos/")
 vim.keymap.set("ca", "obt", "Obsidian tags")
 
--- Memetakan Alt+1 sampai Alt+3 untuk memasukkan tanda '#' bertingkat di Insert Mode
--- Anda bisa menambahkannya sesuai kebutuhan (misal sampai Alt+6 untuk ######)
+-- Fungsi utama untuk memeriksa dan menyisipkan Heading
+local function smart_heading(level)
+  local line = vim.api.nvim_get_current_line()
+  local hashes = string.rep("#", level)
 
-vim.keymap.set("i", "<M-1>", "# ", { desc = "Heading 1" })
-vim.keymap.set("i", "<M-2>", "## ", { desc = "Heading 2" })
-vim.keymap.set("i", "<M-3>", "### ", { desc = "Heading 3" })
-vim.keymap.set("i", "<M-4>", "#### ", { desc = "Heading 4" })
-vim.keymap.set("i", "<M-5>", "##### ", { desc = "Heading 5" })
-vim.keymap.set("i", "<M-6>", "###### ", { desc = "Heading 6" })
+  -- Jika baris belum diawali dengan spasi/tanda #
+  if not line:match("^%s*#" .. string.rep("#", level - 1)) then
+    -- Pindah ke awal baris (0), masukkan hash dan spasi
+    return "<C-o>0" .. hashes .. " "
+  end
+  -- Jika sudah ada, kembalikan hash biasa
+  return hashes
+end
 
-vim.keymap.set("n", "<M-1>", "I# <esc>", { desc = "Heading 1" })
-vim.keymap.set("n", "<M-2>", "I## <esc>", { desc = "Heading 2" })
-vim.keymap.set("n", "<M-3>", "I### <esc>", { desc = "Heading 3" })
-vim.keymap.set("n", "<M-4>", "I#### <esc>", { desc = "Heading 4" })
-vim.keymap.set("n", "<M-5>", "I##### <esc>", { desc = "Heading 5" })
-vim.keymap.set("n", "<M-6>", "I###### <esc>", { desc = "Heading 6" })
+-- Keymap untuk Alt+1 sampai Alt+3 (bisa ditambah sampai Alt+6)
+vim.keymap.set("i", "<M-1>", function()
+  return smart_heading(1)
+end, { expr = true, desc = "Smart Heading 1" })
+vim.keymap.set("i", "<M-2>", function()
+  return smart_heading(2)
+end, { expr = true, desc = "Smart Heading 2" })
+vim.keymap.set("i", "<M-3>", function()
+  return smart_heading(3)
+end, { expr = true, desc = "Smart Heading 3" })
+vim.keymap.set("i", "<M-4>", function()
+  return smart_heading(4)
+end, { expr = true, desc = "Smart Heading 4" })
+vim.keymap.set("i", "<M-5>", function()
+  return smart_heading(5)
+end, { expr = true, desc = "Smart Heading 5" })
+vim.keymap.set("i", "<M-6>", function()
+  return smart_heading(6)
+end, { expr = true, desc = "Smart Heading 6" })
 
 -- vim.keymap.set("n", "<C-BS>", "<esc>:bdelete<CR>", { desc = "Delete buffer", silent = true })
 vim.keymap.set({ "n", "i" }, "<M-w>", "<esc>:bdelete<cr>", { desc = "" })

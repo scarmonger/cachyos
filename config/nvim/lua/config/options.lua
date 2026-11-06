@@ -6,6 +6,7 @@ vim.opt.winbar = "%=%m %f"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.smartcase = true
 vim.opt.conceallevel = 0
+vim.opt.colorcolumn = "100"
 
 vim.opt.iskeyword:append("-") -- hyphenated words recognized by searches / "asdf-asdf" is treated as one word
 -- vim.highlight = "CursorLineNr ctermfg=220 ctermbg=25 gui=bold guifg=#ffd700 guibg=#005faf"

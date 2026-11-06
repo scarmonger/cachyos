@@ -111,5 +111,7 @@
   <Action name="go_previous" shortcut="K"/>
   <Action name="go_first" shortcut="Home; H"/>
   <Action name="go_last" shortcut="End; L"/>
+  <Action name="deletefile" shortcut="Shift+Del; "/>
+  <Action name="file_trash" shortcut="Del; X"/>
  </ActionProperties>
 </gui>

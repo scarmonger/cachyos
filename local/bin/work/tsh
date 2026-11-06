@@ -49,7 +49,7 @@ else:
 if len(sys.argv) > 2:  # Ensure at least 3 elements (including script name)
     days_ago = sys.argv[2]
     index = 17 - int(days_ago)
-    select_day = '/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div/div/div[' + str(index) + ']/div/button'
+    select_day = '/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div/div/div[' + str(index) + ']/div/button'
     print(select_day)
 
 
@@ -151,12 +151,12 @@ driver.find_element("xpath",'/html/body/div[1]/div/section/section/div/section/m
 time.sleep(1)
 
 # Get Actual Start Time
-actualStartElement = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/div/div[1]/div[2]')
+actualStartElement = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/div/div[1]/div[2]')
 actualStartTime = actualStartElement.text
 print("actualStartTime: " + actualStartTime)
 
 # Get Actual End Time
-actualEndElement = driver.find_element("xpath",'/html/body/div[1]/div/section/section/div/section/main/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/div/div[2]/div[2]')
+actualEndElement = driver.find_element("xpath",'/html/body/div/div/section/section/div/section/main/div/div/div/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/div/div[2]/div[2]')
 actualEndTime = actualEndElement.text
 print("actualEndTime: " + actualEndTime)
 
