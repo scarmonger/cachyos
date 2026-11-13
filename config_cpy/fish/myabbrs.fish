@@ -9,3 +9,4 @@ abbr -a -- t 'tmux attach -t 0 || tmux new -s 0 ws'
 # alias clf="tmux split -h lf; lf"
 
 abbr -a -- hpi 'echo "PT Hartono Plantation Indonesia" | wl-copy'
+abbr -a -- hpi 'echo "PT Yupi Indo Jelly Gum" | wl-copy'

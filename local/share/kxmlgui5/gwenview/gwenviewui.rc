@@ -113,5 +113,6 @@
   <Action name="go_last" shortcut="End; L"/>
   <Action name="deletefile" shortcut="Shift+Del; "/>
   <Action name="file_trash" shortcut="Del; X"/>
+  <Action name="file_quit" shortcut="Ctrl+Q; Q"/>
  </ActionProperties>
 </gui>

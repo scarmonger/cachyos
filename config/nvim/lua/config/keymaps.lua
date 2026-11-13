@@ -11,39 +11,36 @@ vim.keymap.set("ca", "note", "cd ~/Dropbox/notes/")
 vim.keymap.set("ca", "cach", "cd ~/marc/github/cachyos/")
 vim.keymap.set("ca", "obt", "Obsidian tags")
 
--- Fungsi utama untuk memeriksa dan menyisipkan Heading
-local function smart_heading(level)
-  local line = vim.api.nvim_get_current_line()
+-- Fungsi pintar untuk membersihkan heading lama dan memasukkan heading baru
+local function apply_heading(level)
   local hashes = string.rep("#", level)
 
-  -- Jika baris belum diawali dengan spasi/tanda #
-  if not line:match("^%s*#" .. string.rep("#", level - 1)) then
-    -- Pindah ke awal baris (0), masukkan hash dan spasi
-    return "<C-o>0" .. hashes .. " "
+  -- Deteksi mode saat ini (Insert atau Normal)
+  local mode = vim.api.nvim_get_mode().mode
+
+  -- Ambil baris saat ini
+  local current_line = vim.api.nvim_get_current_line()
+
+  -- Hapus semua tanda # dan spasi di awal baris menggunakan regex (pattern matching)
+  local clean_line = current_line:gsub("^%s*#+%s*", "")
+
+  -- Terapkan baris yang sudah dibersihkan ditambah hash baru
+  vim.api.nvim_set_current_line(hashes .. " " .. clean_line)
+
+  -- Kembalikan posisi kursor agar tetap nyaman
+  if mode:find("i") then
+    -- Jika di Insert Mode, pindahkan kursor ke akhir baris atau sesuaikan
+    vim.cmd("startinsert")
+    vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], #hashes + 1 + #clean_line })
   end
-  -- Jika sudah ada, kembalikan hash biasa
-  return hashes
 end
 
--- Keymap untuk Alt+1 sampai Alt+3 (bisa ditambah sampai Alt+6)
-vim.keymap.set("i", "<M-1>", function()
-  return smart_heading(1)
-end, { expr = true, desc = "Smart Heading 1" })
-vim.keymap.set("i", "<M-2>", function()
-  return smart_heading(2)
-end, { expr = true, desc = "Smart Heading 2" })
-vim.keymap.set("i", "<M-3>", function()
-  return smart_heading(3)
-end, { expr = true, desc = "Smart Heading 3" })
-vim.keymap.set("i", "<M-4>", function()
-  return smart_heading(4)
-end, { expr = true, desc = "Smart Heading 4" })
-vim.keymap.set("i", "<M-5>", function()
-  return smart_heading(5)
-end, { expr = true, desc = "Smart Heading 5" })
-vim.keymap.set("i", "<M-6>", function()
-  return smart_heading(6)
-end, { expr = true, desc = "Smart Heading 6" })
+-- Keymap untuk Normal Mode (n) dan Insert Mode (i) dari Alt+1 sampai Alt+6
+for i = 1, 6 do
+  vim.keymap.set({ "n", "i" }, "<M-" .. i .. ">", function()
+    apply_heading(i)
+  end, { desc = "Smart Heading " .. i })
+end
 
 -- vim.keymap.set("n", "<C-BS>", "<esc>:bdelete<CR>", { desc = "Delete buffer", silent = true })
 vim.keymap.set({ "n", "i" }, "<M-w>", "<esc>:bdelete<cr>", { desc = "" })
