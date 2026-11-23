@@ -1,6 +1,6 @@
 abbr -a -- o 'cd /home/mc/Downloads'
-abbr -a -- v1 'nvim ~/marc/github/cachyos/'
-abbr -a -- v2 'nvim /home/mc/Dropbox/notes/'
+abbr -a -- v1 '~/marc/github/cachyos/ && nvim'
+abbr -a -- v2 '/home/mc/Dropbox/notes/ && nvim'
 abbr -a -- gs 'git status'
 
 abbr -a -- t 'tmux attach -t 0 || tmux new -s 0 ws'
