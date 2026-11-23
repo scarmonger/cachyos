@@ -1,7 +1,17 @@
 [Desktop Entry]
-Exec=/home/mc/marc/github/cachyos/local/bin/work/gpw
+Comment[en_US]=
+Comment=
+Exec='sleep 30 & /home/mc/marc/github/cachyos/local/bin/work/gpw'
+GenericName[en_US]=
+GenericName=
 Icon=
+MimeType=
+Name[en_US]=gpw
 Name=gpw
 Path=
-Terminal=True
+StartupNotify=true
+Terminal=true
+TerminalOptions=
 Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
