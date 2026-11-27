@@ -56,6 +56,8 @@ cell = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@cla
 pw = cell.text
 pyperclip.copy(pw)
 
+time.sleep(15)
+
 # Update to keepass
 import subprocess
 from pykeepass import PyKeePass

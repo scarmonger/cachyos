@@ -182,7 +182,7 @@ local function link_file_under_cursor()
     return
   end
 
-  local target_dir = "/home/mc/Dropbox/notes/"
+  local target_dir = "/home/mc/Dropbox/"
 
   -- Search recursively in /home/mc/Dropbox/ using fd or fallback to find
   local search_cmd = string.format(
@@ -216,7 +216,7 @@ local function link_file_under_cursor()
   local dir = full_path:match("(.*/)") or ""
   local current_file = full_path:match("[^/]+$")
 
-  -- Replace spaces with underscores in the target file name
+  -- Replace spaces with underscores in the actual file name
   local new_file = current_file:gsub(" ", "_")
   local final_full_path = dir .. new_file
 
@@ -230,18 +230,19 @@ local function link_file_under_cursor()
     vim.notify(string.format("Renamed on disk: '%s' -> '%s'", current_file, new_file), vim.log.levels.INFO)
   end
 
-  -- URL-encode any remaining spaces in directory paths (%20)
+  -- URL-encode any remaining spaces in parent directory paths (%20)
   local encoded_path = final_full_path:gsub(" ", "%%20")
 
   -- Check file extension (case-insensitive)
-  local ext = new_file:match("%.([^%.]+)$")
+  local ext = original_filename:match("%.([^%.]+)$")
   ext = ext and ext:lower() or ""
 
+  -- Keep original_filename (with spaces) inside brackets, use renamed path in parentheses
   local formatted_line
   if ext == "png" or ext == "jpg" or ext == "jpeg" then
-    formatted_line = string.format("![%s](%s)", new_file, encoded_path)
+    formatted_line = string.format("![%s](%s)", original_filename, encoded_path)
   else
-    formatted_line = string.format("[%s](%s)", new_file, encoded_path)
+    formatted_line = string.format("[%s](%s)", original_filename, encoded_path)
   end
 
   -- Replace line under cursor
@@ -250,6 +251,6 @@ end
 
 -- Keymapping for <leader>tc in Normal mode
 vim.keymap.set("n", "<leader>tc", link_file_under_cursor, {
-  desc = "Find, rename spaces on disk, and link file from Dropbox",
+  desc = "Find, rename spaces on disk, and link file with spaced label",
   silent = true,
 })

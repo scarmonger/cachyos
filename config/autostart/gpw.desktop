@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment[en_US]=
 Comment=
-Exec='sleep 30 & /home/mc/marc/github/cachyos/local/bin/work/gpw'
+Exec=/home/mc/marc/github/cachyos/local/bin/work/gpw
 GenericName[en_US]=
 GenericName=
 Icon=

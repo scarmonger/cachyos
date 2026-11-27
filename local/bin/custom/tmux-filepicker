@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#!/usr/bin/env bash
+
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
@@ -10,9 +12,10 @@ if [[ -z $selected ]]; then
   exit 0
 fi
 
-# 1. Check for spaces in filename and rename if necessary
+# 1. Store original name for the label, then replace spaces with underscores for the file path
 dir=$(dirname "$selected")
 filename=$(basename "$selected")
+label_name="${filename//_/ }" # Ensures underscores become spaces for the [label]
 
 if [[ "$filename" =~ [[:space:]] ]]; then
   new_filename=$(echo "$filename" | tr ' ' '_')
@@ -21,14 +24,14 @@ if [[ "$filename" =~ [[:space:]] ]]; then
   filename="$new_filename"
 fi
 
-# 2. Format as Markdown image or standard link based on extension
+# 2. Format as Markdown image or standard link using label_name inside [ ]
 extension="${filename##*.}"
 extension=$(echo "$extension" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$extension" == "jpg" || "$extension" == "jpeg" || "$extension" == "png" || "$extension" == "webp" || "$extension" == "gif" || "$extension" == "svg" ]]; then
-  markdown_link="![$filename]($selected)"
+  markdown_link="![$label_name]($selected)"
 else
-  markdown_link="[$filename]($selected)"
+  markdown_link="[$label_name]($selected)"
 fi
 
 # 3. Cross-platform clipboard support (macOS pbcopy, Wayland wl-copy, X11 xclip/xsel)
